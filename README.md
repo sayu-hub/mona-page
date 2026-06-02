@@ -1,3 +1,6 @@
+# test ブランチによる編集　06-02
+これはテスト用の追記です
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
