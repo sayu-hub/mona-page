@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, ArrowRight, Twitter, Instagram, ChevronRight, Star, Sparkles, ArrowDown } from 'lucide-react';
-// 作成したデータをインポート
+import { Menu, X, ArrowRight, Twitter, Instagram, ChevronRight, Star, Sparkles, ArrowDown, BookOpen, Lightbulb } from 'lucide-react';
 import { navLinks, newsItems, mainWorks, accessories, members } from './data/items';
+import UserGuide from './UserGuide';
 
-function App() {
+export default function App() {
+  const [currentView, setCurrentView] = useState('home'); // 'home' | 'guide'
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const scrollContainerRef = useRef(null);
 
-  // スクロール検知 & アニメーション発火用Observer
   useEffect(() => {
+    if (currentView !== 'home') return;
+
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
 
@@ -56,10 +58,11 @@ function App() {
       window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
-  }, []);
+  }, [currentView]);
 
-  // アクセサリの自動スクロール処理
   useEffect(() => {
+    if (currentView !== 'home') return;
+
     const container = scrollContainerRef.current;
     if (!container) return;
 
@@ -74,16 +77,21 @@ function App() {
     }, 3000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [currentView]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  if (currentView === 'guide') {
+    return <UserGuide onBack={() => {
+      setCurrentView('home');
+      window.scrollTo(0, 0);
+    }} />;
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-rounded selection:bg-emerald-100 selection:text-emerald-900 overflow-x-hidden relative">
-      {/* 全体のノイズオーバーレイ */}
       <div className="fixed inset-0 pointer-events-none z-0 bg-noise opacity-40 mix-blend-overlay"></div>
 
-      {/* Header */}
       <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/80 backdrop-blur-lg py-3 shadow-sm border-b border-white/20' : 'bg-transparent py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <a href="#" className="text-xl font-bold tracking-tight flex items-center gap-2 group hover:opacity-80 transition-opacity">
@@ -110,7 +118,6 @@ function App() {
           </button>
         </div>
 
-        {/* Mobile Nav Overlay */}
         <div className={`fixed inset-0 bg-white/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 transition-all duration-500 ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
           {navLinks.map((link) => (
             <a key={link.name} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-3xl font-extrabold text-slate-800 hover:text-emerald-600 tracking-tight">
@@ -123,7 +130,6 @@ function App() {
         </div>
       </header>
 
-      {/* Hero Section */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[30s] hover:scale-105"
@@ -152,7 +158,7 @@ function App() {
         </div>
       </section>
 
-      {/* News Section */}
+      {}
       <section id="news" className="py-24 px-6 md:px-12 bg-white relative z-10">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-12 md:gap-24">
           <div className="md:w-1/4 reveal">
@@ -187,7 +193,7 @@ function App() {
         </div>
       </section>
 
-      {/* Works Section */}
+      {}
       <section id="work" className="py-32 bg-slate-50/80 relative z-10">
         <div className="px-6 md:px-12 max-w-6xl mx-auto">
           <div className="mb-24 text-center md:text-left reveal">
@@ -198,7 +204,6 @@ function App() {
             <p className="text-slate-500 mt-4 font-medium">こだわり抜いたプロダクトコレクション</p>
           </div>
 
-          {/* Main Products */}
           <div className="space-y-32 mb-40">
             {mainWorks.map((work, index) => (
               <div key={work.id} className={`${work.animClass} flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 md:gap-24 items-center`}>
@@ -238,7 +243,6 @@ function App() {
             ))}
           </div>
 
-          {/* Accessories */}
           <div className="reveal">
             <div className="flex items-end justify-between mb-8 px-2 border-b border-slate-200 pb-4">
               <h3 className="text-2xl font-bold text-slate-800">Accessories & Parts</h3>
@@ -274,8 +278,59 @@ function App() {
         </div>
       </section>
 
-      {/* Member Section */}
-      <section id="member" className="py-24 px-6 md:px-12 bg-white relative z-10">
+      {}
+      <section id="guide" className="py-24 bg-white relative z-10">
+        <div className="px-6 md:px-12 max-w-6xl mx-auto">
+          <div className="mb-16 text-center reveal">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900 inline-block relative">
+              Support & Guide
+              <span className="absolute bottom-2 left-0 w-full h-3 bg-emerald-200/50 -z-10 rounded-full transform rotate-1"></span>
+            </h2>
+            <p className="text-slate-500 mt-4 font-medium">購入後のセットアップから、よりディープなカスタマイズまで</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div 
+              onClick={() => {
+                setCurrentView('guide');
+                window.scrollTo(0, 0);
+              }} 
+              className="cursor-pointer group bg-slate-50 rounded-[2.5rem] p-10 border-2 border-slate-100 hover:border-emerald-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden reveal-left"
+            >
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-300 to-emerald-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+              <div className="w-16 h-16 bg-white border-2 border-emerald-50 rounded-2xl flex items-center justify-center text-emerald-500 mb-8 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-500 shadow-sm">
+                <BookOpen size={32} />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-800 mb-4">User Guide</h3>
+              <p className="text-slate-600 leading-relaxed mb-8 font-medium">
+                初めての方はこちらから。内容物の確認からPCへの接続、ブラウザを使ったキーマップの変更まで、基本のセットアップ手順をご案内します。
+              </p>
+              <div className="inline-flex items-center text-emerald-600 font-bold group-hover:translate-x-2 transition-transform">
+                ガイドを読む <ArrowRight size={18} className="ml-2" />
+              </div>
+            </div>
+
+            <div className="group bg-slate-50 rounded-[2.5rem] p-10 border-2 border-slate-100 relative overflow-hidden reveal-right opacity-80 cursor-default">
+              <div className="w-16 h-16 bg-white border-2 border-slate-100 rounded-2xl flex items-center justify-center text-slate-400 mb-8 shadow-sm">
+                <Lightbulb size={32} />
+              </div>
+              <h3 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
+                Topics & Tips
+                <span className="text-[10px] bg-slate-200 text-slate-600 px-2 py-1 rounded font-black tracking-widest uppercase">Coming Soon</span>
+              </h3>
+              <p className="text-slate-500 leading-relaxed mb-8 font-medium">
+                キーボードをもっと自分好みに。レイヤー機能の活用術やおすすめのマクロ設定、打鍵感を高める静音化のコツなどの応用テクニックを紹介します。
+              </p>
+              <div className="inline-flex items-center text-slate-400 font-bold">
+                近日公開予定
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {}
+      <section id="member" className="py-24 px-6 md:px-12 bg-slate-50/80 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16 reveal">
             <h2 className="text-3xl font-bold inline-block relative">
@@ -311,7 +366,6 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-slate-900 text-white py-16 border-t-4 border-emerald-600 relative z-10 overflow-hidden">
         <div className="absolute -bottom-10 -left-10 text-[10rem] font-black text-slate-800 select-none opacity-50 pointer-events-none">moNa</div>
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 relative">
@@ -336,5 +390,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
