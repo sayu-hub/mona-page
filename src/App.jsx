@@ -276,7 +276,8 @@ export default function App() {
             <Sparkles size={14} className="text-yellow-500" /> HANDCRAFTED IN JAPAN
           </div>
           <h1 className="reveal text-5xl md:text-8xl font-extrabold text-white mb-8 tracking-tight drop-shadow-xl leading-[1.1]">
-            小さなボディでどこでも最大のパフォーマンスを
+            {/* 小さなボディでどこでも最大のパフォーマンスを */}
+            サイト制作中...
           </h1>
           <p className="reveal text-lg md:text-xl text-white/90 font-bold mb-12 drop-shadow-md max-w-xl mx-auto leading-relaxed">
             moNa は、小さな機体に機能性・デザイン性・打鍵感のすべてを追求した<br className="md:hidden"/>カスタムキーボードシリーズです。
