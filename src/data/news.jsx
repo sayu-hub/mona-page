@@ -6,12 +6,12 @@ import TweetEmbed from '../components/TweetEmbed';
 export const newsData = [
   {
     date: '2024.05.20',
-    title: 'moNa 2+ の販売を開始しました',
+    title: 'moNa 2 の販売を開始しました',
     category: 'Product',
     content: (
       <div className="space-y-4">
         <p>大変お待たせいたしました。</p>
-        <p>拡張モデル「moNa 2+」の販売を開始いたしました。</p>
+        <p>「moNa 2」の販売を開始いたしました。</p>
         
         {/* ▼ こんな感じで記事の中に直接ツイートを埋め込めます！ ▼ */}
         <div className="my-6">
@@ -39,8 +39,8 @@ export const newsData = [
     )
   },
   {
-    date: '2024.03.01',
-    title: 'Webサイトをリニューアルしました',
+    date: '2026.XX.XX',
+    title: '公式Webサイトを製作しました',
     category: 'Info',
     content: (
       <div className="space-y-4">
@@ -51,8 +51,8 @@ export const newsData = [
     )
   },
   {
-    date: '2024.05.26',
-    title: 'イベントの写真',
+    date: '2026.03.28',
+    title: 'キーケット2026に出展しました',
     category: 'Event',
     content: (
       <div>
@@ -63,8 +63,8 @@ export const newsData = [
     )
   },
   {
-    date: '2024.04.15',
-    title: '技術書典16 に出展します',
+    date: '2025.11.1',
+    title: 'note更新「moNa開発１周年！ ～誕生・改良の全記録～」',
     category: 'Event',
     content: (
       <div className="space-y-4">
