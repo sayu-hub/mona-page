@@ -173,13 +173,13 @@ export default function App() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   // === ルーティング処理（Viewの切り替え） ===
-  if (view === 'moNa') return <Mona onBack={() => setView('home')} />;
-  if (view === 'moNa2') return <Mona2 onBack={() => setView('home')} />;
-  if (view === 'moNa2plus') return <Mona2plus onBack={() => setView('home')} />;
-  if (view === 'guide') return <UserGuide onBack={() => setView('home')} />;
-  if (view === 'keymap') return <KeymapEditor onBack={() => setView('home')} />;
-  if (view === 'newsList') return <NewsList onBack={() => setView('home')} />;
-  if (view === 'accessoriesList') return <AccessoriesList onBack={() => setView('home')} />;
+  if (view === 'moNa') return <Mona onBack={() => setView('home')} onNavigate={setView} />;
+  if (view === 'moNa2') return <Mona2 onBack={() => setView('home')} onNavigate={setView} />;
+  if (view === 'moNa2plus') return <Mona2plus onBack={() => setView('home')} onNavigate={setView} />;
+  if (view === 'guide') return <UserGuide onBack={() => setView('home')} onNavigate={setView} />;
+  if (view === 'keymap') return <KeymapEditor onBack={() => setView('home')} onNavigate={setView} />;
+  if (view === 'newsList') return <NewsList onBack={() => setView('home')} onNavigate={setView} />;
+  if (view === 'accessoriesList') return <AccessoriesList onBack={() => setView('home')} onNavigate={setView} />;
 
   // === ホーム画面のレンダリング ===
   return (

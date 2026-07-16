@@ -1,193 +1,289 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { 
-  ArrowLeft, ShoppingCart, ChevronRight, Zap, Shield, 
+import React, { useEffect, useState } from 'react';
+import {
+  ArrowLeft, ShoppingCart, ChevronRight, Zap, Shield,
   Settings2, LayoutGrid, Package, Cable, Wrench, FileText,
-  PlayCircle, MousePointerClick
+  MousePointerClick, Mouse, ArrowUp
 } from 'lucide-react';
+import { navLinks } from '../data/items';
+import TweetEmbed from '../components/TweetEmbed';
 
-export default function Mona({ onBack }) {
-  const carouselRef = useRef(null);
+// ▼▼▼ 画像の読み込み ▼▼▼
+import monaImg from '../assets/images/common/moNa.png';
+import whiteMonaImg from '../assets/images/products/mona/white_mona.png';
+import deviceImg from '../assets/images/products/mona/device.png';
+import batteryImg from '../assets/images/products/mona/battery.png';
+import connectionImg from '../assets/images/products/mona/conection.png';
+import layerImg from '../assets/images/products/mona/layer.png';
+// ▲▲▲ ここまで ▲▲▲
+
+
+export default function Mona({ onBack, onNavigate }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const totalImages = 4;
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // 修正部分①：画面を開いた最初の1回だけ一番上にスクロールする
+  // 画面を開いた最初の1回だけ一番上にスクロールする
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // 修正部分②：カルーセルの制御（画像切り替え時にも一番上に戻らないように分離）
+  // スクロール検知
   useEffect(() => {
     const handleScroll = () => {
-      if (carouselRef.current) {
-        const index = Math.round(carouselRef.current.scrollLeft / carouselRef.current.clientWidth);
-        setActiveIndex(index);
-      }
+      setShowScrollTop(window.scrollY > 300);
     };
-
-    const carousel = carouselRef.current;
-    if (carousel) {
-      carousel.addEventListener('scroll', handleScroll);
-      
-      // 自動再生ロジック
-      const interval = setInterval(() => {
-        setActiveIndex((prevIndex) => {
-          const nextIndex = (prevIndex + 1) % totalImages;
-          if (carouselRef.current) {
-            carouselRef.current.scrollTo({
-              left: nextIndex * carouselRef.current.clientWidth,
-              behavior: 'smooth'
-            });
-          }
-          return nextIndex;
-        });
-      }, 4000);
-
-      return () => {
-        carousel.removeEventListener('scroll', handleScroll);
-        clearInterval(interval);
-      };
-    }
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToIndex = (index) => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollTo({
-        left: index * carouselRef.current.clientWidth,
-        behavior: 'smooth'
-      });
-    }
-  };
+  // 画像の自動スライド
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % 4); // 4は画像の枚数
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // ギャラリー用の画像リストを定義
+  const productImages = [
+    { src: monaImg, label: '', tagClass: 'hidden' },
+    { src: whiteMonaImg, label: 'White', tagClass: 'bg-white/90 text-slate-800' },
+    // 外部URLの画像もそのまま使用
+    { src: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&q=80&w=800', label: 'Black', tagClass: 'bg-slate-900/90 text-white' },
+    { src: 'https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?auto=format&fit=crop&q=80&w=800', label: 'Gray', tagClass: 'bg-slate-400/90 text-white' }
+  ];
 
   const features = [
+    // ----------------------------------------------------
+    // 全幅レイアウト（Featuresの最初）
+    // ----------------------------------------------------
     {
-      title: "堅牢なアクリル積層ボディ",
-      description: "マット加工を施した厚みのあるアクリルを幾重にも重ねることで、見た目の美しさと確かな重量感を両立。デスクの上で抜群の安定感を発揮し、タイピング時の微細なズレすら許しません。",
-      image: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&q=80&w=800",
-      icon: <Shield className="w-6 h-6" />,
-      color: "bg-blue-50 text-blue-600"
+      type: 'full',
+      tag: 'デザイン',
+      title: '原点にして、最高傑作。',
+      image: monaImg,
+      description: (
+        <div className="space-y-4">
+          <p>moNaは、プロジェクトの原点であり、すべての始まりとなったキーボードです。左手側にトラックボールを搭載し、キーボードとマウスの境界を取り払った革新的な一台です。</p>
+        </div>
+      )
     },
+    // ----------------------------------------------------
+    // 既存①（左右レイアウト）
+    // ----------------------------------------------------
     {
-      title: "計算し尽くされた打鍵感",
-      description: "内部の空洞を極限まで減らし、打鍵時の不快な反響音を抑える緻密なアコースティック設計。耳に心地よい「コトコト」というフィードバックだけが、あなたの指先に残ります。",
-      image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=800",
+      type: 'side',
+      reverse: false,
+      title: "入力デバイスを一台に集約",
+      image: deviceImg,
+      icon: <Mouse className="w-6 h-6" />,
+      color: "bg-blue-50 text-blue-600",
+      description: (
+        <div className="space-y-4">
+          <p>親指で操作できるトラックボールとエンコーダを備え、moNaのみでキーボードとマウス両方の役割を担います。</p>
+          <p>(マウスボタンも使用可能)</p>
+        </div>
+      )
+    },
+    // ----------------------------------------------------
+    // 既存②（左右レイアウト）
+    // ----------------------------------------------------
+    {
+      type: 'side',
+      reverse: true,
+      title: "複数の状態が視覚的にわかるLEDインジケータ",
+      image: batteryImg,
       icon: <Zap className="w-6 h-6" />,
-      color: "bg-emerald-50 text-emerald-600"
+      color: "bg-emerald-50 text-emerald-600",
+      description: (
+        <div className="space-y-4">
+          <p>LEDインジケータを搭載しており、現在のバッテリー残量・接続状況・マウスレイヤー遷移を一目で確認できます。</p>
+        </div>
+      )
     },
+    // ----------------------------------------------------
+    // 全幅レイアウト
+    // ----------------------------------------------------
     {
-      title: "無限のカスタマイズ性",
-      description: "QMK Firmwareを搭載し、VIAおよびRemapに完全対応。専用ソフトをインストールすることなく、ブラウザ上から直感的にキーマップを変更でき、あなただけの最適な配列を構築できます。",
-      image: "https://images.unsplash.com/photo-1629236715183-20516fcde321?auto=format&fit=crop&q=80&w=800",
+      type: 'full',
+      tag: 'パフォーマンス',
+      title: '美しさと機能性の完全な融合。',
+      image: whiteMonaImg,
+      description: (
+        <div className="space-y-4">
+          <p>細部まで計算された内部構造と、直感的なインターフェース。</p>
+          <p>ワークスペースに調和するミニマルなデザインでありながら、あなたのクリエイティビティを最大限に引き出すパワフルな機能を秘めています。</p>
+        </div>
+      )
+    },
+    // ----------------------------------------------------
+    // 既存③（左右レイアウト）
+    // ----------------------------------------------------
+    {
+      type: 'side',
+      reverse: false,
+      title: "ZMK Firmwareを採用",
+      image: connectionImg,
       icon: <Settings2 className="w-6 h-6" />,
-      color: "bg-purple-50 text-purple-600"
+      color: "bg-purple-50 text-purple-600",
+      description: (
+        <div className="space-y-4">
+          <p>無線キーボードに最適化されたZMK Firmwareを採用し、省電力で効率的に動作します。</p>
+          <p>左右間のケーブルが不要な完全無線設計で、デスク周りをスッキリさせます。</p>
+          <p>最大5つのデバイスを登録可能で、ワンボタンで接続先を素早く切り替えることができます。</p>
+        </div>
+      )
     },
+    // ----------------------------------------------------
+    // 既存④（左右レイアウト）
+    // ----------------------------------------------------
     {
-      title: "空間に調和する60%レイアウト",
-      description: "必要最小限のキーに絞り込んだコンパクトなフォームファクタ。マウスの可動域を劇的に広げ、不要なものを削ぎ落としたクリーンで洗練されたデスクセットアップを実現します。",
-      image: "https://images.unsplash.com/photo-1600456899121-68eda5705257?auto=format&fit=crop&q=80&w=800",
+      type: 'side',
+      reverse: true,
+      title: "レイヤー機能で自由にカスタマイズ",
+      image: layerImg,
       icon: <LayoutGrid className="w-6 h-6" />,
-      color: "bg-orange-50 text-orange-600"
+      color: "bg-orange-50 text-orange-600",
+      description: (
+        <div className="space-y-4">
+          <p>1つの物理キーに複数の機能を割り当てて切り替える仕組み</p>
+          <p>ノートPCやiPadなど、異なるデバイスへの接続先に応じてデフォルトのレイヤーを設定することもできます。</p>
+          <p>その他、modtapやcomboなど様々な機能を使用できます。</p>
+        </div>
+      )
     }
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900 pb-32 scroll-smooth">
+    // ▼ 一番親のdivに `overflow-x-hidden` を追加し、全幅画像による横揺れを防止
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900 pb-32 scroll-smooth overflow-x-hidden">
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-100 px-6 py-4">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <button 
-            onClick={onBack}
-            className="flex items-center text-slate-500 hover:text-emerald-600 font-bold transition-colors group"
-          >
-            <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
-            Home
-          </button>
-          <div className="font-extrabold text-slate-800 tracking-tight flex items-center gap-2">
-            <span className="text-xl">🐼</span> moNa Project
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-6">
+            <button onClick={onBack} className="flex items-center text-slate-500 hover:text-emerald-600 font-bold transition-colors group">
+              <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
+              Home
+            </button>
+            <div className="font-extrabold text-slate-800 tracking-tight flex items-center gap-2">
+              <span className="text-xl">🐼</span> moNa Project
+            </div>
           </div>
-          <div className="w-20"></div>
+
+          <nav className="hidden md:flex gap-8">
+            {navLinks.map((link) => (
+              link.isPage ? (
+                <button 
+                  key={link.name} 
+                  onClick={() => { if(onNavigate) onNavigate(link.viewTarget); window.scrollTo(0, 0); }} 
+                  className="relative text-sm font-bold text-slate-500 hover:text-[#3CB371] transition-colors py-1 group"
+                >
+                  {link.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
+                </button>
+              ) : (
+                <a 
+                  key={link.name} 
+                  href={link.href} 
+                  onClick={() => { onBack(); }}
+                  className="relative text-sm font-bold text-slate-500 hover:text-[#3CB371] transition-colors py-1 group"
+                >
+                  {link.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              )
+            ))}
+          </nav>
         </div>
       </header>
 
       <main className="max-w-5xl mx-auto px-6 mt-12 animate-fade-in">
-        {/* 商品トップ */}
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
-          <div className="relative group">
-            <div className="absolute inset-0 bg-emerald-900/5 rounded-[2.5rem] transform translate-x-4 translate-y-4"></div>
-            <div className="relative aspect-[4/3] bg-white rounded-[2.5rem] overflow-hidden shadow-xl ring-1 ring-slate-900/5">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start mb-24">
+
+          {/* 左側：画像ギャラリー */}
+          <div className="flex flex-col gap-4">
+            {/* メイン画像 */}
+            <div className="relative aspect-[4/3] bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100">
               <div 
-                ref={carouselRef}
-                className="flex overflow-x-auto scrollbar-hide snap-x snap-mandatory h-full w-full"
+                className="flex w-full h-full transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${activeIndex * 100}%)` }}
               >
-                <div className="snap-start shrink-0 w-full h-full">
-                  <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=800" alt="moNa Main" className="w-full h-full object-cover"/>
-                </div>
-                <div className="snap-start shrink-0 w-full h-full relative">
-                  <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-slate-800 shadow-sm">White</span>
-                  <img src="https://images.unsplash.com/photo-1515865261546-f94d0e82c5a0?auto=format&fit=crop&q=80&w=800" alt="moNa White" className="w-full h-full object-cover"/>
-                </div>
-                <div className="snap-start shrink-0 w-full h-full relative">
-                  <span className="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm">Black</span>
-                  <img src="https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&q=80&w=800" alt="moNa Black" className="w-full h-full object-cover"/>
-                </div>
-                <div className="snap-start shrink-0 w-full h-full relative">
-                  <span className="absolute top-4 left-4 bg-slate-400/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm">Gray</span>
-                  <img src="https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?auto=format&fit=crop&q=80&w=800" alt="moNa Gray" className="w-full h-full object-cover"/>
-                </div>
-              </div>
-              
-              {/* インジケータードット */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 bg-slate-900/40 backdrop-blur-sm px-3 py-1.5 rounded-full pointer-events-none">
-                {[...Array(totalImages)].map((_, i) => (
-                  <div 
-                    key={i} 
-                    className={`w-2 h-2 rounded-full transition-colors ${activeIndex === i ? 'bg-white' : 'bg-white/50'}`}
-                  ></div>
+                {productImages.map((img, idx) => (
+                  <div key={idx} className="w-full h-full shrink-0 relative">
+                    <img
+                      src={img.src}
+                      alt={`moNa ${img.label}`}
+                      className="w-full h-full object-cover"
+                    />
+                    {img.label && (
+                      <span className={`absolute top-4 left-4 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold shadow-sm ${img.tagClass}`}>
+                        {img.label}
+                      </span>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
-            <div className="text-center mt-3 text-xs font-bold text-slate-400 flex items-center justify-center gap-1">
-              <PlayCircle className="w-3.5 h-3.5" /> 自動再生中（スワイプ操作も可能）
+
+            {/* サムネイル一覧 */}
+            <div className="flex gap-3 overflow-x-auto scrollbar-hide py-1">
+              {productImages.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveIndex(idx)}
+                  className={`relative w-20 sm:w-24 aspect-[4/3] shrink-0 rounded-xl overflow-hidden transition-all duration-200 focus:outline-none 
+                    ${activeIndex === idx
+                      ? 'border-2 border-emerald-500 ring-4 ring-emerald-500/10'
+                      : 'border-2 border-transparent hover:border-slate-300'
+                    }`}
+                >
+                  <img src={img.src} alt={`thumbnail ${idx}`} className="w-full h-full object-cover" />
+                  {activeIndex !== idx && (
+                    <div className="absolute inset-0 bg-slate-900/10 hover:bg-transparent transition-colors"></div>
+                  )}
+                </button>
+              ))}
             </div>
           </div>
 
+          {/* 右側：商品情報 */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-4 mt-2">
               <span className="text-sm font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-widest">Product 01</span>
               <div className="flex gap-2">
                 <span className="text-xs font-bold text-slate-400 border border-slate-200 px-2 py-0.5 rounded-md">60% Layout</span>
                 <span className="text-xs font-bold text-slate-400 border border-slate-200 px-2 py-0.5 rounded-md">Acrylic</span>
               </div>
             </div>
-            
+
             <h1 className="text-4xl md:text-6xl font-black text-slate-800 mb-6 tracking-tight">moNa</h1>
-            
-            <p className="text-lg text-slate-600 leading-loose mb-6 font-medium">
-              原点となる60%レイアウト。アクリルの積層が織りなす透明感と、打鍵音の響きを計算し尽くしたエントリーモデル。
+
+            <p className="text-lg text-slate-600 leading-loose mb-8 font-medium">
+              原点でありプロジェクト始まりのキーボード。左手側にトラックボールを搭載。
             </p>
 
-            {/* カラーバリエーション選択 */}
-            <div className="mb-6 p-4 bg-slate-100/60 rounded-2xl border border-slate-200/60">
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
-                <MousePointerClick className="w-3.5 h-3.5" /> Color Variations (選択して画像を確認)
+            <div className="mb-8 p-5 bg-slate-100/60 rounded-3xl border border-slate-200/60">
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-1">
+                <MousePointerClick className="w-3.5 h-3.5" /> Color Variations
               </p>
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex flex-wrap items-center gap-3">
                 {[
                   { name: 'ホワイト', color: 'bg-white', border: 'border-slate-300' },
                   { name: 'ブラック', color: 'bg-slate-900', border: 'border-slate-800' },
                   { name: 'グレー', color: 'bg-slate-400', border: 'border-slate-300' }
                 ].map((c, i) => (
-                  <button 
+                  <button
                     key={i}
-                    onClick={() => scrollToIndex(i + 1)}
-                    className={`group flex items-center gap-1.5 px-2 py-1.5 rounded-full transition-all focus:outline-none ring-offset-slate-50 ring-offset-2 ${activeIndex === i + 1 ? 'ring-2 ring-emerald-500 bg-slate-100' : 'hover:bg-slate-200'}`}
+                    onClick={() => setActiveIndex(i + 1)}
+                    className={`group flex items-center gap-2 px-3 py-2 rounded-2xl transition-all focus:outline-none 
+                      ${activeIndex === i + 1 ? 'bg-white shadow-sm border border-emerald-200 ring-2 ring-emerald-500/20' : 'border border-transparent hover:bg-slate-200'}`}
                   >
                     <span className={`w-5 h-5 rounded-full ${c.color} ${c.border} border shadow-sm inline-block transition-transform group-hover:scale-110`}></span>
-                    <span className="text-sm font-bold text-slate-700 pr-1">{c.name}</span>
+                    <span className={`text-sm font-bold ${activeIndex === i + 1 ? 'text-emerald-700' : 'text-slate-600'}`}>{c.name}</span>
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="flex items-center gap-6 p-6 bg-white rounded-3xl border-2 border-slate-100 shadow-sm">
+            <div className="flex items-center gap-6 p-6 bg-white rounded-3xl border border-slate-200 shadow-sm">
               <div className="flex-1">
                 <p className="text-sm text-slate-400 font-bold mb-1">Price</p>
                 <p className="text-3xl font-black text-slate-800 font-mono">¥40,000<span className="text-sm text-slate-500 font-normal"> (税込)</span></p>
@@ -200,7 +296,6 @@ export default function Mona({ onBack }) {
           </div>
         </div>
 
-        {/* Features セクション (Lofree風) */}
         <div className="mb-32 mt-24">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black text-slate-800 tracking-tight mb-4">Features</h2>
@@ -208,22 +303,43 @@ export default function Mona({ onBack }) {
           </div>
 
           <div className="space-y-24 md:space-y-32">
-            {features.map((feature, i) => (
-              <div key={i} className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-10 md:gap-16`}>
-                <div className="w-full md:w-1/2 rounded-[2.5rem] overflow-hidden shadow-2xl ring-1 ring-slate-900/5 group">
-                  <img src={feature.image} alt={feature.title} className="w-full aspect-[4/3] md:aspect-video object-cover transition-transform duration-700 group-hover:scale-105" />
-                </div>
-                <div className="w-full md:w-1/2 space-y-6">
-                  <div className={`w-12 h-12 ${feature.color} rounded-2xl flex items-center justify-center`}>
-                    {feature.icon}
+            {features.map((feature, i) => {
+              // ▼ 全幅レイアウトの場合
+              if (feature.type === 'full') {
+                return (
+                  <div key={i} className="flex flex-col w-full gap-8 md:gap-12">
+                    {/* 画像を画面の端まで広げる（ウィジェットの枠をなくす） */}
+                    <div className="w-[100vw] relative left-1/2 -translate-x-1/2">
+                      <img src={feature.image} alt={feature.title} className="w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9] object-cover" />
+                    </div>
+                    {/* テキスト部分は元のコンテンツ幅に収める */}
+                    <div className="px-2 md:px-0">
+                      {feature.tag && <p className="text-sm font-bold text-slate-500 mb-3">{feature.tag}</p>}
+                      <h3 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tight mb-4">{feature.title}</h3>
+                      <div className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
+                        {feature.description}
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-black text-slate-800 tracking-tight">{feature.title}</h3>
-                  <p className="text-lg text-slate-600 leading-relaxed font-medium">
-                    {feature.description}
-                  </p>
+                );
+              }
+
+              // ▼ 従来の左右レイアウトの場合
+              return (
+                <div key={i} className={`flex flex-col ${feature.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16`}>
+                  <div className="w-full md:w-1/2 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-slate-900/5 group">
+                    <img src={feature.image} alt={feature.title} className="w-full h-auto object-contain transition-transform duration-700 group-hover:scale-105" />
+                  </div>
+                  <div className="w-full md:w-1/2 space-y-6">
+                    <div className={`w-12 h-12 ${feature.color} rounded-2xl flex items-center justify-center`}>
+                      {feature.icon}
+                    </div>
+                    <h3 className="text-3xl md:text-4xl font-black text-slate-800 tracking-tight">{feature.title}</h3>
+                    <div className="text-lg text-slate-600 leading-relaxed font-medium">{feature.description}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -234,13 +350,12 @@ export default function Mona({ onBack }) {
             <h2 className="text-3xl font-bold text-slate-800">商品内容</h2>
           </div>
           <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
-            <p className="text-slate-600 mb-6 font-medium">製品パッケージには以下の内容が含まれています。</p>
             <div className="grid sm:grid-cols-2 gap-4">
               {[
-                { icon: <Package />, title: "moNa キーボード本体", desc: "組み立て済みアクリル積層ボディ（ホワイト／ブラック／グレー）" },
-                { icon: <Cable />, title: "USB Type-C ケーブル", desc: "編み込み高耐久仕様（1.5m）" },
-                { icon: <Wrench />, title: "キーキャッププラー", desc: "キートップの取り外し・交換用工具" },
-                { icon: <FileText />, title: "クイックスタートガイド", desc: "キーマップ変更（VIA/Remap）の手順・保証書付属" },
+                { icon: <Package />, title: "moNa キーボード本体", desc: "はんだ済みの本体" },
+                { icon: <Cable />, title: "moNa 標準キーキャップ", desc: "編み込み高耐久仕様（1.5m）" },
+                { icon: <Wrench />, title: "25mmトラックボール", desc: "POM製のトラックボール" },
+                { icon: <FileText />, title: "商品カード" },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3 p-4 bg-slate-50/80 rounded-2xl border border-slate-100">
                   <div className="text-emerald-500 shrink-0 mt-0.5">
@@ -265,12 +380,12 @@ export default function Mona({ onBack }) {
           <div className="bg-white rounded-[2rem] border border-slate-100 shadow-sm overflow-hidden">
             <dl className="divide-y divide-slate-100">
               {[
-                { label: 'Layout', value: '60%レイアウト' },
+                { label: 'Layout', value: '40%レイアウト' },
                 { label: 'Colors', value: 'ホワイト / ブラック / グレー' },
-                { label: 'Switches', value: 'Cherry MX 互換スイッチ対応 (ホットスワップ非対応)' },
-                { label: 'Connection', value: 'USB Type-C 有線接続' },
-                { label: 'Firmware', value: 'QMK Firmware / VIA, Remap対応' },
-                { label: 'Weight', value: '約 650g (完成時)' },
+                { label: 'Switches', value: 'Choc v1/v2 Lofree製スイッチ対応 (ホットスワップ)' },
+                { label: 'Connection', value: '無線/有線接続対応' },
+                { label: 'Firmware', value: 'ZMK Firmware, Keymap Editor/ZMK Studio対応' },
+                { label: 'Weight', value: '測定中...' },
               ].map((spec, i) => (
                 <div key={i} className="flex flex-col sm:flex-row sm:items-center py-5 px-8 hover:bg-slate-50 transition-colors">
                   <dt className="w-48 text-sm font-bold text-slate-400 mb-1 sm:mb-0 uppercase tracking-wider">{spec.label}</dt>
@@ -280,27 +395,31 @@ export default function Mona({ onBack }) {
             </dl>
           </div>
         </div>
-      </main>
 
-      {/* フローティングボトムバー */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-full max-w-sm px-6 z-50">
-        <div className="bg-slate-900/90 backdrop-blur-md text-white p-3 rounded-full shadow-2xl flex items-center justify-between border border-slate-700/50">
-          <div className="pl-4 font-bold tracking-wide">
-            moNa <span className="text-slate-400 font-normal text-xs ml-1">¥40,000</span>
-          </div>
-          <button className="bg-emerald-500 hover:bg-emerald-400 text-white px-6 py-2.5 rounded-full font-bold transition-colors text-sm flex items-center">
-            Buy Now
-            <ChevronRight className="w-4 h-4 ml-1" />
+        {/* 購入アクションエリア */}
+        <div className="mt-32 mb-16 flex flex-col items-center text-center">
+          <h2 className="text-3xl font-black text-slate-800 mb-6">moNa を手に入れる</h2>
+          <p className="text-slate-500 font-medium mb-10 max-w-lg">
+            すべての始まりとなった、原点のキーボードをあなたの手に。
+          </p>
+          <button className="bg-emerald-500 hover:bg-emerald-400 text-white px-12 py-5 rounded-full font-bold text-lg transition-all shadow-xl shadow-emerald-500/30 flex items-center group hover:-translate-y-1">
+            <ShoppingCart className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
+            購入ページへ進む
+            <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
-      </div>
+      </main>
 
-      <style>{`
-        .animate-fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-      `}</style>
+      {/* トップへ戻るボタン */}
+      <button 
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className={`fixed bottom-6 right-6 p-4 rounded-full bg-slate-900 text-white shadow-xl transition-all duration-300 hover:bg-emerald-500 hover:-translate-y-1 z-50 ${showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+        aria-label="Scroll to top"
+      >
+        <ArrowUp className="w-5 h-5" />
+      </button>
+
+      <style>{`.animate-fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; } @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } } .scrollbar-hide::-webkit-scrollbar { display: none; } .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }`}</style>
     </div>
   );
 }
