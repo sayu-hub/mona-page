@@ -1,18 +1,19 @@
 // src/data/news.jsx の先頭
 import React from 'react';
 // 正しいパス指定
-import TweetEmbed from '../components/TweetEmbed'; 
+import TweetEmbed from '../components/TweetEmbed';
 
 export const newsData = [
   {
     date: '2024.05.20',
     title: 'moNa 2 の販売を開始しました',
     category: 'Product',
+    isPublic: true, // true: 公開, false: 非公開
     content: (
       <div className="space-y-4">
         <p>大変お待たせいたしました。</p>
         <p>「moNa 2」の販売を開始いたしました。</p>
-        
+
         {/* ▼ こんな感じで記事の中に直接ツイートを埋め込めます！ ▼ */}
         <div className="my-6">
           <TweetEmbed url="https://x.com/Pooh_pol0/status/2018878320671387878" />
@@ -26,15 +27,16 @@ export const newsData = [
     date: '2025.09.23',
     title: 'TKX2025に出展しました',
     category: 'Event',
+    isPublic: true, // true: 公開, false: 非公開
     content: (
       <div className="space-y-4">
         <p>9月23日に開催された「Tokyo Keyboard Expo 2025」に個人出展させていただきました。</p>
         <p>当日の様子です！</p>
-        
+
 
         {/* ② src={ } の中に、画像リンクを入れる*/}
         <img src={'../assets/images/news/event-photo.png'} alt="イベントの様子" className="rounded-2xl w-full" />
-        
+
       </div>
     )
   },
@@ -42,6 +44,7 @@ export const newsData = [
     date: '2026.XX.XX',
     title: '公式Webサイトを製作しました',
     category: 'Info',
+    isPublic: true, // true: 公開, false: 非公開
     content: (
       <div className="space-y-4">
         <p>moNa Projectの公式Webサイトを全面リニューアルいたしました。</p>
@@ -54,6 +57,7 @@ export const newsData = [
     date: '2026.03.28',
     title: 'キーケット2026に出展しました',
     category: 'Event',
+    isPublic: true, // true: 公開, false: 非公開
     content: (
       <div>
         <p>当日の様子です！</p>
@@ -66,6 +70,7 @@ export const newsData = [
     date: '2025.11.1',
     title: 'note更新「moNa開発１周年！ ～誕生・改良の全記録～」',
     category: 'Event',
+    isPublic: false, // true: 公開, false: 非公開
     content: (
       <div className="space-y-4">
         <p>5月26日(日)に開催される「技術書典16」にmoNa Projectとして出展いたします。</p>

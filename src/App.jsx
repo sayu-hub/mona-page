@@ -54,7 +54,7 @@ export default function App() {
 
   // ニュースを日付の降順（最新順）に並び替え
   const sortedNews = useMemo(() => {
-    return [...newsData].sort((a, b) => b.date.localeCompare(a.date));
+    return [...newsData].filter(n => n.isPublic !== false).sort((a, b) => b.date.localeCompare(a.date));
   }, []);
 
   // スクロール検知 & アニメーション発火用Observer (ホーム画面用)
