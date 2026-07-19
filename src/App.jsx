@@ -51,7 +51,7 @@ export default function App() {
   const randomAccessories = useMemo(() => shuffleArray(accessories), []);
   const randomTweets = useMemo(() => shuffleArray(tweetUrls), []);
 
-  
+
   // ニュースを日付の降順（最新順）に並び替え
   const sortedNews = useMemo(() => {
     return [...newsData].sort((a, b) => b.date.localeCompare(a.date));
@@ -116,8 +116,8 @@ export default function App() {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    const scrollAmount = 280; 
-    
+    const scrollAmount = 280;
+
     const intervalId = setInterval(() => {
       if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
         container.scrollTo({ left: 0, behavior: 'smooth' });
@@ -137,36 +137,36 @@ export default function App() {
     if (!container) return;
 
     let autoScrollTimer;
-    
-    const startAutoScroll = () => {
-        clearInterval(autoScrollTimer);
-        autoScrollTimer = setInterval(() => {
-            const maxScroll = container.scrollWidth - container.clientWidth;
-            if (maxScroll <= 0) return;
 
-            if (container.scrollLeft >= maxScroll - 10) { 
-                container.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-                container.scrollBy({ left: 370, behavior: 'smooth' }); 
-            }
-        }, 3000);
+    const startAutoScroll = () => {
+      clearInterval(autoScrollTimer);
+      autoScrollTimer = setInterval(() => {
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        if (maxScroll <= 0) return;
+
+        if (container.scrollLeft >= maxScroll - 10) {
+          container.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          container.scrollBy({ left: 370, behavior: 'smooth' });
+        }
+      }, 3000);
     };
 
     const stopAutoScroll = () => clearInterval(autoScrollTimer);
 
     startAutoScroll();
 
-    container.addEventListener('mouseenter', stopAutoScroll); 
+    container.addEventListener('mouseenter', stopAutoScroll);
     container.addEventListener('mouseleave', startAutoScroll);
     container.addEventListener('touchstart', stopAutoScroll);
     container.addEventListener('touchend', startAutoScroll);
 
     return () => {
-        clearInterval(autoScrollTimer);
-        container.removeEventListener('mouseenter', stopAutoScroll); 
-        container.removeEventListener('mouseleave', startAutoScroll);
-        container.removeEventListener('touchstart', stopAutoScroll);
-        container.removeEventListener('touchend', startAutoScroll);
+      clearInterval(autoScrollTimer);
+      container.removeEventListener('mouseenter', stopAutoScroll);
+      container.removeEventListener('mouseleave', startAutoScroll);
+      container.removeEventListener('touchstart', stopAutoScroll);
+      container.removeEventListener('touchend', startAutoScroll);
     };
   }, [view]);
 
@@ -189,12 +189,7 @@ export default function App() {
       <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/40 backdrop-blur-lg py-3 shadow-sm border-b border-white/20' : 'bg-transparent py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           <a href="#" className="text-xl font-bold tracking-tight flex items-center gap-2 group hover:opacity-80 transition-opacity">
-            <div className="relative">
-              <div className={`w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white text-xs transition-transform duration-500 group-hover:rotate-12`}>
-                🐼
-              </div>
-              <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-yellow-300 rounded-full border-2 border-white"></div>
-            </div>
+
             <span className={`font-extrabold transition-colors duration-300 ${scrolled ? 'text-slate-700 hover:text-[#3CB371]' : 'text-slate-400 hover:text-[#3CB371]'}`}>
               moNa Project
             </span>
@@ -203,19 +198,19 @@ export default function App() {
           <nav className="hidden md:flex gap-8">
             {navLinks.map((link) => (
               link.isPage ? (
-                <button 
-                  key={link.name} 
-                  onClick={() => { setView(link.viewTarget); window.scrollTo(0, 0); }} 
+                <button
+                  key={link.name}
+                  onClick={() => { setView(link.viewTarget); window.scrollTo(0, 0); }}
                   className={`relative text-sm font-bold transition-colors py-1 group ${scrolled ? 'text-slate-700 hover:text-[#3CB371]' : 'text-slate-400 hover:text-[#3CB371]'}`}
                 >
                   {link.name}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
                 </button>
               ) : (
-                <a 
-                  key={link.name} 
-                  href={link.href} 
-                  onClick={() => { if(view !== 'home') setView('home'); }}
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => { if (view !== 'home') setView('home'); }}
                   className={`relative text-sm font-bold transition-colors py-1 group ${scrolled ? 'text-slate-700 hover:text-[#3CB371]' : 'text-slate-400 hover:text-[#3CB371]'}`}
                 >
                   {link.name}
@@ -235,18 +230,18 @@ export default function App() {
       <div className={`fixed inset-0 bg-white/95 backdrop-blur-xl z-[60] flex flex-col items-center justify-center gap-8 transition-all duration-500 ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
         {navLinks.map((link) => (
           link.isPage ? (
-            <button 
-              key={link.name} 
-              onClick={() => { setView(link.viewTarget); window.scrollTo(0, 0); setIsMenuOpen(false); }} 
+            <button
+              key={link.name}
+              onClick={() => { setView(link.viewTarget); window.scrollTo(0, 0); setIsMenuOpen(false); }}
               className="text-3xl font-extrabold text-slate-800 hover:text-emerald-600 tracking-tight"
             >
               {link.name}
             </button>
           ) : (
-            <a 
-              key={link.name} 
-              href={link.href} 
-              onClick={() => { setIsMenuOpen(false); if(view !== 'home') setView('home'); }} 
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => { setIsMenuOpen(false); if (view !== 'home') setView('home'); }}
               className="text-3xl font-extrabold text-slate-800 hover:text-emerald-600 tracking-tight"
             >
               {link.name}
@@ -260,9 +255,9 @@ export default function App() {
 
       {/* Hero Section */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[30s] hover:scale-105"
-          style={{ 
+          style={{
             // ▼▼▼ 変更：インポートした背景画像の変数を使うように修正 ▼▼▼
             backgroundImage: `url(${heroBgImage})`,
             // ▲▲▲ ここまで ▲▲▲
@@ -272,20 +267,17 @@ export default function App() {
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-4xl mt-12">
-          <div className="reveal mb-6 inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold text-emerald-800 shadow-lg shadow-emerald-900/10">
-            <Sparkles size={14} className="text-yellow-500" /> HANDCRAFTED IN JAPAN
-          </div>
           <h1 className="reveal text-5xl md:text-8xl font-extrabold text-white mb-8 tracking-tight drop-shadow-xl leading-[1.1]">
             {/* 小さなボディでどこでも最大のパフォーマンスを */}
             サイト制作中...
           </h1>
           <p className="reveal text-lg md:text-xl text-white/90 font-bold mb-12 drop-shadow-md max-w-xl mx-auto leading-relaxed">
-            moNa は、小さな機体に機能性・デザイン性・打鍵感のすべてを追求した<br className="md:hidden"/>カスタムキーボードシリーズです。
+            moNa は、小さな機体に機能性・デザイン性・打鍵感のすべてを追求した<br className="md:hidden" />カスタムキーボードシリーズです。
           </p>
-          
+
           <div className="reveal absolute bottom-[-20vh] md:bottom-[-25vh] left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/90 animate-bounce">
             <span className="text-xs font-bold tracking-[0.3em] uppercase text-slate-300">Scroll</span>
-            <ArrowDown size={24} className="text-slate-300"/>
+            <ArrowDown size={24} className="text-slate-300" />
           </div>
         </div>
       </section>
@@ -300,11 +292,11 @@ export default function App() {
             </h2>
             <p className="text-slate-500 text-lg font-bold">最新の活動情報</p>
           </div>
-          
+
           <div className="flex-1 space-y-12">
             {sortedNews.slice(0, 3).map((news, index) => (
-              <article 
-                key={index} 
+              <article
+                key={index}
                 onClick={() => setSelectedNews(news)}
                 className="reveal border-b border-slate-200 pb-8 last:border-0 cursor-pointer group"
               >
@@ -320,12 +312,12 @@ export default function App() {
               </article>
             ))}
             <div className="pt-6 reveal text-right md:text-left">
-              <button 
+              <button
                 onClick={() => { setView('newsList'); window.scrollTo(0, 0); }}
                 className="inline-flex items-center text-base font-bold text-slate-400 hover:text-emerald-600 transition-colors gap-2 group"
               >
-                すべての記事を見る 
-                <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform"/>
+                すべての記事を見る
+                <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
@@ -347,22 +339,28 @@ export default function App() {
             {mainWorks.map((work, index) => {
               return (
                 <div key={work.id} className={`${work.animClass} flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 md:gap-24 items-center`}>
-                  <div 
-                    className="w-full md:w-1/2 relative group cursor-pointer"
+                  <div
+                    className={`w-full md:w-1/2 relative group ${work.isPublic === false ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                     onClick={() => {
-                      setView(work.targetView);
+                      if (work.isPublic !== false) {
+                        setView(work.targetView);
+                      }
                     }}
                   >
                     <div className="absolute inset-0 bg-emerald-900/5 rounded-[2rem] transform translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-6 group-hover:translate-y-6"></div>
                     <div className="relative aspect-[4/3] bg-white rounded-[2rem] overflow-hidden shadow-xl ring-1 ring-slate-900/5">
-                      <img 
-                        src={work.image} 
-                        alt={work.name} 
+                      <img
+                        src={work.image}
+                        alt={work.name}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                      <div className="absolute bottom-6 right-6 bg-white text-slate-900 px-6 py-3 rounded-full font-bold shadow-lg translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center gap-2">
-                        View Details <ArrowRight size={16} />
+                      <div className={`absolute inset-0 ${work.isPublic === false ? 'bg-black/20' : 'bg-black/0 group-hover:bg-black/10'} transition-colors duration-300 rounded-[2rem]`}></div>
+                      <div className={`absolute bottom-6 right-6 bg-white text-slate-900 px-6 py-3 rounded-full font-bold shadow-lg translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center gap-2 ${work.isPublic === false ? 'bg-slate-100 text-slate-500' : ''}`}>
+                        {work.isPublic === false ? (
+                          <>準備中 <div className="w-2 h-2 rounded-full bg-slate-400 animate-pulse ml-1"></div></>
+                        ) : (
+                          <>View Details <ArrowRight size={16} /></>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -393,34 +391,34 @@ export default function App() {
           <div className="reveal">
             <div className="flex items-end justify-between mb-8 px-2 border-b border-slate-200 pb-4">
               <h3 className="text-2xl font-bold text-slate-800">Accessories & Parts</h3>
-              <button 
+              <button
                 onClick={() => { setView('accessoriesList'); window.scrollTo(0, 0); }}
                 className="text-sm font-bold text-slate-400 hover:text-emerald-600 flex items-center gap-1 group transition-colors"
               >
                 すべて表示 <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
-            
-            <div 
+
+            <div
               ref={scrollContainerRef}
               className="flex overflow-x-auto pb-12 gap-6 no-scrollbar snap-x snap-mandatory"
             >
               {randomAccessories.map((item, index) => {
                 const isImage = typeof item.image === 'string' ? item.image.includes('/') || item.image.includes('.') : !!item.image;
-                
+
                 return (
-                  <a 
-                    key={index} 
-                    href={item.url || "#"} 
-                    target="_blank" 
+                  <a
+                    key={index}
+                    href={item.url || "#"}
+                    target="_blank"
                     rel="noopener noreferrer"
-                    className="snap-start shrink-0 w-64 bg-white rounded-2xl p-4 border border-slate-200 shadow-sm hover:border-emerald-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group flex flex-col self-stretch"                  
+                    className="snap-start shrink-0 w-64 bg-white rounded-2xl p-4 border border-slate-200 shadow-sm hover:border-emerald-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group flex flex-col self-stretch"
                   >
                     {isImage ? (
                       <div className="aspect-square bg-slate-50 rounded-xl mb-4 flex items-center justify-center overflow-hidden shrink-0">
-                        <img 
-                          src={item.image} 
-                          alt={item.name} 
+                        <img
+                          src={item.image}
+                          alt={item.name}
                           className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                         />
                       </div>
@@ -463,11 +461,11 @@ export default function App() {
           </div>
 
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 lg:gap-8">
-            <div 
+            <div
               onClick={() => {
                 setView('guide');
                 window.scrollTo(0, 0);
-              }} 
+              }}
               className="cursor-pointer group bg-slate-50 rounded-[2.5rem] p-8 lg:p-10 border-2 border-slate-100 hover:border-emerald-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden reveal-left"
             >
               <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-300 to-emerald-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
@@ -483,11 +481,11 @@ export default function App() {
               </div>
             </div>
 
-            <div 
+            <div
               onClick={() => {
                 setView('keymap');
                 window.scrollTo(0, 0);
-              }} 
+              }}
               className="cursor-pointer group bg-slate-50 rounded-[2.5rem] p-8 lg:p-10 border-2 border-slate-100 hover:border-emerald-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden reveal"
             >
               <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-300 to-emerald-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
@@ -528,14 +526,14 @@ export default function App() {
       <section id="gallery" className="py-24 px-0 md:px-12 bg-white relative z-10 border-t border-slate-100">
         <div className="max-w-6xl mx-auto px-6 md:px-0 mb-12 text-center reveal">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900 inline-block relative">
-              Gallery
-              <span className="absolute bottom-2 left-0 w-full h-3 bg-emerald-200/50 -z-10 rounded-full transform rotate-1"></span>
+            Gallery
+            <span className="absolute bottom-2 left-0 w-full h-3 bg-emerald-200/50 -z-10 rounded-full transform rotate-1"></span>
           </h2>
           <p className="text-slate-500 mt-4 font-medium">ユーザーの皆様のカスタム例をご紹介</p>
         </div>
 
         <div className="relative w-full reveal">
-          <div 
+          <div
             ref={galleryScrollRef}
             className="flex overflow-x-auto gap-6 pb-8 px-6 md:px-0 no-scrollbar snap-x snap-mandatory"
             style={{ WebkitOverflowScrolling: 'touch' }}
@@ -546,7 +544,7 @@ export default function App() {
               </div>
             ))}
           </div>
-          
+
           <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-white to-transparent pointer-events-none hidden md:block z-10"></div>
           <div className="absolute top-0 left-0 h-full w-24 bg-gradient-to-r from-white to-transparent pointer-events-none hidden md:block z-10"></div>
         </div>
@@ -567,7 +565,7 @@ export default function App() {
             {members.map((member) => (
               <div key={member.id} className="reveal flex flex-col items-center text-center p-10 rounded-[2.5rem] border-2 border-slate-200 bg-white hover:border-emerald-200 hover:shadow-2xl hover:shadow-emerald-900/5 transition-all duration-500 group relative">
                 <div className="absolute top-0 left-0 w-full h-32 bg-slate-50 rounded-t-[2.5rem] -z-10 group-hover:bg-emerald-50/50 transition-colors"></div>
-                
+
                 <div className="w-28 h-28 shrink-0 rounded-full bg-white border-4 border-white shadow-lg flex items-center justify-center overflow-hidden mb-6 text-5xl transform group-hover:scale-110 transition-transform duration-300">
                   {member.image ? (
                     <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
@@ -584,7 +582,7 @@ export default function App() {
                   <p className="text-sm text-slate-600 leading-relaxed mb-8 font-medium border-t border-b border-slate-100 py-4">
                     {member.bio}
                   </p>
-                  
+
                   <div className="flex gap-4 justify-center">
                     {member.twitter && (
                       <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-[#1DA1F2] hover:bg-blue-50 transition-all bg-white border border-slate-200 p-3 rounded-full hover:-translate-y-1 hover:shadow-md">
@@ -607,7 +605,7 @@ export default function App() {
       {/* Footer */}
       <footer className="bg-slate-900 text-white py-8 border-t-4 border-emerald-600 relative z-10 overflow-hidden">
         <div className="absolute -bottom-10 -left-10 text-[10rem] font-black text-slate-800 select-none opacity-50 pointer-events-none">moNa</div>
-        
+
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 relative">
           <div className="flex flex-col items-center md:items-start gap-2">
             <div className="flex items-center gap-3">
@@ -626,7 +624,7 @@ export default function App() {
           <p>&copy; {new Date().getFullYear()} sayu shakupan.</p>
         </div>
       </footer>
-      
+
       {/* ▼ ニュース用ポップアップ ▼ */}
       {selectedNews && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 animate-fade-in">

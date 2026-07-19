@@ -16,17 +16,21 @@ moNa-page/
  │   │       ├── news/      # News記事内で使用する画像
  │   │       └── products/  # 各プロダクト（moNa, moNa2など）の画像
  │   │
+ │   ├── components/        # 再利用可能なUIコンポーネント
+ │   │   └── TweetEmbed.jsx # ツイート埋め込み用コンポーネント
+ │   │
  │   ├── data/              # サイト内に表示するコンテンツデータ
  │   │   ├── items.js       # ナビゲーション、商品情報、メンバー情報などの基本データ
  │   │   └── news.jsx       # News記事のデータ（画像やリンクなどのJSXタグを含む）
  │   │
  │   ├── pages/             # 各独立したページ（ビュー）のコンポーネント
- │   │   ├── Keymap-Editor.jsx # キーマップエディタ画面
- │   │   ├── moNa.jsx          # 商品詳細ページ (moNa)
- │   │   ├── moNa2.jsx         # 商品詳細ページ (moNa 2)
- │   │   ├── moNa2plus.jsx     # 商品詳細ページ (moNa 2+)
- │   │   ├── NewsList.jsx      # News一覧・ポップアップ表示用ページ
- │   │   └── UserGuide.jsx     # ユーザーガイド画面
+ │   │   ├── AccessoriesList.jsx # アクセサリー・パーツ一覧ページ
+ │   │   ├── Keymap-Editor.jsx   # キーマップエディタ画面
+ │   │   ├── moNa.jsx            # 商品詳細ページ (moNa)
+ │   │   ├── moNa2.jsx           # 商品詳細ページ (moNa 2)
+ │   │   ├── moNa2plus.jsx       # 商品詳細ページ (moNa 2+)
+ │   │   ├── NewsList.jsx        # News一覧・ポップアップ表示用ページ
+ │   │   └── UserGuide.jsx       # ユーザーガイド画面
  │   │
  │   ├── App.jsx            # メインコンポーネント（ルーティング機能とトップページのUI）
  │   ├── index.css          # グローバルCSS（Tailwind CSSの読み込み、カスタムフォント等）

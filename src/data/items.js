@@ -33,7 +33,8 @@ export const mainWorks = [
       // ▼ 変更: チョンチョン（' '）を外して、上で作った変数を入れる
       image: monaImg,
       animClass: 'reveal-right',
-      targetView: 'moNa'
+      targetView: 'moNa',
+      isPublic: true
   },
   {
       id: '02',
@@ -42,7 +43,8 @@ export const mainWorks = [
       tags: ['42Key', 'Split', 'Wireless', 'TrackBall(Right)'],
       image: mona2Img,
       animClass: 'reveal-left',
-      targetView: 'moNa2'
+      targetView: 'moNa2',
+      isPublic: true
   },
   {
       id: '03',
@@ -51,7 +53,8 @@ export const mainWorks = [
       tags: ['48Key', 'Split', 'Wireless', 'TrackBall(Right)'],
       image: mona2plusImg,
       animClass: 'reveal-right',
-      targetView: 'moNa2plus'
+      targetView: 'moNa2plus',
+      isPublic: false // true: 公開, false: 非公開（準備中）
   },
 ];
 

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import {
   ArrowLeft, ShoppingCart, ChevronRight, Zap, Shield,
   Settings2, LayoutGrid, Package, Cable, Wrench, FileText,
-  MousePointerClick, Mouse, ArrowUp
+  MousePointerClick, Mouse, ArrowUp, Sparkles
 } from 'lucide-react';
 import { navLinks } from '../data/items';
 import TweetEmbed from '../components/TweetEmbed';
 
 // ▼▼▼ 画像の読み込み ▼▼▼
 import monaImg from '../assets/images/common/moNa.png';
+import mona2Img from '../assets/images/common/moNa2.png';
 import whiteMonaImg from '../assets/images/products/mona/white_mona.png';
 import deviceImg from '../assets/images/products/mona/device.png';
 import batteryImg from '../assets/images/products/mona/battery.png';
@@ -58,12 +59,11 @@ export default function Mona({ onBack, onNavigate }) {
     // ----------------------------------------------------
     {
       type: 'full',
-      tag: 'デザイン',
-      title: '原点にして、最高傑作。',
-      image: monaImg,
+      image: mona2Img,
       description: (
         <div className="space-y-4">
-          <p>moNaは、プロジェクトの原点であり、すべての始まりとなったキーボードです。左手側にトラックボールを搭載し、キーボードとマウスの境界を取り払った革新的な一台です。</p>
+          <p>moNaはkumakeyさん制作のroBaにインスパイアされ、白湯_sayuとshakupanさんで作った小型分割キーボードです。</p>
+          <p>またこのキーボードはキーボードマウス一体型の元祖であるkeyballと製作者のYowkees様 がいなければ実現していないものです。Yowkeesさんのその革新的なアイデアとユーザーの利便性を追求する姿勢に深い敬意を表します。</p>
         </div>
       )
     },
@@ -101,17 +101,41 @@ export default function Mona({ onBack, onNavigate }) {
       )
     },
     // ----------------------------------------------------
-    // 全幅レイアウト
+    // 全幅レイアウト (レイヤー機能)
     // ----------------------------------------------------
     {
       type: 'full',
-      tag: 'パフォーマンス',
-      title: '美しさと機能性の完全な融合。',
-      image: whiteMonaImg,
+      tag: 'カスタマイズ',
+      title: 'レイヤー機能で自由にカスタマイズ。',
+      image: layerImg,
       description: (
         <div className="space-y-4">
-          <p>細部まで計算された内部構造と、直感的なインターフェース。</p>
-          <p>ワークスペースに調和するミニマルなデザインでありながら、あなたのクリエイティビティを最大限に引き出すパワフルな機能を秘めています。</p>
+          <p>
+            レイヤー機能とは、特定のキーを押している間は<strong>同じキーが異なる動作をする</strong>ことができる機能です。
+          </p>
+          <p>
+            例えば1つのキーに<strong>デフォルトでAキー、レイヤー2にBキー</strong>を割り当てるとします。普段はキーを押すとAが入力されますが、レイヤー2に遷移するキーを押している状態でAキーを押したとき、AではなくBのキーが入力されるという機能です。
+          </p>
+          <p>
+            レイヤー数は任意の数だけ増やすことが可能なので、自由にキーを割り当てることができます。
+          </p>
+          <p>
+            その他、<strong>modtap</strong>や<strong>combo</strong>など様々な機能を使用できるので自分の好きなように調整してみてください！
+          </p>
+
+          <div className="pt-4 mt-2">
+            <h4 className="font-bold text-slate-800 mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-4 bg-orange-400 rounded-full"></span>
+              接続別デフォルトレイヤー
+            </h4>
+            <p className="mb-2">
+              ノートPCやiPadなど、異なるデバイスへの接続先に応じてデフォルトのレイヤーを設定することができます。<br />
+              windowsやmacなど異なるOS間でも快適に使用することが可能です。
+            </p>
+            <p className="text-sm">
+              詳しくは<button onClick={() => { if(onNavigate) onNavigate('guide'); window.scrollTo(0, 0); }} className="text-emerald-600 font-bold hover:underline mx-1 transition-colors">Support & Guide</button>から設定方法等をご覧ください。
+            </p>
+          </div>
         </div>
       )
     },
@@ -134,20 +158,19 @@ export default function Mona({ onBack, onNavigate }) {
       )
     },
     // ----------------------------------------------------
-    // 既存④（左右レイアウト）
+    // 既存④（左右レイアウト - 旧全幅）
     // ----------------------------------------------------
     {
       type: 'side',
       reverse: true,
-      title: "レイヤー機能で自由にカスタマイズ",
-      image: layerImg,
-      icon: <LayoutGrid className="w-6 h-6" />,
-      color: "bg-orange-50 text-orange-600",
+      title: "美しさと機能性の完全な融合",
+      image: whiteMonaImg,
+      icon: <Sparkles className="w-6 h-6" />,
+      color: "bg-slate-100 text-slate-700",
       description: (
         <div className="space-y-4">
-          <p>1つの物理キーに複数の機能を割り当てて切り替える仕組み</p>
-          <p>ノートPCやiPadなど、異なるデバイスへの接続先に応じてデフォルトのレイヤーを設定することもできます。</p>
-          <p>その他、modtapやcomboなど様々な機能を使用できます。</p>
+          <p>細部まで計算された内部構造と、直感的なインターフェース。</p>
+          <p>ワークスペースに調和するミニマルなデザインでありながら、あなたのクリエイティビティを最大限に引き出すパワフルな機能を秘めています。</p>
         </div>
       )
     }
@@ -163,26 +186,23 @@ export default function Mona({ onBack, onNavigate }) {
               <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
               Home
             </button>
-            <div className="font-extrabold text-slate-800 tracking-tight flex items-center gap-2">
-              <span className="text-xl">🐼</span> moNa Project
-            </div>
           </div>
 
           <nav className="hidden md:flex gap-8">
             {navLinks.map((link) => (
               link.isPage ? (
-                <button 
-                  key={link.name} 
-                  onClick={() => { if(onNavigate) onNavigate(link.viewTarget); window.scrollTo(0, 0); }} 
+                <button
+                  key={link.name}
+                  onClick={() => { if (onNavigate) onNavigate(link.viewTarget); window.scrollTo(0, 0); }}
                   className="relative text-sm font-bold text-slate-500 hover:text-[#3CB371] transition-colors py-1 group"
                 >
                   {link.name}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
                 </button>
               ) : (
-                <a 
-                  key={link.name} 
-                  href={link.href} 
+                <a
+                  key={link.name}
+                  href={link.href}
                   onClick={() => { onBack(); }}
                   className="relative text-sm font-bold text-slate-500 hover:text-[#3CB371] transition-colors py-1 group"
                 >
@@ -202,7 +222,7 @@ export default function Mona({ onBack, onNavigate }) {
           <div className="flex flex-col gap-4">
             {/* メイン画像 */}
             <div className="relative aspect-[4/3] bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100">
-              <div 
+              <div
                 className="flex w-full h-full transition-transform duration-500 ease-out"
                 style={{ transform: `translateX(-${activeIndex * 100}%)` }}
               >
@@ -249,8 +269,8 @@ export default function Mona({ onBack, onNavigate }) {
             <div className="flex items-center gap-3 mb-4 mt-2">
               <span className="text-sm font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-widest">Product 01</span>
               <div className="flex gap-2">
-                <span className="text-xs font-bold text-slate-400 border border-slate-200 px-2 py-0.5 rounded-md">60% Layout</span>
-                <span className="text-xs font-bold text-slate-400 border border-slate-200 px-2 py-0.5 rounded-md">Acrylic</span>
+                <span className="text-xs font-bold text-slate-400 border border-slate-200 px-2 py-0.5 rounded-md">42key</span>
+                <span className="text-xs font-bold text-slate-400 border border-slate-200 px-2 py-0.5 rounded-md">TrackBall(Left)</span>
               </div>
             </div>
 
@@ -315,7 +335,7 @@ export default function Mona({ onBack, onNavigate }) {
                     {/* テキスト部分は元のコンテンツ幅に収める */}
                     <div className="px-2 md:px-0">
                       {feature.tag && <p className="text-sm font-bold text-slate-500 mb-3">{feature.tag}</p>}
-                      <h3 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tight mb-4">{feature.title}</h3>
+                      {feature.title && <h3 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tight mb-4">{feature.title}</h3>}
                       <div className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
                         {feature.description}
                       </div>
@@ -411,7 +431,7 @@ export default function Mona({ onBack, onNavigate }) {
       </main>
 
       {/* トップへ戻るボタン */}
-      <button 
+      <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         className={`fixed bottom-6 right-6 p-4 rounded-full bg-slate-900 text-white shadow-xl transition-all duration-300 hover:bg-emerald-500 hover:-translate-y-1 z-50 ${showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
         aria-label="Scroll to top"

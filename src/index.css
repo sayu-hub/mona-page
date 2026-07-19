@@ -9,13 +9,15 @@
 /* 以下、カスタムCSS */
 body {
   font-family: "M PLUS Rounded 1c", sans-serif;
-  background-color: #f8fafc; /* bg-slate-50 */
+  background-color: #f8fafc;
+  /* bg-slate-50 */
 }
 
 /* スクロールバー非表示ユーティリティ */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

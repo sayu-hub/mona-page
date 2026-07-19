@@ -46,7 +46,7 @@ export const newsData = [
       <div className="space-y-4">
         <p>moNa Projectの公式Webサイトを全面リニューアルいたしました。</p>
         <p>より見やすく、各プロダクトの魅力が伝わるデザインへと刷新しています。</p>
-        <p>合わせてUser GuideやKeymap Editorなどのサポート機能もアップデートしておりますので、ぜひご活用ください。</p>
+        <p>User GuideやKeymap Editorなどの機能なども順次追加していく予定ですので、是非ご活用ください。</p>
       </div>
     )
   },
