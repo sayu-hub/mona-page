@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Package, CheckCircle, Keyboard, HelpCircle, Menu, X, ChevronRight, ExternalLink, ArrowRight } from 'lucide-react';
+import { BookOpen, Package, CheckCircle, Keyboard, HelpCircle, Menu, X, ChevronRight, ExternalLink, ArrowRight, Wrench } from 'lucide-react';
 
 const SectionHeading = ({ children }) => (
   <div className="flex items-center mb-8 border-b border-slate-100 pb-6">
@@ -42,7 +42,7 @@ const SECTIONS = {
             <h3 className="text-xl font-bold text-slate-800 mb-3">まずは基本を押さえましょう</h3>
             <p className="text-sm">
               ひとまずこのガイドの通りに進めれば、キーボードとしての基本機能がすべて使えるようになります。
-              よりマニアックな設定（マクロ機能や特殊なキーコードなど）を使った「より便利にする方法」については、後日公開予定の<strong>Advanced Guide</strong>にてご紹介しますので、お楽しみに！
+              よりマニアックな設定（マクロ機能や特殊なキーコードなど）を使った「より便利にする方法」については、後日公開予定の<strong>Topics & Tips</strong>にてご紹介しますので、お楽しみに！
             </p>
           </div>
         </div>
@@ -67,35 +67,80 @@ const SECTIONS = {
         </div>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-white p-8 rounded-3xl shadow-sm border-2 border-slate-50">
-            <Badge type="info">同梱物</Badge>
-            <h3 className="text-lg font-bold mb-4 text-slate-800">基本セット</h3>
+            <h3 className="text-xl font-black text-slate-800 tracking-tight mb-6">同梱物</h3>
             <ul className="space-y-4 text-slate-600 font-medium">
               <li className="flex items-center justify-between border-b border-slate-50 pb-2">
                 <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2"/> キーボード本体</span>
-                <span className="text-slate-400 text-sm">1台</span>
+                <span className="text-slate-400 text-sm">左右1台</span>
               </li>
               <li className="flex items-center justify-between border-b border-slate-50 pb-2">
-                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2"/> ゴム足</span>
-                <span className="text-slate-400 text-sm">1セット</span>
+                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2"/> キーキャップ</span>
+                <span className="text-slate-400 text-sm">42個</span>
+              </li>
+              <li className="flex items-center justify-between border-b border-slate-50 pb-2">
+                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2"/> 25mmトラックボール</span>
+                <span className="text-slate-400 text-sm">1個</span>
+              </li>
+              <li className="flex items-center justify-between border-b border-slate-50 pb-2">
+                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2"/> バッテリー</span>
+                <span className="text-slate-400 text-sm">2個</span>
               </li>
               <li className="flex items-center justify-between pb-2">
-                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2"/> 保証書 / サンクスカード</span>
+                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2"/> サンクスカード</span>
                 <span className="text-slate-400 text-sm">1枚</span>
               </li>
             </ul>
           </div>
           <div className="bg-white p-8 rounded-3xl shadow-sm border-2 border-slate-50">
-            <Badge type="warning">お客様でご用意いただくもの</Badge>
-            <h3 className="text-lg font-bold mb-4 text-slate-800">別途必要なもの</h3>
+            <h3 className="text-xl font-black text-slate-800 tracking-tight mb-6">お客様でご用意いただくもの</h3>
             <ul className="space-y-4 text-slate-600 font-medium">
+              <li className="flex items-center justify-between border-b border-slate-50 pb-2">
+                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-amber-400 mr-2"/> キースイッチ</span>
+                <span className="text-slate-400 text-sm">42個</span>
+              </li>
               <li className="flex items-center justify-between border-b border-slate-50 pb-2">
                 <span className="flex items-center"><ChevronRight className="w-4 h-4 text-amber-400 mr-2"/> USBケーブル (Type-C)</span>
                 <span className="text-slate-400 text-sm">1本</span>
               </li>
-              <li className="flex items-start pb-2 text-sm text-slate-500 mt-2">
-                ※PCと通信するため「データ通信対応」のケーブルをご用意ください。充電専用ケーブルでは反応しません。
+              <li className="flex items-start pb-2 text-sm text-slate-500 mt-4 flex-col gap-2">
+                <span>※USBケーブルはPCとの接続に必要です（データ通信対応のもの）。</span>
+                <span>※キースイッチをご購入の際は、本機に対応している規格かご確認ください（Choc v1/v2、Lofree製スイッチ対応）。</span>
               </li>
             </ul>
+          </div>
+        </div>
+      </div>
+    )
+  },
+  assembly: {
+    id: 'assembly',
+    title: '本体の組み立て',
+    icon: <Wrench className="w-5 h-5" />,
+    content: (
+      <div className="animate-fade-in">
+        <SectionHeading>本体の組み立て</SectionHeading>
+        <p className="text-slate-600 leading-relaxed mb-8">
+          動作確認を行う前に、キースイッチとキーキャップを本体に取り付けます。
+        </p>
+        <div className="space-y-8">
+          <div className="flex">
+            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2">01</div>
+            <div>
+              <h3 className="text-xl font-bold text-slate-800 mb-3">キースイッチの取り付け</h3>
+              <p className="text-slate-600 leading-relaxed">
+                商品内容に不足がないか確認後、本体に別途で購入していただいた任意のキースイッチを差し込んでいきます。
+                ピンが曲がらないよう、基板に対して垂直にゆっくりと押し込んでください。
+              </p>
+            </div>
+          </div>
+          <div className="flex">
+            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2">02</div>
+            <div>
+              <h3 className="text-xl font-bold text-slate-800 mb-3">キーキャップの取り付け</h3>
+              <p className="text-slate-600 leading-relaxed">
+                すべてのキースイッチを差し込み終わったら、次に付属のキーキャップを取り付けていきます。
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -109,42 +154,36 @@ const SECTIONS = {
       <div className="animate-fade-in">
         <SectionHeading>動作確認を行う</SectionHeading>
         <p className="text-slate-600 leading-relaxed mb-8">
-          すべてのキーが正しく反応するか、PCに接続してテストを行いましょう。
+          すべてのキーやカーソルが正しく反応するか、PCに接続してテストを行いましょう。
         </p>
         <div className="space-y-8">
           <div className="flex">
             <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2">01</div>
             <div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">PCに接続する</h3>
+              <h3 className="text-xl font-bold text-slate-800 mb-3">本体（左右）の電源を入れる</h3>
               <p className="text-slate-600 leading-relaxed">
-                ご用意いただいたUSBケーブルで、キーボードとPCを接続します。
-                OS標準のドライバーが自動的にインストールされます。特別なソフトウェアのインストールは不要です。
+                本機は完全無線設計です。まずはキーボード本体（左右両方）の電源スイッチをONにしてください。
               </p>
             </div>
           </div>
           <div className="flex">
             <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2">02</div>
             <div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">テストツールを開く</h3>
-              <p className="text-slate-600 leading-relaxed mb-4">
-                ブラウザ（Google Chrome または Microsoft Edge を推奨）で、キーボード設定ツール「Remap」のテストページにアクセスします。
+              <h3 className="text-xl font-bold text-slate-800 mb-3">PCの設定画面からBluetooth接続する</h3>
+              <p className="text-slate-600 leading-relaxed">
+                お使いのPC（WindowsやMacなど）の設定画面から、Bluetoothデバイスの追加を開きます。
+                ペアリングモードになっている本機を選択し、Bluetooth接続を完了させてください。
               </p>
-              <a href="#" className="inline-flex items-center bg-slate-800 text-white px-5 py-2.5 rounded-full font-bold text-sm hover:bg-slate-700 transition-colors shadow-md">
-                Remap Testモードを開く <ExternalLink className="w-4 h-4 ml-2" />
-              </a>
             </div>
           </div>
           <div className="flex">
             <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2">03</div>
             <div className="w-full">
-              <h3 className="text-xl font-bold text-slate-800 mb-3">キーを順番に押す</h3>
-              <p className="text-slate-600 leading-relaxed mb-4">
-                画面上のキーボードレイアウトを見ながら、実際のキーボードのキーを左上から順番に押していきます。
-                正しく反応したキーは、画面上で色が変化します。
+              <h3 className="text-xl font-bold text-slate-800 mb-3">各キーやカーソル等が動くか確認する</h3>
+              <p className="text-slate-600 leading-relaxed">
+                接続が完了したら、テキストエディタやブラウザを開き、実際に各キーを押して入力できるか確認してください。
+                また、トラックボールを動かしてマウスカーソルが正常に動作することも合わせて確認しましょう。
               </p>
-              <div className="bg-slate-50 h-48 rounded-3xl border-2 border-emerald-100 flex items-center justify-center text-emerald-600 font-bold">
-                 [ Remap テスト画面のイメージ画像 ]
-              </div>
             </div>
           </div>
         </div>
@@ -159,38 +198,45 @@ const SECTIONS = {
       <div className="animate-fade-in">
         <SectionHeading>キーマップの変更</SectionHeading>
         <p className="text-slate-600 leading-relaxed mb-8">
-          動作確認が終わったら、自分好みのキー配置に変更してみましょう。専用ソフトは不要で、ブラウザ上ですすぐに変更できます。
+          動作確認が終わったら、自分好みのキー配置に変更してみましょう。本機はZMK Firmwareを採用しているため、「Keymap Editor」というWebツールを使ってブラウザ上から視覚的に変更できます。
         </p>
         <div className="bg-white border-2 border-slate-100 rounded-[2rem] p-8 md:p-10 shadow-sm">
           <Badge type="info">STEP BY STEP</Badge>
-          <h3 className="text-2xl font-bold text-slate-800 mb-6">Remapを使った変更手順</h3>
+          <h3 className="text-2xl font-bold text-slate-800 mb-6">Keymap Editorを使った変更手順</h3>
           <ul className="space-y-6">
             <li className="flex items-start">
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4">1</span>
               <div>
-                <p className="font-bold text-slate-800 mb-1">Remapにアクセス</p>
-                <p className="text-slate-600 text-sm">ブラウザで <a href="#" className="text-emerald-600 hover:underline">Remap</a> を開き、「Start Remap for your keyboard」をクリックします。</p>
+                <p className="font-bold text-slate-800 mb-1">Keymap Editorにアクセス</p>
+                <p className="text-slate-600 text-sm">ブラウザで <a href="https://nickcoutsos.github.io/keymap-editor/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">Keymap Editor</a> を開き、GitHubアカウントでログインします。</p>
               </div>
             </li>
             <li className="flex items-start">
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4">2</span>
               <div>
-                <p className="font-bold text-slate-800 mb-1">キーボードを選択</p>
-                <p className="text-slate-600 text-sm">「+ Keyboard」をクリックし、ポップアップから接続されているキーボードを選択して「接続」を押します。</p>
+                <p className="font-bold text-slate-800 mb-1">リポジトリの連携</p>
+                <p className="text-slate-600 text-sm">ご自身のZMK設定が保存されているGitHubリポジトリへのアクセスを許可して、現在のキーマップを読み込みます。</p>
               </div>
             </li>
             <li className="flex items-start">
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4">3</span>
               <div>
                 <p className="font-bold text-slate-800 mb-1">ドラッグ＆ドロップで配置</p>
-                <p className="text-slate-600 text-sm">画面下部に表示されるキーのリストから、割り当てたいキーを上部のキーボードの図にドラッグ＆ドロップします。</p>
+                <p className="text-slate-600 text-sm">画面下部に表示されるキーのリストから、割り当てたいキーを上部のキーボードの図にドラッグ＆ドロップして配置を変更します。</p>
               </div>
             </li>
             <li className="flex items-start">
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4">4</span>
               <div>
-                <p className="font-bold text-slate-800 mb-1">キーボードに保存（Flash）</p>
-                <p className="text-slate-600 text-sm">変更が終わったら、右上の<span className="inline-block bg-slate-800 text-white px-2 py-0.5 rounded mx-1 text-xs">Flash</span>ボタンを押します。これで設定がキーボード本体に記憶されます。</p>
+                <p className="font-bold text-slate-800 mb-1">変更を保存してビルド</p>
+                <p className="text-slate-600 text-sm">「Save」ボタンを押すと変更内容がGitHubに送信され、自動的に新しいファームウェアのビルド（作成）が始まります。</p>
+              </div>
+            </li>
+            <li className="flex items-start">
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4">5</span>
+              <div>
+                <p className="font-bold text-slate-800 mb-1">ファームウェアの書き込み</p>
+                <p className="text-slate-600 text-sm">GitHub Actionsでビルドが完了したら「.uf2」ファイルをダウンロードします。キーボードをPCにUSB接続してブートローダーモードにし、表示されたドライブへ「.uf2」ファイルをコピーすれば完了です。</p>
               </div>
             </li>
           </ul>
@@ -211,16 +257,16 @@ const SECTIONS = {
         <div className="space-y-4">
           {[
             {
-              q: "PCにキーボードとして認識されない",
-              a: "使用しているUSBケーブルが「充電専用」の可能性があります。「データ通信対応」のケーブルに変更して再度お試しください。また、USBハブを経由している場合は、PCに直接接続してみてください。"
+              q: "PCにBluetoothデバイスとして認識されない",
+              a: "キーボード本体の電源がONになっているか確認してください。また、他のデバイス（スマートフォン等）に既に接続されていないか確認し、ペアリングモードをやり直してみてください。"
             },
             {
-              q: "Remapでキーボードが一覧に表示されない",
-              a: "ブラウザがGoogle Chrome または Microsoft Edgeであることを確認してください。Safariなど他のブラウザではWebHIDという通信機能に対応していないため表示されません。"
+              q: "Keymap Editorで自分のリポジトリが表示されない",
+              a: "GitHubアカウントとの連携時に、ZMK設定が含まれるリポジトリへのアクセス権限（リポジトリへの許可）が正しく設定されているか確認してください。"
             },
             {
               q: "特定のキーが反応しない",
-              a: "キースイッチが奥までしっかりと差し込まれているか確認してください。配送時の衝撃等でスイッチが少し浮いてしまっている場合があります。"
+              a: "キースイッチが奥までしっかりと差し込まれているか、ピンが折れ曲がっていないか確認してください。配送時や組み立て時の衝撃等でスイッチが少し浮いてしまっている場合があります。"
             }
           ].map((item, index) => (
             <details key={index} className="group bg-white border-2 border-slate-100 rounded-2xl">

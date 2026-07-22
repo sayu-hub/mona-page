@@ -427,22 +427,61 @@ export default function Mona2({ onBack, onNavigate }) {
             <div className="w-2 h-8 bg-emerald-500 rounded-full mr-4"></div>
             <h2 className="text-3xl font-bold text-slate-800">商品内容</h2>
           </div>
-          <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm">
-            <div className="grid sm:grid-cols-2 gap-4">
-              {[
-                { icon: <Package />, title: "moNa 2 キーボード本体", desc: "組み立て済みアクリル積層ボディ" },
-                { icon: <Cable />, title: "USB Type-C ケーブル", desc: "編み込み高耐久仕様（1.5m）" },
-                { icon: <Wrench />, title: "キースイッチ＆キャッププラー", desc: "スイッチとキャップの交換用工具" },
-                { icon: <FileText />, title: "クイックスタートガイド", desc: "保証書・VIA設定手順" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-3 p-4 bg-slate-50/80 rounded-2xl border border-slate-100">
-                  <div className="text-emerald-500 shrink-0 mt-0.5">{React.cloneElement(item.icon, { className: "w-5 h-5" })}</div>
-                  <div>
-                    <p className="font-bold text-slate-800 text-sm">{item.title}</p>
-                    <p className="text-xs text-slate-500 mt-0.5">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* 左カード */}
+            <div className="bg-white rounded-[2rem] p-8 md:p-10 border border-slate-100 shadow-sm">
+              <h3 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight mb-6">
+                同梱物
+              </h3>
+              <ul className="divide-y divide-slate-100/80">
+                {[
+                  { name: "キーボード本体", qty: "左右1台" },
+                  { name: "キーキャップ", qty: "42個" },
+                  { name: "25mmトラックボール", qty: "1個" },
+                  { name: "バッテリー", qty: "2個" },
+                  { name: "サンクスカード", qty: "1枚" },
+                ].map((item, i) => (
+                  <li key={i} className="flex justify-between items-center py-4">
+                    <div className="flex items-center text-slate-800 font-bold">
+                      <ChevronRight className="w-5 h-5 text-emerald-500 mr-3" />
+                      {item.name}
+                    </div>
+                    <div className="text-slate-400 font-medium">{item.qty}</div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 右カード */}
+            <div className="bg-white rounded-[2rem] p-8 md:p-10 border border-slate-100 shadow-sm flex flex-col">
+              <div>
+                <h3 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight mb-6">
+                  お客様でご用意いただくもの
+                </h3>
+                <ul className="divide-y divide-slate-100/80">
+                  {[
+                    { name: "キースイッチ", qty: "42個" },
+                    { name: "USBケーブル (Type-C)", qty: "1本" },
+                  ].map((item, i) => (
+                    <li key={i} className="flex justify-between items-center py-4">
+                      <div className="flex items-center text-slate-800 font-bold">
+                        <ChevronRight className="w-5 h-5 text-orange-400 mr-3" />
+                        {item.name}
+                      </div>
+                      <div className="text-slate-400 font-medium">{item.qty}</div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="mt-8 space-y-2">
+                <p className="text-slate-500 text-sm font-medium leading-relaxed">
+                  ※USBケーブルはPCとの接続に必要です（データ通信対応のもの）。
+                </p>
+                <p className="text-slate-500 text-sm font-medium leading-relaxed">
+                  ※キースイッチをご購入の際は、本機に対応している規格かご確認ください（Choc v1/v2、Lofree製スイッチ対応）。
+                </p>
+              </div>
             </div>
           </div>
         </div>

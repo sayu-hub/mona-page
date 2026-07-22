@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 
 export const newsData = [
   {
-    date: '2026.07.22',
+    date: '2026.xx.xx',
     title: '公式Webサイトを開設しました',
     category: 'Info',
     isPublic: true, // true: 公開, false: 非公開
@@ -90,16 +90,23 @@ export const newsData = [
     isPublic: true,
     content: (
       <div className="space-y-4">
-        <p>5月26日(日)に開催される「技術書典16」にmoNa Projectとして出展いたします。</p>
-        <p>当日は実機に触れられる展示スペースもご用意しております。</p>
+        <p>moNa Projectを開始してから、無事に1周年を迎えることができました！</p>
         <p>
-          ブース番号等は追って
-          {/* ↓ リンク（aタグ）を使った例 ↓ */}
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="mx-1 text-emerald-600 font-bold hover:underline">
-            公式Twitter
-          </a>
-          にて告知いたしますので、ぜひ遊びに来てください！
+          これを記念して、moNaの誕生から現在に至るまでの開発の道のりや、こだわって改良を重ねたポイントなどをまとめたnote記事を公開しました。
         </p>
+        <p>
+          これまでの試行錯誤の裏側や、これからの展望についても綴っています。ぜひご覧ください。
+        </p>
+        <div className="pt-4">
+          <a
+            href="https://note.com/pooh_polo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center bg-emerald-50 text-emerald-600 px-4 py-2 rounded-full font-bold hover:bg-emerald-100 transition-colors"
+          >
+            note記事を読む
+          </a>
+        </div>
       </div>
     )
   },
