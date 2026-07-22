@@ -20,7 +20,6 @@ export const navLinks = [
   { name: 'Works', href: '#work', isPage: false },
   { name: 'Gallery', href: '#gallery', isPage: false },
   { name: 'Support&Guide', href: '#guide', isPage: false },
-  { name: 'Keymap Editor', viewTarget: 'keymap', isPage: true },
   { name: 'Member', href: '#member', isPage: false },
 ];
 

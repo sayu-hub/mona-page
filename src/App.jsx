@@ -503,25 +503,19 @@ export default function App() {
               </div>
             </div>
 
-            <div
-              onClick={() => {
-                setView('keymap');
-                window.scrollTo(0, 0);
-              }}
-              className="cursor-pointer group bg-slate-50 rounded-[2.5rem] p-8 lg:p-10 border-2 border-slate-100 hover:border-emerald-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden reveal"
-            >
-              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-300 to-emerald-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-              <div className="w-16 h-16 bg-white border-2 border-slate-100 rounded-2xl flex items-center justify-center text-slate-400 mb-8 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-500 shadow-sm">
+            <div className="group bg-slate-50 rounded-[2.5rem] p-8 lg:p-10 border-2 border-slate-100 relative overflow-hidden reveal opacity-80 cursor-default">
+              <div className="w-16 h-16 bg-white border-2 border-slate-100 rounded-2xl flex items-center justify-center text-slate-400 mb-8 shadow-sm">
                 <Keyboard size={32} />
               </div>
-              <h3 className="text-2xl font-bold text-slate-800 mb-4">
+              <h3 className="text-2xl font-bold text-slate-800 mb-4 flex flex-col items-start gap-2 xl:flex-row xl:items-center">
                 Keymap Editor
+                <span className="text-[10px] bg-slate-200 text-slate-600 px-2 py-1 rounded font-black tracking-widest uppercase mt-1 xl:mt-0">Coming Soon</span>
               </h3>
               <p className="text-slate-500 leading-relaxed mb-8 font-medium text-sm lg:text-base">
                 ブラウザから直接キーマップを変更できます。専用ソフトのインストールは不要です。（WebHID API使用）
               </p>
-              <div className="inline-flex items-center text-emerald-600 font-bold group-hover:translate-x-2 transition-transform">
-                エディタを開く <ArrowRight size={18} className="ml-2" />
+              <div className="inline-flex items-center text-slate-400 font-bold">
+                近日公開予定
               </div>
             </div>
 

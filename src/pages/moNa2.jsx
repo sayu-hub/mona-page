@@ -7,7 +7,7 @@ import {
 import { navLinks } from '../data/items';
 import TweetEmbed from '../components/TweetEmbed';
 
-import sampleVideo from '../assets/images/common/sample.mp4';
+// import sampleVideo from '../assets/images/common/sample.mp4';
 
 // ▼▼▼ 画像の読み込み ▼▼▼
 import mona2Img from '../assets/images/common/moNa2.png';
@@ -50,7 +50,7 @@ function VideoFadeIn({ feature, sectionIndex }) {
         }}
       >
         <div className="max-w-3xl mx-auto">
-          <video
+          {/* <video
             className="w-full rounded-2xl shadow-2xl"
             autoPlay
             loop
@@ -59,7 +59,7 @@ function VideoFadeIn({ feature, sectionIndex }) {
             poster=""
           >
             <source src={sampleVideo} type="video/mp4" />
-          </video>
+          </video> */}
         </div>
       </div>
       <div className="px-2 md:px-0">

@@ -17,7 +17,7 @@ import connectionImg from '../assets/images/products/mona/conection.png';
 import layerImg from '../assets/images/products/mona/layer.png';
 // ▲▲▲ ここまで ▲▲▲
 
-import sampleVideo from '../assets/images/common/sample.mp4';
+// import sampleVideo from '../assets/images/common/sample.mp4';
 
 // 映像フェードインコンポーネント（初回表示時のみアニメーション）
 function VideoFadeIn({ feature, sectionIndex }) {
@@ -50,7 +50,7 @@ function VideoFadeIn({ feature, sectionIndex }) {
         }}
       >
         <div className="max-w-3xl mx-auto">
-          <video
+          {/* <video
             className="w-full rounded-2xl shadow-2xl"
             autoPlay
             loop
@@ -59,7 +59,7 @@ function VideoFadeIn({ feature, sectionIndex }) {
             poster=""
           >
             <source src={sampleVideo} type="video/mp4" />
-          </video>
+          </video> */}
         </div>
       </div>
       <div className="px-2 md:px-0">
