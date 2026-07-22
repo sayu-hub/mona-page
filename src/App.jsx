@@ -11,6 +11,7 @@ import Mona2plus from './pages/moNa2plus';
 import UserGuide from './pages/UserGuide';
 import KeymapEditor from './pages/Keymap-Editor';
 import AccessoriesList from './pages/AccessoriesList';
+import FAQ from './pages/FAQ';
 import TweetEmbed from './components/TweetEmbed';
 
 // ▼▼▼ 追加：背景画像をインポートする ▼▼▼
@@ -41,6 +42,15 @@ const shuffleArray = (array) => {
 // ==========================================
 // 2. メインAppコンポーネント
 // ==========================================
+
+const getCategoryColor = (category) => {
+  switch (category?.toLowerCase()) {
+    case 'info': return 'bg-blue-50 text-blue-700';
+    case 'product': return 'bg-purple-50 text-purple-700';
+    case 'event': default: return 'bg-emerald-50 text-emerald-700';
+  }
+};
+
 export default function App() {
   const [view, setView] = useState('home'); // 'home' | 'moNa' | 'moNa2' | 'moNa2plus' | 'guide' | 'keymap'
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,6 +65,17 @@ export default function App() {
   // ニュースを日付の降順（最新順）に並び替え
   const sortedNews = useMemo(() => {
     return [...newsData].filter(n => n.isPublic !== false).sort((a, b) => b.date.localeCompare(a.date));
+  }, []);
+
+  // カスタムイベントで画面遷移を制御（ニュース記事内からのリンク用など）
+  useEffect(() => {
+    const handleNavigate = (e) => {
+      setView(e.detail);
+      setSelectedNews(null);
+      window.scrollTo(0, 0);
+    };
+    window.addEventListener('navigate', handleNavigate);
+    return () => window.removeEventListener('navigate', handleNavigate);
   }, []);
 
   // スクロール検知 & アニメーション発火用Observer (ホーム画面用)
@@ -180,6 +201,7 @@ export default function App() {
   if (view === 'keymap') return <KeymapEditor onBack={() => setView('home')} onNavigate={setView} />;
   if (view === 'newsList') return <NewsList onBack={() => setView('home')} onNavigate={setView} />;
   if (view === 'accessoriesList') return <AccessoriesList onBack={() => setView('home')} onNavigate={setView} />;
+  if (view === 'faq') return <FAQ onBack={() => setView('home')} onNavigate={setView} />;
 
   // === ホーム画面のレンダリング ===
   return (
@@ -302,7 +324,7 @@ export default function App() {
               >
                 <div className="flex items-center gap-5 mb-4">
                   <time className="text-base text-slate-400 font-mono font-medium tracking-wide">{news.date}</time>
-                  <span className={`text-xs font-bold px-3 py-1 rounded-sm uppercase tracking-wider bg-emerald-50 text-emerald-700`}>
+                  <span className={`text-xs font-bold px-3 py-1 rounded-sm uppercase tracking-wider ${getCategoryColor(news.category)}`}>
                     {news.category}
                   </span>
                 </div>
@@ -615,7 +637,8 @@ export default function App() {
             <p className="text-slate-400 text-sm mt-1">Handmade Keyboards from Japan.</p>
           </div>
           <div className="flex gap-8">
-            <a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-bold hover:underline decoration-emerald-500 decoration-2 underline-offset-4">Top</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); setView('home'); window.scrollTo(0, 0); }} className="text-slate-400 hover:text-white transition-colors text-sm font-bold hover:underline decoration-emerald-500 decoration-2 underline-offset-4">Top</a>
+            <a href="#" onClick={(e) => { e.preventDefault(); setView('faq'); window.scrollTo(0, 0); }} className="text-slate-400 hover:text-white transition-colors text-sm font-bold hover:underline decoration-emerald-500 decoration-2 underline-offset-4">FAQ</a>
             <a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-bold hover:underline decoration-emerald-500 decoration-2 underline-offset-4">Contact</a>
           </div>
         </div>
@@ -633,7 +656,7 @@ export default function App() {
             <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
               <div className="flex items-center gap-3">
                 <time className="text-sm text-slate-500 font-mono font-medium">{selectedNews.date}</time>
-                <span className="text-[11px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider bg-emerald-50 text-emerald-700">
+                <span className={`text-[11px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider ${getCategoryColor(selectedNews.category)}`}>
                   {selectedNews.category}
                 </span>
               </div>

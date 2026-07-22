@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   ArrowLeft, ShoppingCart, ChevronRight, Zap, Shield,
   Settings2, LayoutGrid, Package, Cable, Wrench, FileText,
-  MousePointerClick, Mouse, ArrowUp
+  MousePointerClick, Mouse, ArrowUp, Sparkles
 } from 'lucide-react';
 import { navLinks } from '../data/items';
 import TweetEmbed from '../components/TweetEmbed';
-import LayerDemo from '../components/LayerDemo';
+
+import sampleVideo from '../assets/images/common/sample.mp4';
 
 // ▼▼▼ 画像の読み込み ▼▼▼
 import mona2Img from '../assets/images/common/moNa2.png';
@@ -17,6 +18,60 @@ import deviceImg from '../assets/images/products/mona2/device.png';
 import batteryImg from '../assets/images/products/mona2/battery.png';
 import connectionImg from '../assets/images/products/mona2/conection.png';
 import layerImg from '../assets/images/products/mona2/layer.png';
+
+// 映像フェードインコンポーネント（初回表示時のみアニメーション）
+function VideoFadeIn({ feature, sectionIndex }) {
+  const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div key={sectionIndex} className="flex flex-col w-full gap-8 md:gap-12">
+      <div
+        ref={ref}
+        className="w-[100vw] relative left-1/2 -translate-x-1/2 bg-gradient-to-b from-[#0b1121] via-[#0f172a] to-slate-50 px-4 sm:px-8 py-8 sm:py-12"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+          transition: 'opacity 1s ease-out, transform 1s ease-out',
+        }}
+      >
+        <div className="max-w-3xl mx-auto">
+          <video
+            className="w-full rounded-2xl shadow-2xl"
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster=""
+          >
+            <source src={sampleVideo} type="video/mp4" />
+          </video>
+        </div>
+      </div>
+      <div className="px-2 md:px-0">
+        {feature.tag && <p className="text-sm font-bold text-slate-500 mb-3">{feature.tag}</p>}
+        {feature.title && <h3 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tight mb-4">{feature.title}</h3>}
+        <div className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
+          {feature.description}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Mona2({ onBack, onNavigate }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -84,18 +139,19 @@ export default function Mona2({ onBack, onNavigate }) {
       )
     },
     // ----------------------------------------------------
-    // 既存②（左右レイアウト）
+    // コンパクト設計（左右レイアウト）
     // ----------------------------------------------------
     {
       type: 'side',
       reverse: true,
-      title: "複数の状態が視覚的にわかるLEDインジケータ",
-      image: batteryImg,
-      icon: <Zap className="w-6 h-6" />,
-      color: "bg-emerald-50 text-emerald-600",
+      title: "場所を選ばないコンパクト設計",
+      image: whitemona2Img,
+      icon: <Sparkles className="w-6 h-6" />,
+      color: "bg-slate-100 text-slate-700",
       description: (
         <div className="space-y-4">
-          <p>LEDインジケータを搭載しており、現在のバッテリー残量・接続状況・マウスレイヤー遷移を一目で確認できます。</p>
+          <p>小型で軽量な設計により、バッグに入れて簡単に持ち運ぶことができます。</p>
+          <p>自宅のデスクはもちろん、オフィスやカフェ、外出先など、あらゆる場所でいつもの快適な作業環境を実現します。</p>
         </div>
       )
     },
@@ -103,7 +159,7 @@ export default function Mona2({ onBack, onNavigate }) {
     // インタラクティブレイヤーデモ
     // ----------------------------------------------------
     {
-      type: 'layer-demo',
+      type: 'video',
       tag: 'カスタマイズ',
       title: 'レイヤー機能で自由にカスタマイズ。',
       description: (
@@ -155,6 +211,22 @@ export default function Mona2({ onBack, onNavigate }) {
         </div>
       )
     },
+    // ----------------------------------------------------
+    // 既存②（左右レイアウト）
+    // ----------------------------------------------------
+    {
+      type: 'side',
+      reverse: true,
+      title: "複数の状態が視覚的にわかるLEDインジケータ",
+      image: batteryImg,
+      icon: <Zap className="w-6 h-6" />,
+      color: "bg-emerald-50 text-emerald-600",
+      description: (
+        <div className="space-y-4">
+          <p>LEDインジケータを搭載しており、現在のバッテリー残量・接続状況・マウスレイヤー遷移を一目で確認できます。</p>
+        </div>
+      )
+    }
 
   ];
 
@@ -326,26 +398,9 @@ export default function Mona2({ onBack, onNavigate }) {
                 );
               }
 
-              // ▼ インタラクティブレイヤーデモの場合
-              if (feature.type === 'layer-demo') {
-                return (
-                  <div key={i} className="flex flex-col w-full gap-8 md:gap-12">
-                    {/* インタラクティブキーボードデモ */}
-                    <div className="w-[100vw] relative left-1/2 -translate-x-1/2 bg-gradient-to-b from-[#0b1121] via-[#0f172a] to-slate-50 px-4 sm:px-8 py-8 sm:py-12">
-                      <div className="max-w-3xl mx-auto">
-                        <LayerDemo />
-                      </div>
-                    </div>
-                    {/* テキスト部分 */}
-                    <div className="px-2 md:px-0">
-                      {feature.tag && <p className="text-sm font-bold text-slate-500 mb-3">{feature.tag}</p>}
-                      {feature.title && <h3 className="text-2xl md:text-4xl font-black text-slate-800 tracking-tight mb-4">{feature.title}</h3>}
-                      <div className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
-                        {feature.description}
-                      </div>
-                    </div>
-                  </div>
-                );
+              // ▼ 映像セクションの場合
+              if (feature.type === 'video') {
+                return <VideoFadeIn key={i} feature={feature} sectionIndex={i} />;
               }
 
               // ▼ 従来の左右レイアウトの場合

@@ -3,6 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { ArrowLeft, X, ChevronRight } from 'lucide-react';
 import { newsData } from '../data/news';
 
+const getCategoryColor = (category) => {
+  switch (category?.toLowerCase()) {
+    case 'info': return 'bg-blue-50 text-blue-700';
+    case 'product': return 'bg-purple-50 text-purple-700';
+    case 'event': default: return 'bg-emerald-50 text-emerald-700';
+  }
+};
+
 export default function NewsList({ onBack }) {
   const [selectedNews, setSelectedNews] = useState(null);
 
@@ -44,7 +52,7 @@ export default function NewsList({ onBack }) {
             >
               <div className="flex items-center gap-4 md:w-48 shrink-0">
                 <time className="text-sm text-slate-400 font-mono font-medium">{news.date}</time>
-                <span className={`text-[11px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider bg-emerald-50 text-emerald-700`}>
+                <span className={`text-[11px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider ${getCategoryColor(news.category)}`}>
                   {news.category}
                 </span>
               </div>
@@ -67,7 +75,7 @@ export default function NewsList({ onBack }) {
             <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
               <div className="flex items-center gap-3">
                 <time className="text-sm text-slate-500 font-mono font-medium">{selectedNews.date}</time>
-                <span className="text-[11px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider bg-emerald-50 text-emerald-700">
+                <span className={`text-[11px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider ${getCategoryColor(selectedNews.category)}`}>
                   {selectedNews.category}
                 </span>
               </div>
