@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Package, CheckCircle, Keyboard, HelpCircle, Menu, X, ChevronRight, ExternalLink, ArrowRight, Wrench } from 'lucide-react';
+import { BookOpen, Package, CheckCircle, Keyboard, HelpCircle, Menu, X, ChevronRight, ExternalLink, ArrowRight, Wrench, Github, Image as ImageIcon } from 'lucide-react';
+import step1 from '../assets/images/userguide/step1.png';
+import step2 from '../assets/images/userguide/step2.png';
+import step8 from '../assets/images/userguide/step8.png';
+import step10 from '../assets/images/userguide/step10.png';
+import step11 from '../assets/images/userguide/step11.png';
+import step_bt_1 from '../assets/images/userguide/step_bt_1.png';
+import step_encoders_1 from '../assets/images/userguide/step_encoders_1.png';
+import step12 from '../assets/images/userguide/step12.png';
+import step_reset_1 from '../assets/images/userguide/step_reset_1.jpeg';
 
 const SectionHeading = ({ children }) => (
   <div className="flex items-center mb-8 border-b border-slate-100 pb-6">
@@ -19,6 +28,41 @@ const Badge = ({ children, type = 'info' }) => {
     <span className={`inline-block px-2.5 py-1 text-[11px] font-bold rounded ${styles[type]} tracking-widest uppercase mb-2`}>
       {children}
     </span>
+  );
+};
+
+const ZoomableImage = ({ src, alt, className }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <img 
+        src={src} 
+        alt={alt} 
+        className={`${className} cursor-zoom-in hover:opacity-90 transition-opacity`}
+        onClick={() => setIsOpen(true)}
+      />
+      {isOpen && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 md:p-8 animate-fade-in"
+          onClick={() => setIsOpen(false)}
+        >
+          <div className="relative max-w-6xl w-full h-full flex items-center justify-center">
+            <button 
+              className="absolute top-0 right-0 bg-slate-800 hover:bg-slate-700 text-white rounded-full p-2 transition-colors z-10 shadow-lg"
+              onClick={(e) => { e.stopPropagation(); setIsOpen(false); }}
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <img 
+              src={src} 
+              alt={alt} 
+              className="max-w-full max-h-full object-contain drop-shadow-2xl rounded-lg cursor-zoom-out" 
+              onClick={(e) => { e.stopPropagation(); setIsOpen(false); }}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
@@ -103,8 +147,8 @@ const SECTIONS = {
                 <span className="text-slate-400 text-sm">1本</span>
               </li>
               <li className="flex items-start pb-2 text-sm text-slate-500 mt-4 flex-col gap-2">
-                <span>※USBケーブルはPCとの接続に必要です（データ通信対応のもの）。</span>
-                <span>※キースイッチをご購入の際は、本機に対応している規格かご確認ください（Choc v1/v2、Lofree製スイッチ対応）。</span>
+                <span>※USBケーブルはPCとの接続に必要です。<br />（データ通信対応のもの）</span>
+                <span>※キースイッチをご購入の際は、本機に対応している規格かご確認ください。<br />（Choc v1/v2、Lofree製スイッチ対応）</span>
               </li>
             </ul>
           </div>
@@ -112,80 +156,157 @@ const SECTIONS = {
       </div>
     )
   },
-  assembly: {
-    id: 'assembly',
-    title: '本体の組み立て',
+  assemblyAndTesting: {
+    id: 'assemblyAndTesting',
+    title: '組み立てと動作確認',
     icon: <Wrench className="w-5 h-5" />,
     content: (
       <div className="animate-fade-in">
-        <SectionHeading>本体の組み立て</SectionHeading>
+        <SectionHeading>組み立てと動作確認</SectionHeading>
         <p className="text-slate-600 leading-relaxed mb-8">
-          動作確認を行う前に、キースイッチとキーキャップを本体に取り付けます。
+          キースイッチとキーキャップを本体に取り付け、PCに接続して正しく反応するかテストを行いましょう。
         </p>
-        <div className="space-y-8">
+        <div className="space-y-16">
           <div className="flex">
-            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2">01</div>
-            <div>
+            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2 w-16 shrink-0">01</div>
+            <div className="w-full">
               <h3 className="text-xl font-bold text-slate-800 mb-3">キースイッチの取り付け</h3>
-              <p className="text-slate-600 leading-relaxed">
+              <p className="text-slate-600 leading-relaxed mb-6">
                 商品内容に不足がないか確認後、本体に別途で購入していただいた任意のキースイッチを差し込んでいきます。
                 ピンが曲がらないよう、基板に対して垂直にゆっくりと押し込んでください。
               </p>
+              <div className="w-full aspect-video bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400">
+                <ImageIcon className="w-10 h-10 mb-3 text-slate-300" />
+                <span className="font-bold text-sm tracking-widest">[ 画像を挿入 ]</span>
+              </div>
             </div>
           </div>
           <div className="flex">
-            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2">02</div>
-            <div>
+            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2 w-16 shrink-0">02</div>
+            <div className="w-full">
               <h3 className="text-xl font-bold text-slate-800 mb-3">キーキャップの取り付け</h3>
-              <p className="text-slate-600 leading-relaxed">
+              <p className="text-slate-600 leading-relaxed mb-6">
                 すべてのキースイッチを差し込み終わったら、次に付属のキーキャップを取り付けていきます。
               </p>
+              <div className="w-full aspect-video bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400">
+                <ImageIcon className="w-10 h-10 mb-3 text-slate-300" />
+                <span className="font-bold text-sm tracking-widest">[ 画像を挿入 ]</span>
+              </div>
             </div>
           </div>
+          <div className="flex">
+            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2 w-16 shrink-0">03</div>
+            <div className="w-full">
+              <h3 className="text-xl font-bold text-slate-800 mb-3">本体（左右）の電源を入れる</h3>
+              <p className="text-slate-600 leading-relaxed mb-6">
+                本機は完全無線設計です。まずはキーボード本体（左右両方）の電源スイッチをONにしてください。
+              </p>
+              <div className="w-full aspect-video bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400">
+                <ImageIcon className="w-10 h-10 mb-3 text-slate-300" />
+                <span className="font-bold text-sm tracking-widest">[ 画像を挿入 ]</span>
+              </div>
+            </div>
+          </div>
+          <div className="flex">
+            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2 w-16 shrink-0">04</div>
+            <div className="w-full">
+              <h3 className="text-xl font-bold text-slate-800 mb-3">PCの設定画面からBluetooth接続する</h3>
+              <p className="text-slate-600 leading-relaxed mb-6">
+                お使いのPC（WindowsやMacなど）の設定画面から、Bluetoothデバイスの追加を開きます。
+                ペアリングモードになっている本機を選択し、Bluetooth接続を完了させてください。
+              </p>
+              <div className="w-full aspect-video bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400">
+                <ImageIcon className="w-10 h-10 mb-3 text-slate-300" />
+                <span className="font-bold text-sm tracking-widest">[ 画像を挿入 ]</span>
+              </div>
+            </div>
+          </div>
+          <div className="flex">
+            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2 w-16 shrink-0">05</div>
+            <div className="w-full">
+              <h3 className="text-xl font-bold text-slate-800 mb-3">各キーやカーソル等が動くか確認する</h3>
+              <p className="text-slate-600 leading-relaxed mb-6">
+                接続が完了したら、テキストエディタやブラウザを開き、実際に各キーを押して入力できるか確認してください。
+                また、トラックボールを動かしてマウスカーソルが正常に動作することも合わせて確認しましょう。
+              </p>
+              <div className="w-full aspect-video bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400">
+                <ImageIcon className="w-10 h-10 mb-3 text-slate-300" />
+                <span className="font-bold text-sm tracking-widest">[ 画像を挿入 ]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-12 p-8 bg-emerald-50/50 rounded-3xl border border-emerald-100 text-center animate-fade-in">
+          <p className="text-emerald-800 font-bold mb-2">お疲れ様でした！これで動作確認は完了です 🎉</p>
+          <p className="text-sm text-emerald-700">
+            無事にすべてのキーが反応することが確認できたら、次はキーマップなどを自分好みにカスタマイズしていきましょう！
+          </p>
+        </div>
+
+        <div className="mt-6 p-6 bg-amber-50/50 rounded-3xl border border-amber-100 animate-fade-in">
+          <h4 className="text-amber-800 font-bold mb-2 flex items-center">
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            うまく動作しない場合
+          </h4>
+          <p className="text-sm text-amber-700 leading-relaxed mb-4">
+            キーが反応しない、PCと接続できないなどの初期不良と思われる症状がある場合は、提供元側の原因が考えられます。お手数ですが、以下のサポート窓口よりお問い合わせください。
+          </p>
+          <a href="#" className="inline-flex items-center text-sm font-bold text-amber-700 hover:text-amber-600 underline decoration-amber-300 underline-offset-4 transition-colors">
+            サポートにお問い合わせする <ExternalLink className="w-4 h-4 ml-1" />
+          </a>
         </div>
       </div>
     )
   },
-  testing: {
-    id: 'testing',
-    title: '動作確認を行う',
-    icon: <CheckCircle className="w-5 h-5" />,
+  githubSetup: {
+    id: 'githubSetup',
+    title: 'ファームウェアの準備 (GitHub)',
+    icon: <Github className="w-5 h-5" />,
     content: (
       <div className="animate-fade-in">
-        <SectionHeading>動作確認を行う</SectionHeading>
+        <SectionHeading>GitHubリポジトリのフォーク</SectionHeading>
         <p className="text-slate-600 leading-relaxed mb-8">
-          すべてのキーやカーソルが正しく反応するか、PCに接続してテストを行いましょう。
+          キーマップの変更や、自分用のファームウェアを書き出すためには、<strong>GitHub Actions</strong>を利用します。<br/>
+          事前にGitHubアカウントを用意し、設定用のリポジトリをフォーク（複製）しておきましょう。
         </p>
-        <div className="space-y-8">
-          <div className="flex">
-            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2">01</div>
-            <div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">本体（左右）の電源を入れる</h3>
-              <p className="text-slate-600 leading-relaxed">
-                本機は完全無線設計です。まずはキーボード本体（左右両方）の電源スイッチをONにしてください。
-              </p>
-            </div>
-          </div>
-          <div className="flex">
-            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2">02</div>
-            <div>
-              <h3 className="text-xl font-bold text-slate-800 mb-3">PCの設定画面からBluetooth接続する</h3>
-              <p className="text-slate-600 leading-relaxed">
-                お使いのPC（WindowsやMacなど）の設定画面から、Bluetoothデバイスの追加を開きます。
-                ペアリングモードになっている本機を選択し、Bluetooth接続を完了させてください。
-              </p>
-            </div>
-          </div>
-          <div className="flex">
-            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2">03</div>
-            <div className="w-full">
-              <h3 className="text-xl font-bold text-slate-800 mb-3">各キーやカーソル等が動くか確認する</h3>
-              <p className="text-slate-600 leading-relaxed">
-                接続が完了したら、テキストエディタやブラウザを開き、実際に各キーを押して入力できるか確認してください。
-                また、トラックボールを動かしてマウスカーソルが正常に動作することも合わせて確認しましょう。
-              </p>
-            </div>
-          </div>
+        <div className="bg-white border-2 border-slate-100 rounded-[2rem] p-8 md:p-10 shadow-sm mb-12">
+          <Badge type="info">STEP BY STEP</Badge>
+          <h3 className="text-2xl font-bold text-slate-800 mb-6">アカウント登録とフォークの手順</h3>
+          <ul className="space-y-8">
+            <li className="flex items-start">
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4 mt-1">1</span>
+              <div className="w-full">
+                <p className="font-bold text-slate-800 mb-2">GitHubアカウントの登録</p>
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  GitHubアカウントをお持ちでない場合は、事前に <a href="https://github.com/signup" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline font-bold inline-flex items-center">アカウント登録 <ExternalLink className="w-3 h-3 ml-1" /></a> を済ませてください。
+                </p>
+              </div>
+            </li>
+            <li className="flex items-start">
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4 mt-1">2</span>
+              <div className="w-full">
+                <p className="font-bold text-slate-800 mb-2">リポジトリのフォーク</p>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  準備ができたら、お使いの機種に合わせて以下のベースリポジトリをご自身のアカウントへフォーク（複製）します。<br/>
+                  リンク先の画面右上にある「Fork」ボタンから実行できます。
+                </p>
+                <div className="flex flex-col gap-2 mb-4">
+                  <a href="https://github.com/sayu-hub/zmk-config-moNa" target="_blank" rel="noopener noreferrer" className="inline-flex items-center w-fit px-4 py-2 bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 rounded-lg border border-slate-200 hover:border-emerald-200 transition-colors font-bold text-sm">
+                    <span className="w-16">moNa用:</span> zmk-config-moNa <ExternalLink className="w-4 h-4 ml-2 text-slate-400" />
+                  </a>
+                  <a href="https://github.com/sayu-hub/zmk-config-moNa2" target="_blank" rel="noopener noreferrer" className="inline-flex items-center w-fit px-4 py-2 bg-slate-50 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 rounded-lg border border-slate-200 hover:border-emerald-200 transition-colors font-bold text-sm">
+                    <span className="w-16">moNa2用:</span> zmk-config-moNa2 <ExternalLink className="w-4 h-4 ml-2 text-slate-400" />
+                  </a>
+                </div>
+                <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                  <p className="text-xs text-slate-500">
+                    ※この時点でフォークしたリポジトリ（mainブランチ）にcommitやpushを行うと、自動的にGitHub Actionsが実行され、ご自身のキーボード用ファームウェアが自動で書き出される状態になります。
+                  </p>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     )
@@ -200,46 +321,163 @@ const SECTIONS = {
         <p className="text-slate-600 leading-relaxed mb-8">
           動作確認が終わったら、自分好みのキー配置に変更してみましょう。本機はZMK Firmwareを採用しているため、「Keymap Editor」というWebツールを使ってブラウザ上から視覚的に変更できます。
         </p>
-        <div className="bg-white border-2 border-slate-100 rounded-[2rem] p-8 md:p-10 shadow-sm">
+        <div className="bg-white border-2 border-slate-100 rounded-[2rem] p-8 md:p-10 shadow-sm mb-12">
           <Badge type="info">STEP BY STEP</Badge>
           <h3 className="text-2xl font-bold text-slate-800 mb-6">Keymap Editorを使った変更手順</h3>
-          <ul className="space-y-6">
+          <ul className="space-y-12">
             <li className="flex items-start">
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4">1</span>
-              <div>
-                <p className="font-bold text-slate-800 mb-1">Keymap Editorにアクセス</p>
-                <p className="text-slate-600 text-sm">ブラウザで <a href="https://nickcoutsos.github.io/keymap-editor/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline">Keymap Editor</a> を開き、GitHubアカウントでログインします。</p>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4 mt-1">1</span>
+              <div className="w-full">
+                <p className="font-bold text-slate-800 mb-2">Keymap Editorにアクセス</p>
+                <p className="text-slate-600 text-sm mb-4">ブラウザで <a href="https://nickcoutsos.github.io/keymap-editor/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline font-bold">Keymap Editor</a> を開き、GitHubアカウントでログインします。</p>
+                <ZoomableImage src={step1} alt="Keymap Editor Access" className="w-full max-w-lg rounded-xl border border-slate-100 shadow-sm" />
               </div>
             </li>
             <li className="flex items-start">
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4">2</span>
-              <div>
-                <p className="font-bold text-slate-800 mb-1">リポジトリの連携</p>
-                <p className="text-slate-600 text-sm">ご自身のZMK設定が保存されているGitHubリポジトリへのアクセスを許可して、現在のキーマップを読み込みます。</p>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4 mt-1">2</span>
+              <div className="w-full">
+                <p className="font-bold text-slate-800 mb-2">リポジトリの連携</p>
+                <p className="text-slate-600 text-sm mb-4">事前にフォークしたご自身のZMK設定リポジトリ（<code>zmk-config-moNa</code> または <code>zmk-config-moNa2</code>）へのアクセスを許可して、現在のキーマップを読み込みます。</p>
+                <ZoomableImage src={step2} alt="Repository Linking" className="w-full max-w-lg rounded-xl border border-slate-100 shadow-sm" />
               </div>
             </li>
             <li className="flex items-start">
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4">3</span>
-              <div>
-                <p className="font-bold text-slate-800 mb-1">ドラッグ＆ドロップで配置</p>
-                <p className="text-slate-600 text-sm">画面下部に表示されるキーのリストから、割り当てたいキーを上部のキーボードの図にドラッグ＆ドロップして配置を変更します。</p>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4 mt-1">3</span>
+              <div className="w-full">
+                <p className="font-bold text-slate-800 mb-2">キーマップの編集</p>
+                <p className="text-slate-600 text-sm mb-6">画面下部に表示されるキーのリストから、割り当てたいキーをドラッグ＆ドロップして配置を変更します。以下の主要な設定を押さえておきましょう。</p>
+                <ZoomableImage src={step8} alt="Keymap Editor UI" className="w-full rounded-2xl border border-slate-100 shadow-sm mb-8" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-slate-50 p-5 rounded-2xl">
+                    <span className="font-bold text-slate-700 block mb-2 text-sm">Behaviors（振る舞い）</span>
+                    <p className="text-xs text-slate-500 mb-4"><code>&amp;kp</code>(通常のキー), <code>&amp;mo</code>(レイヤー切り替え), <code>&amp;mkp</code>(マウスボタン)などが基本です。</p>
+                    <ZoomableImage src={step10} alt="Behaviors" className="w-full rounded-lg border border-slate-200" />
+                  </div>
+                  <div className="bg-slate-50 p-5 rounded-2xl">
+                    <span className="font-bold text-slate-700 block mb-2 text-sm">Bluetooth（無線）</span>
+                    <p className="text-xs text-slate-500 mb-4"><code>BT_CLR_ALL</code>(ペアリング解除), <code>BT_SEL 0</code>(メインPC用)などを割り当てると便利です。</p>
+                    <ZoomableImage src={step_bt_1} alt="Bluetooth" className="w-full rounded-lg border border-slate-200" />
+                  </div>
+                  <div className="bg-slate-50 p-5 rounded-2xl">
+                    <span className="font-bold text-slate-700 block mb-2 text-sm">Keycodes（キーコード）</span>
+                    <p className="text-xs text-slate-500 mb-4">一般的なキー入力です。UI上の検索窓から探すことができます。</p>
+                    <ZoomableImage src={step11} alt="Keycodes" className="w-full rounded-lg border border-slate-200" />
+                  </div>
+                  <div className="bg-slate-50 p-5 rounded-2xl">
+                    <span className="font-bold text-slate-700 block mb-2 text-sm">Encoders（つまみ）</span>
+                    <p className="text-xs text-slate-500 mb-4"><code>&amp;inc_dec_kp</code>を使って、左回り・右回りそれぞれにキーを指定できます。</p>
+                    <ZoomableImage src={step_encoders_1} alt="Encoders" className="w-full rounded-lg border border-slate-200" />
+                  </div>
+                </div>
               </div>
             </li>
             <li className="flex items-start">
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4">4</span>
-              <div>
-                <p className="font-bold text-slate-800 mb-1">変更を保存してビルド</p>
-                <p className="text-slate-600 text-sm">「Save」ボタンを押すと変更内容がGitHubに送信され、自動的に新しいファームウェアのビルド（作成）が始まります。</p>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4 mt-1">4</span>
+              <div className="w-full">
+                <p className="font-bold text-slate-800 mb-2">変更を保存してビルド</p>
+                <p className="text-slate-600 text-sm mb-4">「Save」ボタンを押すと変更内容がGitHubリポジトリにpushされ、自動的に新しいファームウェアのビルド（GitHub Actions）が始まります。</p>
+                <ZoomableImage src={step12} alt="Save Changes" className="w-full max-w-lg rounded-xl border border-slate-100 shadow-sm" />
               </div>
             </li>
             <li className="flex items-start">
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4">5</span>
-              <div>
-                <p className="font-bold text-slate-800 mb-1">ファームウェアの書き込み</p>
-                <p className="text-slate-600 text-sm">GitHub Actionsでビルドが完了したら「.uf2」ファイルをダウンロードします。キーボードをPCにUSB接続してブートローダーモードにし、表示されたドライブへ「.uf2」ファイルをコピーすれば完了です。</p>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mr-4 mt-1">5</span>
+              <div className="w-full">
+                <p className="font-bold text-slate-800 mb-2">ファームウェアの書き込み</p>
+                <p className="text-slate-600 text-sm mb-4 leading-relaxed">
+                  ビルドが完了したらファームウェアをダウンロードして解凍します。<br/>
+                  PCとmoNa2をUSB-Cケーブルで繋ぎ、<strong>リセットボタンを2回</strong>押します。<br/>
+                  認識されたドライブに右手用なら<code>moNa2_R...uf2</code>（左手なら<code>moNa2_L...uf2</code>）をドラッグ＆ドロップすれば完了です！
+                </p>
+                <ZoomableImage src={step_reset_1} alt="Reset Button" className="w-full max-w-sm rounded-xl border border-slate-100 shadow-sm" />
               </div>
             </li>
           </ul>
+        </div>
+      </div>
+    )
+  },
+  mouseSettings: {
+    id: 'mouseSettings',
+    title: 'マウスの設定',
+    icon: <Wrench className="w-5 h-5" />,
+    content: (
+      <div className="animate-fade-in">
+        <SectionHeading>マウスの設定 (最新ファームウェア設定)</SectionHeading>
+        <p className="text-slate-600 leading-relaxed mb-8">
+          今回のアップデートでは、ファームウェアを <strong>ZMK Firmware v0.3.0</strong> に合わせて新たに作成し直しました。<br/>
+          より高度なカスタマイズ（トラックボールの挙動変更など）を行いたい方向けの設定です。
+        </p>
+
+        <div className="space-y-6">
+          <div className="bg-white p-6 md:p-8 rounded-3xl border-2 border-slate-100 shadow-sm">
+            <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center"><ChevronRight className="w-5 h-5 text-emerald-500 mr-2"/>フォルダ構成とキーマップファイル</h3>
+            <p className="text-slate-600 text-sm mb-4 leading-relaxed">
+              最新のフォルダ構成では、「<code>mona2.keymap</code>」が2か所に存在します。
+            </p>
+            <ul className="list-none space-y-2 mb-4 text-sm">
+              <li className="flex items-center text-slate-700"><span className="text-emerald-500 mr-2">🔹</span> <code className="mx-1">mona2</code> フォルダ → <strong>初期設定</strong></li>
+              <li className="flex items-center text-slate-700"><span className="text-emerald-500 mr-2">🔹</span> <code className="mx-1">config</code> フォルダ → <strong>個人用設定</strong></li>
+            </ul>
+            <p className="text-slate-600 text-sm mb-4 leading-relaxed">
+              動作上は <strong>config フォルダ内のファイルが優先</strong> され、Keymap Editor で変更した内容も config フォルダ配下に保存されます。
+            </p>
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+              <p className="text-xs text-slate-500">
+                ※旧構成に含まれている docs / img / model は、moNa2のケースデータ等の保存先であり、ファームウェアの動作には直接関係しません。
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 md:p-8 rounded-3xl border-2 border-slate-100 shadow-sm">
+            <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center"><ChevronRight className="w-5 h-5 text-emerald-500 mr-2"/>マウス動作の設定方法</h3>
+            <p className="text-slate-600 text-sm mb-4 leading-relaxed">
+              今回のアップデートで ZMK Firmware がマウス入力を正式にサポートしたため、badjeff氏による派生ドライバーへ切り替え、マウス関連の処理は ZMK 側（<code>input-processors</code>）で行うように変更されました。<br/>
+              マウス動作をカスタマイズする際は、以下のファイルを編集します。
+            </p>
+            <ul className="list-none space-y-2 mb-6 text-sm">
+              <li className="flex items-center text-slate-700"><span className="text-emerald-500 mr-2">🔹</span> <code className="mx-1">mona2.dtsi</code></li>
+              <li className="flex items-center text-slate-700"><span className="text-emerald-500 mr-2">🔹</span> <code className="mx-1">mona2_r.overlay</code></li>
+            </ul>
+
+            <h4 className="font-bold text-slate-700 text-sm mb-2">dtsiファイル (デフォルトのマウス動作)</h4>
+            <p className="text-xs text-slate-500 mb-2">
+              有効化したい場合は、先頭の <code>//</code> を削除してください。（※日本語コメントの <code>//</code> は消さないでください）
+            </p>
+            <div className="bg-slate-800 rounded-xl p-4 overflow-x-auto text-emerald-400 text-sm font-mono mb-6 whitespace-pre">
+              {`    trackball_central_listener: trackball_central_listener {
+        compatible = "zmk,input-listener";
+        status = "disabled";
+        input-processors = 
+            <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>;       //Y軸反転
+            //<&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,      //X軸とY軸の入れ替え
+            //<&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,     //X軸反転
+            //<&zip_temp_layer 5 500>;                          //オートマウスレイヤーの選択
+    };`}
+            </div>
+
+            <h4 className="font-bold text-slate-700 text-sm mb-2">overlayファイル (スクロールレイヤー)</h4>
+            <p className="text-xs text-slate-500 mb-2">
+              <code>layers = &lt;3&gt;;</code> によってレイヤー3をスクロールレイヤーになるよう指定しています。
+            </p>
+            <div className="bg-slate-800 rounded-xl p-4 overflow-x-auto text-emerald-400 text-sm font-mono mb-6 whitespace-pre">
+              {`    scroller {
+        layers = <3>;  //有効化するレイヤーの指定
+        input-processors = 
+            // <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,     //X軸とY軸の入れ替え
+            <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
+            <&zip_xy_to_scroll_mapper>,                         //スクロールモードに変更
+            <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //スクロールのX軸反転
+            <&zip_scroll_scaler 1 5>;                           //スクロール量を1/4倍
+    };`}
+            </div>
+
+            <p className="text-sm text-slate-600">
+              その他、<code>input-processors</code> の設定項目については、以下のZMK公式ページをご覧ください。<br/>
+              <a href="https://zmk.dev/docs/features/pointing#input-processors" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline font-bold inline-flex items-center mt-2">
+                Input Processor Overview | ZMK <ExternalLink className="w-3 h-3 ml-1" />
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     )
@@ -297,6 +535,7 @@ const SECTIONS = {
 export default function UserGuide({ onBack }) {
   const [activeSection, setActiveSection] = useState('introduction');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true);
   const sectionKeys = Object.keys(SECTIONS);
 
   useEffect(() => {
@@ -365,22 +604,30 @@ export default function UserGuide({ onBack }) {
       )}
 
       <div className="max-w-6xl mx-auto flex">
-        <aside className="hidden md:flex flex-col w-72 shrink-0 h-screen sticky top-0 border-r border-slate-100 bg-white">
-          <div className="p-8 pb-4">
-            <button onClick={onBack} className="flex items-center text-slate-500 hover:text-emerald-600 mb-6 font-bold transition-colors">
-              <ArrowRight className="w-4 h-4 mr-2 rotate-180" /> ホームに戻る
-            </button>
-            <h2 className="text-xl font-black text-slate-800 tracking-tight">
-              moNa<br/>
-              <span className="text-slate-400 font-bold text-sm tracking-widest uppercase">User Guide</span>
-            </h2>
+        <aside className={`relative hidden md:flex flex-col shrink-0 h-screen sticky top-0 bg-white transition-all duration-300 z-10 ${isDesktopSidebarOpen ? 'w-72 border-r border-slate-100' : 'w-0'}`}>
+          <div className={`w-72 h-full flex flex-col overflow-hidden transition-opacity duration-300 ${isDesktopSidebarOpen ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="p-8 pb-4 shrink-0">
+              <button onClick={onBack} className="flex items-center text-slate-500 hover:text-emerald-600 mb-6 font-bold transition-colors">
+                <ArrowRight className="w-4 h-4 mr-2 rotate-180" /> ホームに戻る
+              </button>
+              <h2 className="text-xl font-black text-slate-800 tracking-tight">
+                moNa<br/>
+                <span className="text-slate-400 font-bold text-sm tracking-widest uppercase">User Guide</span>
+              </h2>
+            </div>
+            <div className="flex-1 overflow-y-auto px-4 py-2">
+              <NavigationList />
+            </div>
+            <div className="p-6 text-xs font-bold text-slate-300 shrink-0">
+              © {new Date().getFullYear()} moNa Project
+            </div>
           </div>
-          <div className="flex-1 overflow-y-auto px-4 py-2">
-            <NavigationList />
-          </div>
-          <div className="p-6 text-xs font-bold text-slate-300">
-            © {new Date().getFullYear()} moNa Project
-          </div>
+          <button 
+            onClick={() => setIsDesktopSidebarOpen(!isDesktopSidebarOpen)}
+            className={`absolute top-8 -right-3.5 z-20 bg-white border border-slate-200 shadow-sm rounded-full p-1 text-slate-400 hover:text-emerald-600 hover:shadow transition-all`}
+          >
+            <ChevronRight className={`w-5 h-5 transition-transform duration-300 ${isDesktopSidebarOpen ? 'rotate-180' : ''}`} />
+          </button>
         </aside>
 
         <main className="flex-1 min-w-0 p-6 md:p-12 lg:p-16">
