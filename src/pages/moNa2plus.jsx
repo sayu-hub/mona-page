@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   ArrowLeft, ShoppingCart, ChevronRight, Zap, Shield,
   Settings2, LayoutGrid, Package, Cable, Wrench, FileText,
-  MousePointerClick, Mouse, ArrowUp
+  MousePointerClick, Mouse, ArrowUp, ExternalLink
 } from 'lucide-react';
 import { navLinks } from '../data/items';
 import TweetEmbed from '../components/TweetEmbed';
@@ -164,11 +164,31 @@ export default function Mona2Plus({ onBack, onNavigate }) {
                   {link.name}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
                 </button>
+              ) : link.isExternal ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative text-sm font-bold text-slate-500 hover:text-[#3CB371] transition-colors py-1 group flex items-center gap-1"
+                >
+                  {link.name}
+                  <ExternalLink size={14} className="opacity-70" />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
               ) : (
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => { onBack(); }}
+                  onClick={(e) => { 
+                    e.preventDefault();
+                    onBack(); 
+                    setTimeout(() => {
+                      const id = link.href.replace('#', '');
+                      const element = document.getElementById(id);
+                      if (element) element.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }}
                   className="relative text-sm font-bold text-slate-500 hover:text-[#3CB371] transition-colors py-1 group"
                 >
                   {link.name}

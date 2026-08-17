@@ -18,8 +18,9 @@ import shakupanIcon from '../assets/images/home/members/shakupan_icon.png';
 export const navLinks = [
   { name: 'News', href: '#news', isPage: false },
   { name: 'Works', href: '#work', isPage: false },
-  { name: 'Gallery', href: '#gallery', isPage: false },
   { name: 'Support&Guide', href: '#guide', isPage: false },
+  { name: 'Setting', href: '#setting', isPage: false },
+  { name: 'Gallery', href: '#gallery', isPage: false },
   { name: 'Member', href: '#member', isPage: false },
 ];
 

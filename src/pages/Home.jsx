@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { Menu, X, ArrowRight, Twitter, Instagram, ChevronRight, Star, Sparkles, ArrowDown, ShoppingCart, Zap, ArrowLeft, BookOpen, Keyboard, Lightbulb } from 'lucide-react';
+import { Menu, X, ArrowRight, Twitter, Instagram, ChevronRight, Star, Sparkles, ArrowDown, ShoppingCart, Zap, ArrowLeft, BookOpen, Keyboard, Lightbulb, ExternalLink } from 'lucide-react';
 import { navLinks, mainWorks, accessories, members, tweetUrls } from '../data/items';
 import { newsData } from '../data/news';
 
@@ -68,7 +68,7 @@ export default function Home() {
       if (target === 'home') target = '';
       if (target === 'newsList') target = 'news';
       if (target === 'accessoriesList') target = 'accessories';
-      
+
       navigate(`/${target}`);
       setSelectedNews(null);
       window.scrollTo(0, 0);
@@ -210,26 +210,46 @@ export default function Home() {
               link.isPage ? (
                 <button
                   key={link.name}
-                  onClick={() => { 
+                  onClick={() => {
                     let path = link.viewTarget;
                     if (path === 'moNa') path = '/mona';
                     if (path === 'moNa2') path = '/mona2';
                     if (path === 'moNa2plus') path = '/mona2plus';
                     if (path === 'guide') path = '/guide';
                     if (path === 'keymap') path = '/keymap';
-                    navigate(path); 
-                    window.scrollTo(0, 0); 
+                    navigate(path);
+                    window.scrollTo(0, 0);
                   }}
                   className={`relative text-sm font-bold transition-colors py-1 group ${scrolled ? 'text-slate-700 hover:text-[#3CB371]' : 'text-slate-400 hover:text-[#3CB371]'}`}
                 >
                   {link.name}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
                 </button>
+              ) : link.isExternal ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`relative text-sm font-bold transition-colors py-1 group flex items-center gap-1 ${scrolled ? 'text-slate-700 hover:text-[#3CB371]' : 'text-slate-400 hover:text-[#3CB371]'}`}
+                >
+                  {link.name}
+                  <ExternalLink size={14} className="opacity-70" />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
               ) : (
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => { navigate('/'); }}
+                  onClick={(e) => { 
+                    e.preventDefault();
+                    navigate('/'); 
+                    setTimeout(() => {
+                      const id = link.href.replace('#', '');
+                      const element = document.getElementById(id);
+                      if (element) element.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }}
                   className={`relative text-sm font-bold transition-colors py-1 group ${scrolled ? 'text-slate-700 hover:text-[#3CB371]' : 'text-slate-400 hover:text-[#3CB371]'}`}
                 >
                   {link.name}
@@ -251,26 +271,47 @@ export default function Home() {
           link.isPage ? (
             <button
               key={link.name}
-              onClick={() => { 
+              onClick={() => {
                 let path = link.viewTarget;
                 if (path === 'moNa') path = '/mona';
                 if (path === 'moNa2') path = '/mona2';
                 if (path === 'moNa2plus') path = '/mona2plus';
                 if (path === 'guide') path = '/guide';
                 if (path === 'keymap') path = '/keymap';
-                navigate(path); 
-                window.scrollTo(0, 0); 
-                setIsMenuOpen(false); 
+                navigate(path);
+                window.scrollTo(0, 0);
+                setIsMenuOpen(false);
               }}
               className="text-3xl font-extrabold text-slate-800 hover:text-emerald-600 tracking-tight"
             >
               {link.name}
             </button>
+          ) : link.isExternal ? (
+            <a
+              key={link.name}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-3xl font-extrabold text-slate-800 hover:text-emerald-600 tracking-tight flex items-center gap-2"
+            >
+              {link.name}
+              <ExternalLink size={24} className="opacity-70" />
+            </a>
           ) : (
             <a
               key={link.name}
               href={link.href}
-              onClick={() => { setIsMenuOpen(false); navigate('/'); }}
+              onClick={(e) => { 
+                e.preventDefault();
+                setIsMenuOpen(false); 
+                navigate('/'); 
+                setTimeout(() => {
+                  const id = link.href.replace('#', '');
+                  const element = document.getElementById(id);
+                  if (element) element.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+              }}
               className="text-3xl font-extrabold text-slate-800 hover:text-emerald-600 tracking-tight"
             >
               {link.name}
@@ -515,21 +556,29 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="group bg-slate-50 rounded-[2.5rem] p-8 lg:p-10 border-2 border-slate-100 relative overflow-hidden reveal opacity-80 cursor-default">
-              <div className="w-16 h-16 bg-white border-2 border-slate-100 rounded-2xl flex items-center justify-center text-slate-400 mb-8 shadow-sm">
+            {/* ↓リンク先URLを「ここにリンクのURLを入力してください」の部分に入力してください↓ */}
+            <a
+              id="setting"
+              href="https://studio.dya.cormoran.works/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer group bg-slate-50 rounded-[2.5rem] p-8 lg:p-10 border-2 border-slate-100 hover:border-emerald-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden reveal block scroll-mt-32"
+            >
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-300 to-emerald-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+              <div className="w-16 h-16 bg-white border-2 border-emerald-50 rounded-2xl flex items-center justify-center text-emerald-500 mb-8 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-500 shadow-sm">
                 <Keyboard size={32} />
               </div>
               <h3 className="text-2xl font-bold text-slate-800 mb-4 flex flex-col items-start gap-2 xl:flex-row xl:items-center">
-                Keymap Editor
-                <span className="text-[10px] bg-slate-200 text-slate-600 px-2 py-1 rounded font-black tracking-widest uppercase mt-1 xl:mt-0">Coming Soon</span>
+                Keyboard Setting
+                <span className="text-[10px] bg-slate-200 text-slate-600 px-2 py-1 rounded font-black tracking-widest uppercase mt-1 xl:mt-0">DYA Studio</span>
               </h3>
-              <p className="text-slate-500 leading-relaxed mb-8 font-medium text-sm lg:text-base">
-                ブラウザから直接キーマップを変更できます。専用ソフトのインストールは不要です。（WebHID API使用）
+              <p className="text-slate-600 leading-relaxed mb-8 font-medium text-sm lg:text-base">
+                ブラウザから直接キーマップやトラックボールの設定を行うことができます。専用ソフトのインストールは不要です。
               </p>
-              <div className="inline-flex items-center text-slate-400 font-bold">
-                近日公開予定
+              <div className="inline-flex items-center text-emerald-600 font-bold group-hover:translate-x-2 transition-transform">
+                エディタを開く <ExternalLink size={18} className="ml-2" />
               </div>
-            </div>
+            </a>
 
             <div className="group bg-slate-50 rounded-[2.5rem] p-8 lg:p-10 border-2 border-slate-100 relative overflow-hidden reveal-right opacity-80 cursor-default">
               <div className="w-16 h-16 bg-white border-2 border-slate-100 rounded-2xl flex items-center justify-center text-slate-400 mb-8 shadow-sm">
