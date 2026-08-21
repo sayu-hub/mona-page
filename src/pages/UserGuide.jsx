@@ -35,28 +35,28 @@ const ZoomableImage = ({ src, alt, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <img 
-        src={src} 
-        alt={alt} 
+      <img
+        src={src}
+        alt={alt}
         className={`${className} cursor-zoom-in hover:opacity-90 transition-opacity`}
         onClick={() => setIsOpen(true)}
       />
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 md:p-8 animate-fade-in"
           onClick={() => setIsOpen(false)}
         >
           <div className="relative max-w-6xl w-full h-full flex items-center justify-center">
-            <button 
+            <button
               className="absolute top-0 right-0 bg-slate-800 hover:bg-slate-700 text-white rounded-full p-2 transition-colors z-10 shadow-lg"
               onClick={(e) => { e.stopPropagation(); setIsOpen(false); }}
             >
               <X className="w-5 h-5" />
             </button>
-            <img 
-              src={src} 
-              alt={alt} 
-              className="max-w-full max-h-full object-contain drop-shadow-2xl rounded-lg cursor-zoom-out" 
+            <img
+              src={src}
+              alt={alt}
+              className="max-w-full max-h-full object-contain drop-shadow-2xl rounded-lg cursor-zoom-out"
               onClick={(e) => { e.stopPropagation(); setIsOpen(false); }}
             />
           </div>
@@ -114,23 +114,23 @@ const SECTIONS = {
             <h3 className="text-xl font-black text-slate-800 tracking-tight mb-6">同梱物</h3>
             <ul className="space-y-4 text-slate-600 font-medium">
               <li className="flex items-center justify-between border-b border-slate-50 pb-2">
-                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2"/> キーボード本体</span>
+                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2" /> キーボード本体</span>
                 <span className="text-slate-400 text-sm">左右1台</span>
               </li>
               <li className="flex items-center justify-between border-b border-slate-50 pb-2">
-                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2"/> キーキャップ</span>
+                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2" /> キーキャップ</span>
                 <span className="text-slate-400 text-sm">42個</span>
               </li>
               <li className="flex items-center justify-between border-b border-slate-50 pb-2">
-                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2"/> 25mmトラックボール</span>
+                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2" /> 25mmトラックボール</span>
                 <span className="text-slate-400 text-sm">1個</span>
               </li>
               <li className="flex items-center justify-between border-b border-slate-50 pb-2">
-                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2"/> バッテリー</span>
+                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2" /> バッテリー</span>
                 <span className="text-slate-400 text-sm">2個</span>
               </li>
               <li className="flex items-center justify-between pb-2">
-                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2"/> サンクスカード</span>
+                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2" /> サンクスカード</span>
                 <span className="text-slate-400 text-sm">1枚</span>
               </li>
             </ul>
@@ -139,11 +139,11 @@ const SECTIONS = {
             <h3 className="text-xl font-black text-slate-800 tracking-tight mb-6">お客様でご用意いただくもの</h3>
             <ul className="space-y-4 text-slate-600 font-medium">
               <li className="flex items-center justify-between border-b border-slate-50 pb-2">
-                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-amber-400 mr-2"/> キースイッチ</span>
+                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-amber-400 mr-2" /> キースイッチ</span>
                 <span className="text-slate-400 text-sm">42個</span>
               </li>
               <li className="flex items-center justify-between border-b border-slate-50 pb-2">
-                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-amber-400 mr-2"/> USBケーブル (Type-C)</span>
+                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-amber-400 mr-2" /> USBケーブル (Type-C)</span>
                 <span className="text-slate-400 text-sm">1本</span>
               </li>
               <li className="flex items-start pb-2 text-sm text-slate-500 mt-4 flex-col gap-2">
@@ -236,7 +236,7 @@ const SECTIONS = {
             </div>
           </div>
         </div>
-        
+
         <div className="mt-12 p-8 bg-emerald-50/50 rounded-3xl border border-emerald-100 text-center animate-fade-in">
           <p className="text-emerald-800 font-bold mb-2">お疲れ様でした！これで動作確認は完了です 🎉</p>
           <p className="text-sm text-emerald-700">
@@ -267,7 +267,7 @@ const SECTIONS = {
       <div className="animate-fade-in">
         <SectionHeading>GitHubリポジトリのフォーク</SectionHeading>
         <p className="text-slate-600 leading-relaxed mb-8">
-          キーマップの変更や、自分用のファームウェアを書き出すためには、<strong>GitHub Actions</strong>を利用します。<br/>
+          キーマップの変更や、自分用のファームウェアを書き出すためには、<strong>GitHub Actions</strong>を利用します。<br />
           事前にGitHubアカウントを用意し、設定用のリポジトリをフォーク（複製）しておきましょう。
         </p>
         <div className="bg-white border-2 border-slate-100 rounded-[2rem] p-8 md:p-10 shadow-sm mb-12">
@@ -288,7 +288,7 @@ const SECTIONS = {
               <div className="w-full">
                 <p className="font-bold text-slate-800 mb-2">リポジトリのフォーク</p>
                 <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                  準備ができたら、お使いの機種に合わせて以下のベースリポジトリをご自身のアカウントへフォーク（複製）します。<br/>
+                  準備ができたら、お使いの機種に合わせて以下のベースリポジトリをご自身のアカウントへフォーク（複製）します。<br />
                   リンク先の画面右上にある「Fork」ボタンから実行できます。
                 </p>
                 <div className="flex flex-col gap-2 mb-4">
@@ -384,8 +384,8 @@ const SECTIONS = {
               <div className="w-full">
                 <p className="font-bold text-slate-800 mb-2">ファームウェアの書き込み</p>
                 <p className="text-slate-600 text-sm mb-4 leading-relaxed">
-                  ビルドが完了したらファームウェアをダウンロードして解凍します。<br/>
-                  PCとmoNa2をUSB-Cケーブルで繋ぎ、<strong>リセットボタンを2回</strong>押します。<br/>
+                  ビルドが完了したらファームウェアをダウンロードして解凍します。<br />
+                  PCとmoNa2をUSB-Cケーブルで繋ぎ、<strong>リセットボタンを2回</strong>押します。<br />
                   認識されたドライブに右手用なら<code>moNa2_R...uf2</code>（左手なら<code>moNa2_L...uf2</code>）をドラッグ＆ドロップすれば完了です！
                 </p>
                 <ZoomableImage src={step_reset_1} alt="Reset Button" className="w-full max-w-sm rounded-xl border border-slate-100 shadow-sm" />
@@ -404,13 +404,13 @@ const SECTIONS = {
       <div className="animate-fade-in">
         <SectionHeading>マウスの設定 (最新ファームウェア設定)</SectionHeading>
         <p className="text-slate-600 leading-relaxed mb-8">
-          今回のアップデートでは、ファームウェアを <strong>ZMK Firmware v0.3.0</strong> に合わせて新たに作成し直しました。<br/>
+          今回のアップデートでは、ファームウェアを <strong>ZMK Firmware v0.3.0</strong> に合わせて新たに作成し直しました。<br />
           より高度なカスタマイズ（トラックボールの挙動変更など）を行いたい方向けの設定です。
         </p>
 
         <div className="space-y-6">
           <div className="bg-white p-6 md:p-8 rounded-3xl border-2 border-slate-100 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center"><ChevronRight className="w-5 h-5 text-emerald-500 mr-2"/>フォルダ構成とキーマップファイル</h3>
+            <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center"><ChevronRight className="w-5 h-5 text-emerald-500 mr-2" />フォルダ構成とキーマップファイル</h3>
             <p className="text-slate-600 text-sm mb-4 leading-relaxed">
               最新のフォルダ構成では、「<code>mona2.keymap</code>」が2か所に存在します。
             </p>
@@ -429,9 +429,9 @@ const SECTIONS = {
           </div>
 
           <div className="bg-white p-6 md:p-8 rounded-3xl border-2 border-slate-100 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center"><ChevronRight className="w-5 h-5 text-emerald-500 mr-2"/>マウス動作の設定方法</h3>
+            <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center"><ChevronRight className="w-5 h-5 text-emerald-500 mr-2" />マウス動作の設定方法</h3>
             <p className="text-slate-600 text-sm mb-4 leading-relaxed">
-              今回のアップデートで ZMK Firmware がマウス入力を正式にサポートしたため、badjeff氏による派生ドライバーへ切り替え、マウス関連の処理は ZMK 側（<code>input-processors</code>）で行うように変更されました。<br/>
+              今回のアップデートで ZMK Firmware がマウス入力を正式にサポートしたため、badjeff氏による派生ドライバーへ切り替え、マウス関連の処理は ZMK 側（<code>input-processors</code>）で行うように変更されました。<br />
               マウス動作をカスタマイズする際は、以下のファイルを編集します。
             </p>
             <ul className="list-none space-y-2 mb-6 text-sm">
@@ -472,7 +472,7 @@ const SECTIONS = {
             </div>
 
             <p className="text-sm text-slate-600">
-              その他、<code>input-processors</code> の設定項目については、以下のZMK公式ページをご覧ください。<br/>
+              その他、<code>input-processors</code> の設定項目については、以下のZMK公式ページをご覧ください。<br />
               <a href="https://zmk.dev/docs/features/pointing#input-processors" target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline font-bold inline-flex items-center mt-2">
                 Input Processor Overview | ZMK <ExternalLink className="w-3 h-3 ml-1" />
               </a>
@@ -556,11 +556,10 @@ export default function UserGuide({ onBack }) {
           <button
             key={key}
             onClick={() => handleNavClick(key)}
-            className={`w-full flex items-center px-4 py-3.5 text-sm font-bold rounded-2xl transition-all duration-200 ${
-              isActive
+            className={`w-full flex items-center px-4 py-3.5 text-sm font-bold rounded-2xl transition-all duration-200 ${isActive
                 ? 'bg-emerald-50 text-emerald-700 border-2 border-emerald-100'
                 : 'text-slate-500 hover:bg-slate-50 border-2 border-transparent'
-            }`}
+              }`}
           >
             <span className={`mr-3 ${isActive ? 'text-emerald-500' : 'text-slate-400'}`}>
               {section.icon}
@@ -611,7 +610,7 @@ export default function UserGuide({ onBack }) {
                 <ArrowRight className="w-4 h-4 mr-2 rotate-180" /> ホームに戻る
               </button>
               <h2 className="text-xl font-black text-slate-800 tracking-tight">
-                moNa<br/>
+                moNa<br />
                 <span className="text-slate-400 font-bold text-sm tracking-widest uppercase">User Guide</span>
               </h2>
             </div>
@@ -622,7 +621,7 @@ export default function UserGuide({ onBack }) {
               © {new Date().getFullYear()} moNa Project
             </div>
           </div>
-          <button 
+          <button
             onClick={() => setIsDesktopSidebarOpen(!isDesktopSidebarOpen)}
             className={`absolute top-8 -right-3.5 z-20 bg-white border border-slate-200 shadow-sm rounded-full p-1 text-slate-400 hover:text-emerald-600 hover:shadow transition-all`}
           >
