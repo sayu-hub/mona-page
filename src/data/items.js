@@ -28,7 +28,7 @@ export const mainWorks = [
   {
       id: '01',
       name: 'moNa',
-      description: '原点でありプロジェクト始まりのキーボード。左手側にトラックボールを搭載。',
+      description: '原点でありプロジェクト始まりのキーボード。\n左手側にトラックボールを搭載。',
       tags: ['42Key', 'Split', 'Wireless', 'TrackBall(Left)'],
       // ▼ 変更: チョンチョン（' '）を外して、上で作った変数を入れる
       image: monaImg,
@@ -39,7 +39,7 @@ export const mainWorks = [
   {
       id: '02',
       name: 'moNa 2',
-      description: 'より多くの人が使いやすい右手トラックボール。水平エンコーダも搭載しており一台でキーボードとマウス両方の役割を果たします。',
+      description: 'より多くの人が使いやすい右手トラックボール。\n水平エンコーダも搭載しており一台でキーボードとマウス両方の役割を果たします。',
       tags: ['42Key', 'Split', 'Wireless', 'TrackBall(Right)'],
       image: mona2Img,
       animClass: 'reveal-left',
@@ -49,7 +49,7 @@ export const mainWorks = [
   {
       id: '03',
       name: 'moNa 2+',
-      description: 'キー数とエンコーダの増えたmoNa2の拡張版。より幅広いキーマップの設定が可能に。',
+      description: 'キー数とエンコーダの増えたmoNa2の拡張版。\nより幅広いキーマップの設定が可能に。',
       tags: ['48Key', 'Split', 'Wireless', 'TrackBall(Right)'],
       image: mona2plusImg,
       animClass: 'reveal-right',
@@ -79,7 +79,7 @@ export const members = [
       note: 'https://note.com/pooh_polo'
   },
   {
-      name: 'Shakupan',
+      name: 'shakupan',
       role: 'Develop & Sell',
       bio: '筐体デザインと意匠を担当。手に触れる素材感にこだわる。パンダグッズ収集家。',
       id: 'shakupan',

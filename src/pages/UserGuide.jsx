@@ -125,13 +125,9 @@ const SECTIONS = {
                 <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2" /> 25mmトラックボール</span>
                 <span className="text-slate-400 text-sm">1個</span>
               </li>
-              <li className="flex items-center justify-between border-b border-slate-50 pb-2">
+              <li className="flex items-center justify-between pb-2">
                 <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2" /> バッテリー</span>
                 <span className="text-slate-400 text-sm">2個</span>
-              </li>
-              <li className="flex items-center justify-between pb-2">
-                <span className="flex items-center"><ChevronRight className="w-4 h-4 text-emerald-400 mr-2" /> サンクスカード</span>
-                <span className="text-slate-400 text-sm">1枚</span>
               </li>
             </ul>
           </div>

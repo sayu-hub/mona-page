@@ -21,9 +21,9 @@ export const newsData = [
         <p>当日 moNa2の販売等も行う予定です。ぜひ、お越しください！</p>
         <div className="mt-4 p-4 bg-slate-50 border-l-4 border-emerald-500 rounded-r-lg">
           <p className="font-bold text-slate-800 mb-2">TKX26公式ページ</p>
-          <a 
-            href="https://tkx.yushakobo.jp/tkx2026/" 
-            target="_blank" 
+          <a
+            href="https://tkx.yushakobo.jp/tkx2026/"
+            target="_blank"
             rel="noopener noreferrer"
             className="text-emerald-600 hover:text-emerald-700 underline flex items-center gap-1 w-fit"
           >
@@ -58,9 +58,10 @@ export const newsData = [
         <p>3月28日に開催されたキーボードイベント「キーケット2026」に出展いたしました。</p>
         <p>当日は私たちのブースへ非常に多くの方々に足を運んでいただき、心より感謝申し上げます。実機に触れていただいた皆様から温かいお言葉をいただき、大変励みになりました！</p>
         <p>当日の様子です↓</p>
-        <div className="my-6">
+        <div className="my-6 space-y-6">
           {/* 当日の様子の後にツイートを載せる */}
-          <TweetEmbed url="https://x.com/Pooh_pol0/status/2018878320671387878" />
+          <TweetEmbed url="https://x.com/Arai_Lab/status/2037690644177797156?s=20" />
+          <TweetEmbed url="https://x.com/shakupan_/status/2037366813861069213?s=20" />
         </div>
       </div>
     )
@@ -77,9 +78,10 @@ export const newsData = [
         <p>私たちにとって初めてのイベント参加ということもあり、不手際なところもあったかと思いますが、当ブースへ足を運んでくださった皆様、本当にありがとうございました！</p>
         <p>たくさんの方にmoNaを試打していただき、貴重なご意見や感想を直接お聞きすることができて大変有意義な時間となりました。</p>
         <p>当日の様子です↓</p>
-        <div className="my-6">
+        <div className="my-6 space-y-6">
           {/* 当日の様子の後にツイートを載せる */}
-          <TweetEmbed url="https://x.com/Pooh_pol0/status/2018878320671387878" />
+          <TweetEmbed url="https://x.com/Pooh_pol0/status/1970388505097646334?s=20" />
+          <TweetEmbed url="https://x.com/shakupan_/status/1970138723653398699?s=20" />
         </div>
       </div>
     )
@@ -94,19 +96,14 @@ export const newsData = [
         <p>大変お待たせいたしました。</p>
         <p>「moNa 2」の販売を開始いたしました。</p>
 
-        {/* ▼ こんな感じで記事の中に直接ツイートを埋め込めます！ ▼ */}
-        <div className="my-6">
-          <TweetEmbed url="https://x.com/Pooh_pol0/status/2018878320671387878" />
-        </div>
-
         {/* moNa2.jsx へ飛ぶボタン */}
         <div className="mt-8 flex justify-center">
-          <button
-            onClick={() => window.dispatchEvent(new CustomEvent('navigate', { detail: 'moNa2' }))}
+          <a
+            href="/mona-page/#/mona2"
             className="inline-flex items-center justify-center px-8 py-3 bg-emerald-600 text-white font-bold rounded-full hover:bg-emerald-500 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             商品ページはこちら <ArrowRight className="ml-2 w-5 h-5" />
-          </button>
+          </a>
         </div>
       </div>
     )

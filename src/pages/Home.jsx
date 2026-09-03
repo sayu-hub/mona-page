@@ -446,7 +446,7 @@ export default function Home() {
                       <h3 className="text-4xl font-bold text-slate-900">{work.name}</h3>
                     </div>
                     <div className="w-16 h-1 bg-emerald-500 rounded-full"></div>
-                    <p className="text-slate-600 leading-loose text-lg font-medium">
+                    <p className="text-slate-600 leading-loose text-lg font-medium whitespace-pre-wrap">
                       {work.description}
                     </p>
                     <div className="flex flex-wrap gap-2 pt-2">
@@ -465,7 +465,10 @@ export default function Home() {
           {/* アクセサリー部分 */}
           <div className="reveal">
             <div className="flex items-end justify-between mb-8 px-2 border-b border-slate-200 pb-4">
-              <h3 className="text-2xl font-bold text-slate-800">Accessories & Parts</h3>
+              <h3 className="text-2xl font-bold text-slate-800 relative inline-block z-10">
+                Accessories & Parts
+                <span className="absolute bottom-1 left-0 w-full h-2.5 bg-emerald-200/50 -z-10 rounded-full transform -rotate-1"></span>
+              </h3>
               <button
                 onClick={() => { navigate('/accessories'); window.scrollTo(0, 0); }}
                 className="text-sm font-bold text-slate-400 hover:text-emerald-600 flex items-center gap-1 group transition-colors"
@@ -549,7 +552,8 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold text-slate-800 mb-4">User Guide</h3>
               <p className="text-slate-600 leading-relaxed mb-8 font-medium text-sm lg:text-base">
-                初めての方はこちらから。内容物の確認からPCへの接続、ブラウザを使ったキーマップの変更まで、基本のセットアップ手順をご案内します。
+                初めての方はこちらから。<br />
+                内容物の確認からPCへの接続、キーマップの変更まで、基本のセットアップ手順をご案内します。
               </p>
               <div className="inline-flex items-center text-emerald-600 font-bold group-hover:translate-x-2 transition-transform">
                 ガイドを読む <ArrowRight size={18} className="ml-2" />
@@ -573,7 +577,8 @@ export default function Home() {
                 <span className="text-[10px] bg-slate-200 text-slate-600 px-2 py-1 rounded font-black tracking-widest uppercase mt-1 xl:mt-0">DYA Studio</span>
               </h3>
               <p className="text-slate-600 leading-relaxed mb-8 font-medium text-sm lg:text-base">
-                ブラウザから直接キーマップやトラックボールの設定を行うことができます。専用ソフトのインストールは不要です。
+                ブラウザから直接キーマップやトラックボールの設定を行うことができます。<br />
+                専用ソフトのインストールは不要です。
               </p>
               <div className="inline-flex items-center text-emerald-600 font-bold group-hover:translate-x-2 transition-transform">
                 エディタを開く <ExternalLink size={18} className="ml-2" />
@@ -589,7 +594,8 @@ export default function Home() {
                 <span className="text-[10px] bg-slate-200 text-slate-600 px-2 py-1 rounded font-black tracking-widest uppercase mt-1 xl:mt-0">Coming Soon</span>
               </h3>
               <p className="text-slate-500 leading-relaxed mb-8 font-medium text-sm lg:text-base">
-                もっと自分好みに。レイヤー機能の活用術やマクロ設定、打鍵感を高める静音化のコツなどの応用テクニックを紹介します。
+                もっと自分好みに。<br />
+                レイヤー機能の活用術やマクロ設定といった応用テクニックのほか、キーボードをより楽しむためのおすすめアイテムなどもご紹介します。
               </p>
               <div className="inline-flex items-center text-slate-400 font-bold">
                 近日公開予定
@@ -640,10 +646,10 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {members.map((member) => (
-              <div key={member.id} className="reveal flex flex-col items-center text-center p-10 rounded-[2.5rem] border-2 border-slate-200 bg-white hover:border-emerald-200 hover:shadow-2xl hover:shadow-emerald-900/5 transition-all duration-500 group relative">
-                <div className="absolute top-0 left-0 w-full h-32 bg-slate-50 rounded-t-[2.5rem] -z-10 group-hover:bg-emerald-50/50 transition-colors"></div>
+              <div key={member.id} className="reveal flex flex-col items-center text-center p-8 pb-10 rounded-[2.5rem] border-2 border-slate-100 bg-white hover:border-emerald-200 hover:shadow-2xl hover:shadow-emerald-900/10 transition-all duration-500 group relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-slate-50 to-white -z-10 group-hover:from-emerald-50/50 group-hover:to-white transition-colors duration-500"></div>
 
-                <div className="w-28 h-28 shrink-0 rounded-full bg-white border-4 border-white shadow-lg flex items-center justify-center overflow-hidden mb-6 text-5xl transform group-hover:scale-110 transition-transform duration-300">
+                <div className="w-32 h-32 shrink-0 rounded-full bg-white border-[6px] border-white shadow-xl flex items-center justify-center overflow-hidden mb-5 text-5xl transform group-hover:scale-105 group-hover:-translate-y-1 transition-all duration-500 z-10">
                   {member.image ? (
                     <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
                   ) : (
@@ -651,24 +657,21 @@ export default function Home() {
                   )}
                 </div>
 
-                <div className="flex-1 w-full">
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">{member.name}</h3>
-                  <p className="text-xs font-extrabold text-emerald-600 uppercase tracking-widest mb-6 bg-emerald-50/50 border border-emerald-100 px-4 py-1.5 rounded-full inline-block">
+                <div className="flex-1 w-full flex flex-col items-center z-10">
+                  <h3 className="text-2xl font-black text-slate-800 mb-3">{member.name}</h3>
+                  <p className="text-xs font-black text-emerald-600 uppercase tracking-widest bg-emerald-50 border border-emerald-100 px-5 py-2 rounded-full inline-block shadow-sm">
                     {member.role}
                   </p>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-8 font-medium border-t border-b border-slate-100 py-4">
-                    {member.bio}
-                  </p>
 
-                  <div className="flex gap-4 justify-center">
+                  <div className="flex gap-4 justify-center mt-8">
                     {member.twitter && (
-                      <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-[#1DA1F2] hover:bg-blue-50 transition-all bg-white border border-slate-200 p-3 rounded-full hover:-translate-y-1 hover:shadow-md">
-                        <Twitter size={18} />
+                      <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-[#1DA1F2] hover:bg-blue-50 transition-all bg-white border border-slate-200 p-4 rounded-full hover:-translate-y-1 hover:shadow-lg">
+                        <Twitter size={20} />
                       </a>
                     )}
                     {member.note && (
-                      <a href={member.note} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-[#2CB696] hover:bg-emerald-50 transition-all bg-white border border-slate-200 p-3 rounded-full hover:-translate-y-1 hover:shadow-md">
-                        <NoteIcon size={18} />
+                      <a href={member.note} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-[#2CB696] hover:bg-emerald-50 transition-all bg-white border border-slate-200 p-4 rounded-full hover:-translate-y-1 hover:shadow-lg">
+                        <NoteIcon size={20} />
                       </a>
                     )}
                   </div>

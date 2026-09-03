@@ -18,6 +18,7 @@ import deviceImg from '../assets/images/products/mona2/device.png';
 import batteryImg from '../assets/images/products/mona2/battery.png';
 import connectionImg from '../assets/images/products/mona2/conection.png';
 import layerImg from '../assets/images/products/mona2/layer.png';
+import carryImg from '../assets/images/products/carry.png';
 
 // 映像フェードインコンポーネント（初回表示時のみアニメーション）
 function VideoFadeIn({ feature, sectionIndex }) {
@@ -50,6 +51,13 @@ function VideoFadeIn({ feature, sectionIndex }) {
         }}
       >
         <div className="max-w-3xl mx-auto">
+          {feature.image && (
+            <img 
+              src={feature.image} 
+              alt="Layer feature" 
+              className="w-full rounded-2xl shadow-2xl" 
+            />
+          )}
           {/* <video
             className="w-full rounded-2xl shadow-2xl"
             autoPlay
@@ -116,7 +124,7 @@ export default function Mona2({ onBack, onNavigate }) {
       image: mona2Img,
       description: (
         <div className="space-y-4">
-          <p>moNaはkumakeyさん制作のroBaにインスパイアされ、白湯_sayuとshakupanさんで作った小型分割キーボードです。</p>
+          <p>moNaはkumakeyさん制作のroBaにインスパイアされ、白湯_sayuとshakupanで作った小型分割キーボードです。</p>
           <p>またこのキーボードはキーボードマウス一体型の元祖であるkeyballと製作者のYowkees様 がいなければ実現していないものです。Yowkeesさんのその革新的なアイデアとユーザーの利便性を追求する姿勢に深い敬意を表します。</p>
         </div>
       )
@@ -133,7 +141,7 @@ export default function Mona2({ onBack, onNavigate }) {
       color: "bg-blue-50 text-blue-600",
       description: (
         <div className="space-y-4">
-          <p>親指で操作できるトラックボールとエンコーダを備え、moNaのみでキーボードとマウス両方の役割を担います。</p>
+          <p>親指で操作できるトラックボールとエンコーダを備え、moNaだけでキーボードとマウス両方の役割を担います。</p>
           <p>(マウスボタンも使用可能)</p>
         </div>
       )
@@ -145,7 +153,7 @@ export default function Mona2({ onBack, onNavigate }) {
       type: 'side',
       reverse: true,
       title: "場所を選ばないコンパクト設計",
-      image: whitemona2Img,
+      image: carryImg,
       icon: <Sparkles className="w-6 h-6" />,
       color: "bg-slate-100 text-slate-700",
       description: (
@@ -162,13 +170,15 @@ export default function Mona2({ onBack, onNavigate }) {
       type: 'video',
       tag: 'カスタマイズ',
       title: 'レイヤー機能で自由にカスタマイズ。',
+      image: layerImg,
       description: (
         <div className="space-y-4">
           <p>
-            レイヤー機能は、特定のキーを押している間だけ<strong>キーの役割を丸ごと切り替える</strong>仕組みです。上のデモで実際にレイヤーを切り替えて、キー配列がどう変わるか体験してみてください。
+            レイヤー機能は、特定のキーを押している間だけ<strong>キーの役割を丸ごと切り替える</strong>仕組みです。
           </p>
           <p>
-            たとえば、あるキーに<strong>通常は「A」、レイヤー2では「B」</strong>を割り当てたとします。普段そのキーを押せばAが入力されますが、レイヤー切替キーを押しながら同じキーを押すと、Bが入力されます。
+            たとえば、あるキーに<strong>通常は「A」、レイヤー2では「B」</strong>を割り当てたとします。<br />
+            普段そのキーを押せばAが入力されますが、レイヤー切替キーを押しながら同じキーを押すと、Bが入力されます。
           </p>
           <p>
             moNa2では複数のレイヤーを使うことで、少ないキーでも自分だけのキー配列を自由に構築できます。
@@ -187,7 +197,7 @@ export default function Mona2({ onBack, onNavigate }) {
               windowsやmacなど異なるOS間でも快適に使用することが可能です。
             </p>
             <p className="text-sm">
-              詳しくは<button onClick={() => { if (onNavigate) onNavigate('guide'); window.scrollTo(0, 0); }} className="text-emerald-600 font-bold hover:underline mx-1 transition-colors">Support & Guide</button>から設定方法等をご覧ください。
+              詳しくは<span className="text-emerald-600 font-bold hover:underline mx-1">Topics & Tips</span>から設定方法等をご覧ください。
             </p>
           </div>
         </div>
@@ -289,8 +299,8 @@ export default function Mona2({ onBack, onNavigate }) {
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-6 mt-12 animate-fade-in">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start mb-24">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 mt-6 sm:mt-12 animate-fade-in">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start mb-16 md:mb-24">
 
           {/* 左側：画像ギャラリー */}
           <div className="flex flex-col gap-4">
@@ -323,7 +333,7 @@ export default function Mona2({ onBack, onNavigate }) {
                 <button
                   key={idx}
                   onClick={() => setActiveIndex(idx)}
-                  className={`relative w-20 sm:w-24 aspect-[4/3] shrink-0 rounded-xl overflow-hidden transition-all duration-200 focus:outline-none 
+                  className={`relative w-16 sm:w-24 aspect-[4/3] shrink-0 rounded-lg sm:rounded-xl overflow-hidden transition-all duration-200 focus:outline-none 
                     ${activeIndex === idx
                       ? 'border-2 border-emerald-500 ring-4 ring-emerald-500/10'
                       : 'border-2 border-transparent hover:border-slate-300'
@@ -340,21 +350,21 @@ export default function Mona2({ onBack, onNavigate }) {
 
           {/* 右側：商品情報 */}
           <div>
-            <div className="flex items-center gap-3 mb-4 mt-2">
-              <span className="text-sm font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-widest">Product 02</span>
+            <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-3 md:mb-4 mt-1 md:mt-2">
+              <span className="text-xs md:text-sm font-bold text-emerald-600 bg-emerald-50 px-2.5 md:px-3 py-1 rounded-full uppercase tracking-widest">Product 02</span>
               <div className="flex gap-2">
                 <span className="text-xs font-bold text-slate-400 border border-slate-200 px-2 py-0.5 rounded-md">42key</span>
                 <span className="text-xs font-bold text-slate-400 border border-slate-200 px-2 py-0.5 rounded-md">TrackBall(Right)</span>
               </div>
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-black text-slate-800 mb-6 tracking-tight">moNa 2</h1>
+            <h1 className="text-3xl md:text-6xl font-black text-slate-800 mb-4 md:mb-6 tracking-tight">moNa 2</h1>
 
-            <p className="text-lg text-slate-600 leading-loose mb-8 font-medium">
-              独立した矢印キーを追加し、実用性を高めた第2世代モデル。待望のホットスワップに対応し、無限の打鍵感を探求できます。
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed md:leading-loose mb-6 md:mb-8 font-medium">
+              独立した矢印キーを追加し、実用性を高めた第2世代モデル。<br />待望のホットスワップに対応し、無限の打鍵感を探求できます。
             </p>
 
-            <div className="mb-8 p-5 bg-slate-100/60 rounded-3xl border border-slate-200/60">
+            <div className="mb-6 md:mb-8 p-4 md:p-5 bg-slate-100/60 rounded-2xl md:rounded-3xl border border-slate-200/60">
               <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-1">
                 <MousePointerClick className="w-3.5 h-3.5" /> Color Variations
               </p>
@@ -377,12 +387,12 @@ export default function Mona2({ onBack, onNavigate }) {
               </div>
             </div>
 
-            <div className="flex items-center gap-6 p-6 bg-white rounded-3xl border border-slate-200 shadow-sm">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 md:gap-6 p-4 md:p-6 bg-white rounded-2xl md:rounded-3xl border border-slate-200 shadow-sm">
               <div className="flex-1">
                 <p className="text-sm text-slate-400 font-bold mb-1">Price</p>
-                <p className="text-3xl font-black text-slate-800 font-mono">¥45,000<span className="text-sm text-slate-500 font-normal"> (税込)</span></p>
+                <p className="text-2xl md:text-3xl font-black text-slate-800 font-mono">¥45,000<span className="text-sm text-slate-500 font-normal ml-1">(税込)</span></p>
               </div>
-              <button className="flex-1 bg-slate-900 hover:bg-emerald-600 text-white flex items-center justify-center py-4 rounded-2xl font-bold transition-colors shadow-lg shadow-emerald-600/20 group">
+              <button className="sm:flex-1 bg-slate-900 hover:bg-emerald-600 text-white flex items-center justify-center py-3.5 md:py-4 rounded-xl md:rounded-2xl font-bold transition-colors shadow-lg shadow-emerald-600/20 group">
                 <ShoppingCart className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                 購入する
               </button>
@@ -459,7 +469,6 @@ export default function Mona2({ onBack, onNavigate }) {
                   { name: "キーキャップ", qty: "42個" },
                   { name: "25mmトラックボール", qty: "1個" },
                   { name: "バッテリー", qty: "2個" },
-                  { name: "サンクスカード", qty: "1枚" },
                 ].map((item, i) => (
                   <li key={i} className="flex justify-between items-center py-4">
                     <div className="flex items-center text-slate-800 font-bold">
@@ -518,9 +527,8 @@ export default function Mona2({ onBack, onNavigate }) {
                 { label: 'Colors', value: 'ホワイト / ブラック / グレー' },
                 { label: 'Switches', value: 'Choc v1/v2 Lofree製スイッチ対応 (ホットスワップ)' },
                 { label: 'Connection', value: '無線/有線接続対応' },
-                { label: 'Firmware', value: 'ZMK Firmware, Keymap Editor/ZMK Studio対応' },
+                { label: 'Firmware', value: <span>ZMK Firmware <span className="text-slate-400 text-sm ml-2">DYA Studio対応</span></span> },
                 { label: 'Size', value: '測定中...' },
-                { label: 'Weight', value: '測定中...' },
                 { label: 'Battery', value: '170 mAh' }
               ].map((spec, i) => (
                 <div key={i} className="flex flex-col sm:flex-row sm:items-center py-5 px-8 hover:bg-slate-50 transition-colors">
@@ -535,14 +543,61 @@ export default function Mona2({ onBack, onNavigate }) {
         {/* 購入アクションエリア */}
         <div className="mt-32 mb-16 flex flex-col items-center text-center">
           <h2 className="text-3xl font-black text-slate-800 mb-6">moNa 2 を手に入れる</h2>
-          <p className="text-slate-500 font-medium mb-10 max-w-lg">
-            究極の滑らかさと機能性をあなたのデスクに。
-          </p>
-          <button className="bg-emerald-500 hover:bg-emerald-400 text-white px-12 py-5 rounded-full font-bold text-lg transition-all shadow-xl shadow-emerald-500/30 flex items-center group hover:-translate-y-1">
-            <ShoppingCart className="w-6 h-6 mr-3 group-hover:scale-110 transition-transform" />
-            購入ページへ進む
-            <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-          </button>
+          
+          <div className="bg-white rounded-3xl p-8 md:p-10 border-2 border-slate-100 shadow-xl shadow-slate-200/50 max-w-3xl w-full text-left relative overflow-hidden mt-4">
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-400 to-teal-400"></div>
+            <h3 className="text-xl md:text-2xl font-bold text-slate-800 mb-8 flex items-center">
+              購入手段はこちら <ChevronRight className="w-6 h-6 ml-1 text-emerald-500" />
+            </h3>
+            
+            <ul className="space-y-6 mb-10">
+              <li className="flex items-start">
+                <span className="text-orange-400 mr-3 shrink-0 text-lg">🔸</span>
+                <div className="text-slate-700 font-medium leading-relaxed">
+                  <a href="https://shakupan.booth.pm/items/6376654" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline text-lg">
+                    Boothページ
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-orange-400 mr-3 shrink-0 text-lg">🔸</span>
+                <div className="text-slate-700 font-medium leading-relaxed">
+                  moNaサーバ内マーケットプレイス訳あり品 中古品<br />
+                  <a href="https://discord.gg/SZ3EMRdk9N" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline text-sm inline-flex items-center mt-1">
+                    Discordへ参加 <ExternalLink className="w-3 h-3 ml-1" />
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-orange-400 mr-3 shrink-0 text-lg">🔸</span>
+                <div className="text-slate-700 font-medium leading-relaxed">
+                  お苦しみmoNa（<a href="https://x.com/shakupan_" target="_blank" rel="noopener noreferrer" className="text-[#1DA1F2] hover:underline">@shakupan_</a>にて募集）基板＋バッテリーのみの構成<br />
+                  <a href="https://note.com/shakupan/n/n285a125abbb7" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline text-sm inline-flex items-center mt-1">
+                    詳細はこちら <ExternalLink className="w-3 h-3 ml-1" />
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-orange-400 mr-3 shrink-0 text-lg">🔸</span>
+                <div className="text-slate-700 font-medium leading-relaxed">
+                  <a href="https://x.com/shakupan_" target="_blank" rel="noopener noreferrer" className="text-[#1DA1F2] hover:underline">@shakupan_</a> または <a href="https://x.com/Pooh_pol0" target="_blank" rel="noopener noreferrer" className="text-[#1DA1F2] hover:underline">@Pooh_pol0</a> による企画販売
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-orange-400 mr-3 shrink-0 text-lg">🔸</span>
+                <div className="text-slate-700 font-medium leading-relaxed">
+                  TKXなどのオフラインイベント販売
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+          <div className="bg-red-50/80 p-5 md:p-6 rounded-2xl border border-red-100 max-w-3xl w-full mt-6 flex items-center justify-center shadow-sm">
+            <p className="text-base md:text-lg font-bold text-red-600 flex items-center leading-relaxed">
+              <span className="mr-3 text-2xl leading-none">※</span>
+              <span>上記以外の購入ルートの場合、サポート等は一切対応しません。</span>
+            </p>
+          </div>
         </div>
       </main>
 

@@ -55,7 +55,7 @@ export default function Mona2Plus({ onBack, onNavigate }) {
       image: mona2Img,
       description: (
         <div className="space-y-4">
-          <p>moNaはkumakeyさん制作のroBaにインスパイアされ、白湯_sayuとshakupanさんで作った小型分割キーボードです。</p>
+          <p>moNaはkumakeyさん制作のroBaにインスパイアされ、白湯_sayuとshakupanで作った小型分割キーボードです。</p>
           <p>またこのキーボードはキーボードマウス一体型の元祖であるkeyballと製作者のYowkees様 がいなければ実現していないものです。Yowkeesさんのその革新的なアイデアとユーザーの利便性を追求する姿勢に深い敬意を表します。</p>
         </div>
       )
@@ -262,7 +262,7 @@ export default function Mona2Plus({ onBack, onNavigate }) {
             <h1 className="text-4xl md:text-6xl font-black text-slate-800 mb-6 tracking-tight">moNa 2 Plus</h1>
 
             <p className="text-lg text-slate-600 leading-loose mb-8 font-medium">
-              Fキー列とノブを備えたフラッグシップモデル。極上の打鍵感を生み出すガスケットマウントを採用し、妥協のないタイピング体験を提供します。
+              Fキー列とノブを備えたフラッグシップモデル。<br />極上の打鍵感を生み出すガスケットマウントを採用し、妥協のないタイピング体験を提供します。
             </p>
 
             <div className="mb-8 p-5 bg-slate-100/60 rounded-3xl border border-slate-200/60">
