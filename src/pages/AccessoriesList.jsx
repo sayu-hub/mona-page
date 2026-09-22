@@ -34,8 +34,8 @@ export default function AccessoriesList({ onBack }) {
             <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
             Home
           </button>
-          <div className="font-extrabold text-slate-800 tracking-tight flex items-center gap-2">
-            <span className="text-xl">🐼</span> moNa Project
+          <div className="font-extrabold text-slate-800 tracking-tight">
+            moNa Project
           </div>
           <div className="w-20"></div>
         </div>
@@ -70,11 +70,18 @@ export default function AccessoriesList({ onBack }) {
               {items.map((item, index) => (
                 <a 
                   key={index} 
-                  href={item.url || "#"} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="bg-white rounded-2xl p-4 border border-slate-100 shadow-sm hover:border-emerald-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group block flex flex-col h-full"
+                  href={item.isComingSoon ? undefined : item.url}
+                  target={item.isComingSoon ? undefined : "_blank"}
+                  rel={item.isComingSoon ? undefined : "noopener noreferrer"}
+                  aria-disabled={item.isComingSoon || undefined}
+                  onClick={item.isComingSoon ? (event) => event.preventDefault() : undefined}
+                  className={`relative bg-white rounded-2xl p-4 border border-slate-100 shadow-sm hover:border-emerald-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group block flex flex-col h-full ${item.isComingSoon ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                 >
+                  {item.isComingSoon && (
+                    <div className="pointer-events-none absolute inset-x-3 top-3 z-10 rounded-lg bg-slate-900/90 px-2 py-1.5 text-center text-[10px] font-bold leading-tight text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100">
+                      商品・販売ページ準備中
+                    </div>
+                  )}
                   
                   {/* ▼ ここから：画像の有無で表示を切り替える処理 ▼ */}
                   {isImagePath(item.image) ? (

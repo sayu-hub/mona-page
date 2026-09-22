@@ -42,7 +42,7 @@ export default function TweetEmbed({ url }) {
   }, [url]);
 
   return (
-    <div ref={containerRef} className="w-full flex justify-center min-h-[200px] items-center bg-white rounded-2xl border border-slate-100 p-4 shadow-sm">
+    <div ref={containerRef} className="w-full flex justify-center min-h-[200px] items-center">
       <div className="w-8 h-8 border-4 border-emerald-100 border-t-emerald-500 rounded-full animate-spin"></div>
     </div>
   );

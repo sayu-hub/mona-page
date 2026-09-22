@@ -144,7 +144,7 @@ export default function Mona2Plus({ onBack, onNavigate }) {
   return (
     // ▼ 一番親のdivに `overflow-x-hidden` を追加し、全幅画像による横揺れを防止
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900 pb-32 scroll-smooth overflow-x-hidden">
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-100 px-6 py-4">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-100 px-6 py-4 md:fixed md:left-0 md:w-full">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-6">
             <button onClick={onBack} className="flex items-center text-slate-500 hover:text-emerald-600 font-bold transition-colors group">
@@ -200,7 +200,7 @@ export default function Mona2Plus({ onBack, onNavigate }) {
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-6 mt-12 animate-fade-in">
+      <main className="max-w-5xl mx-auto px-6 mt-12 md:mt-0 md:pt-24 animate-fade-in">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start mb-24">
 
           {/* 左側：画像ギャラリー */}
@@ -293,7 +293,11 @@ export default function Mona2Plus({ onBack, onNavigate }) {
                 <p className="text-sm text-slate-400 font-bold mb-1">Price</p>
                 <p className="text-3xl font-black text-slate-800 font-mono">¥55,000<span className="text-sm text-slate-500 font-normal"> (税込)</span></p>
               </div>
-              <button className="flex-1 bg-slate-900 hover:bg-emerald-600 text-white flex items-center justify-center py-4 rounded-2xl font-bold transition-colors shadow-lg shadow-emerald-600/20 group">
+              <button
+                type="button"
+                onClick={() => document.getElementById('purchase')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                className="flex-1 bg-slate-900 hover:bg-emerald-600 text-white flex items-center justify-center py-4 rounded-2xl font-bold transition-colors shadow-lg shadow-emerald-600/20 group"
+              >
                 <ShoppingCart className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                 購入する
               </button>
@@ -398,7 +402,7 @@ export default function Mona2Plus({ onBack, onNavigate }) {
         </div>
 
         {/* 購入アクションエリア */}
-        <div className="mt-32 mb-16 flex flex-col items-center text-center">
+        <div id="purchase" className="scroll-mt-24 mt-32 mb-16 flex flex-col items-center text-center">
           <h2 className="text-3xl font-black text-slate-800 mb-6">moNa 2 Plus を手に入れる</h2>
           <p className="text-slate-500 font-medium mb-10 max-w-lg">
             最高峰のタイピング体験をあなたのデスクに。

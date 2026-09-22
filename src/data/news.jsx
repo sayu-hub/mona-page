@@ -42,7 +42,7 @@ export const newsData = [
           <img src={tkx26MapImg} alt="TKX2026会場マップ。sayu / shakupanブースはB17、roBaブースはB18" className="w-full rounded-2xl border border-slate-100 shadow-sm" />
         </div>
 
-        <p>今回は初めて販売するキーキャップをご用意しています。</p>
+        <p>今回は初めて販売する射出成形キーキャップ「LAK mini ice keycaps」をご用意しています。</p>
         <p>お隣のB18のroBaブースにも関連商品がありますので、ぜひあわせてお立ち寄りください。</p>
         <p>販売は先着順で、なくなり次第終了となります。</p>
         <p>各商品は10月中旬以降にも販売を予定しています。会場では展示品を実際に触っていただけますので、ぜひお気軽にお越しください。</p>

@@ -4,10 +4,12 @@ import mona2Img from '../assets/images/common/moNa2.png';
 import mona2plusImg from '../assets/images/common/moNa2plus.png';
 
 import monaKeycapsImg from '../assets/images/home/Accessories/mona_keycaps.png';
+import notraImg from '../assets/images/home/Accessories/notra.png';
 import kotoriShimaImg from '../assets/images/home/Accessories/kotori-shimaenaga.png';
 import kotoriBlankImg from '../assets/images/home/Accessories/kotori-blank.png';
 import ridgeCapImg from '../assets/images/home/Accessories/ridgecap.png';
 import narrowCapImg from '../assets/images/home/Accessories/narrowcap17.png';
+import mona2WoodcaseImg from '../assets/images/home/Accessories/mona2_woodcase.jpg';
 import coropitImg from '../assets/images/home/Accessories/coropit.png';
 import henkanImg from '../assets/images/home/Accessories/19mm-henkan.png';
 
@@ -60,10 +62,13 @@ export const mainWorks = [
 
 export const accessories = [
   { name: 'Keycaps moNa標準キーキャップ', price: '¥4,500~', image: monaKeycapsImg, url:'https://sayuworks.stores.jp/items/692e4fb02200bb41580c08b6'},
+  { name: 'Keycaps notra', price: '¥4,200', image: notraImg, url: 'https://plotoftheprototype.com/products/notra' },
   { name: 'Keycaps Kotori-Shimaenaga', price: '¥7,500~', image: kotoriShimaImg, url:'https://kotori-kcp.booth.pm/items/7468940' },
   { name: 'Keycaps Kotiri-Blank', price: '¥4,500~', image: kotoriBlankImg, url:'https://booth.pm/ja/items/6781056' },
   { name: 'Keycaps RidgeCap', price: '¥5,000~', image: ridgeCapImg, url:'https://arailab.booth.pm/items/8159022' },
   { name: 'Keycaps NarrowCap 17', price: '¥5,500~', image: narrowCapImg, url:'https://booth.pm/ja/items/7406191' },
+  { name: 'Keycaps LAK mini ice keycaps', price: '¥5,000~', image: 'LAK', isComingSoon: true },
+  { name: 'Case moNa2木製ケース', price: '¥28,000', image: mona2WoodcaseImg, url: 'https://kinoya.booth.pm/items/7418837' },
   { name: 'Attachment COROPIT', price: '¥4,000~', image: coropitImg, url:'https://booth.pm/ja/items/6830658' },
   { name: 'Attachment 19mm変換キット', price: '¥5,000~', image: henkanImg, url:'https://sayuworks.stores.jp/items/68fb9bd112e4fd7301bcabab' }
 ];
@@ -94,4 +99,15 @@ export const tweetUrls = [
   "https://x.com/shakupan_/status/1979856517454348427?s=20",
   "https://x.com/Pooh_pol0/status/2018878320671387878?s=20",
   "https://x.com/Pooh_pol0/status/1992143194306589016?s=20",
+  "https://x.com/puriko69x/status/1951443809654739365?s=20",
+  "https://x.com/black_trooper/status/2012839726655705595?s=20",
+  "https://x.com/saMe_no_tweet/status/1999026734575005868?s=20",
+  "https://x.com/entasis777/status/2016071924624064604?s=20",
+  "https://x.com/mozumasu/status/2040025651936473174?s=20",
+  "https://x.com/ruitomowoyobu/status/2040762189842350314?s=20",
+  "https://x.com/nagomi_ke/status/1980929719035101666?s=20",
+  "https://x.com/soo_suke/status/1919535087676490064?s=20",
+  "https://x.com/Pooh_pol0/status/2000536327398563863?s=20",
+  "https://x.com/with_kazuma/status/1971153559304667149?s=20",
+
 ];

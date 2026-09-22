@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Navigate, Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import NewsList from './pages/NewsList';
 import Mona from './pages/moNa';
@@ -8,7 +8,6 @@ import Mona2plus from './pages/moNa2plus';
 import UserGuide from './pages/UserGuide';
 import KeymapEditor from './pages/Keymap-Editor';
 import AccessoriesList from './pages/AccessoriesList';
-import FAQ from './pages/FAQ';
 
 export default function App() {
   const navigate = useNavigate();
@@ -36,7 +35,7 @@ export default function App() {
       <Route path="/keymap" element={<KeymapEditor onBack={() => navigate('/')} onNavigate={handleNavigate} />} />
       <Route path="/news" element={<NewsList onBack={() => navigate('/')} onNavigate={handleNavigate} />} />
       <Route path="/accessories" element={<AccessoriesList onBack={() => navigate('/')} onNavigate={handleNavigate} />} />
-      <Route path="/faq" element={<FAQ onBack={() => navigate('/')} onNavigate={handleNavigate} />} />
+      <Route path="/faq" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import {
   ArrowLeft, ShoppingCart, ChevronRight, Zap, Shield,
   Settings2, LayoutGrid, Package, Cable, Wrench, FileText,
-  MousePointerClick, Mouse, ArrowUp, Sparkles, ExternalLink
+  Mouse, ArrowUp, Sparkles, ExternalLink
 } from 'lucide-react';
 import { navLinks } from '../data/items';
 import TweetEmbed from '../components/TweetEmbed';
@@ -10,7 +10,6 @@ import TweetEmbed from '../components/TweetEmbed';
 // ▼▼▼ 画像の読み込み ▼▼▼
 import monaImg from '../assets/images/common/moNa.png';
 import mona2Img from '../assets/images/common/moNa2.png';
-import whiteMonaImg from '../assets/images/products/mona/white_mona.png';
 import carryImg from '../assets/images/products/carry.png';
 import deviceImg from '../assets/images/products/mona/device.png';
 import batteryImg from '../assets/images/products/mona/battery.png';
@@ -111,10 +110,9 @@ export default function Mona({ onBack, onNavigate }) {
   // ギャラリー用の画像リストを定義
   const productImages = [
     { src: monaImg, label: '', tagClass: 'hidden' },
-    { src: whiteMonaImg, label: 'White', tagClass: 'bg-white/90 text-slate-800' },
-    // 外部URLの画像もそのまま使用
-    { src: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&q=80&w=800', label: 'Black', tagClass: 'bg-slate-900/90 text-white' },
-    { src: 'https://images.unsplash.com/photo-1601445638532-3c6f6c3aa1d6?auto=format&fit=crop&q=80&w=800', label: 'Gray', tagClass: 'bg-slate-400/90 text-white' }
+    { label: '画像準備中', isPlaceholder: true },
+    { label: '画像準備中', isPlaceholder: true },
+    { label: '画像準備中', isPlaceholder: true }
   ];
 
   const features = [
@@ -243,8 +241,8 @@ export default function Mona({ onBack, onNavigate }) {
 
   return (
     // ▼ 一番親のdivに `overflow-x-hidden` を追加し、全幅画像による横揺れを防止
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900 pb-32 scroll-smooth overflow-x-hidden">
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-100 px-6 py-4">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900 pb-32 scroll-smooth overflow-x-hidden">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-100 px-6 py-4 md:fixed md:left-0 md:w-full">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-6">
             <button onClick={onBack} className="flex items-center text-slate-500 hover:text-emerald-600 font-bold transition-colors group">
@@ -300,25 +298,32 @@ export default function Mona({ onBack, onNavigate }) {
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 mt-6 sm:mt-12 animate-fade-in">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start mb-16 md:mb-24">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 mt-8 sm:mt-16 md:mt-0 md:pt-24 animate-fade-in">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-14 lg:gap-20 items-start mb-16 md:mb-28">
 
           {/* 左側：画像ギャラリー */}
           <div className="flex flex-col gap-4">
             {/* メイン画像 */}
-            <div className="relative aspect-[4/3] bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100">
+            <div className="relative aspect-[4/3] bg-white rounded-xl overflow-hidden border border-slate-200">
               <div
                 className="flex w-full h-full transition-transform duration-500 ease-out"
                 style={{ transform: `translateX(-${activeIndex * 100}%)` }}
               >
                 {productImages.map((img, idx) => (
                   <div key={idx} className="w-full h-full shrink-0 relative">
-                    <img
-                      src={img.src}
-                      alt={`moNa ${img.label}`}
-                      className="w-full h-full object-cover"
-                    />
-                    {img.label && (
+                    {img.isPlaceholder ? (
+                      <div className="w-full h-full bg-slate-50 flex flex-col items-center justify-center text-slate-400">
+                        <Package className="w-12 h-12 mb-3 text-slate-300" />
+                        <span className="font-bold text-sm tracking-widest">画像準備中</span>
+                      </div>
+                    ) : (
+                      <img
+                        src={img.src}
+                        alt={`moNa ${img.label}`}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                    {img.label && !img.isPlaceholder && (
                       <span className={`absolute top-4 left-4 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold shadow-sm ${img.tagClass}`}>
                         {img.label}
                       </span>
@@ -334,14 +339,18 @@ export default function Mona({ onBack, onNavigate }) {
                 <button
                   key={idx}
                   onClick={() => setActiveIndex(idx)}
-                  className={`relative w-16 sm:w-24 aspect-[4/3] shrink-0 rounded-lg sm:rounded-xl overflow-hidden transition-all duration-200 focus:outline-none 
+                  className={`relative w-16 sm:w-24 aspect-[4/3] shrink-0 overflow-hidden transition-all duration-200 focus:outline-none
                     ${activeIndex === idx
-                      ? 'border-2 border-emerald-500 ring-4 ring-emerald-500/10'
-                      : 'border-2 border-transparent hover:border-slate-300'
+                      ? 'outline outline-2 outline-slate-900 outline-offset-2'
+                      : 'opacity-55 hover:opacity-100'
                     }`}
                 >
-                  <img src={img.src} alt={`thumbnail ${idx}`} className="w-full h-full object-cover" />
-                  {activeIndex !== idx && (
+                  {img.isPlaceholder ? (
+                    <div className="w-full h-full bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-400">準備中</div>
+                  ) : (
+                    <img src={img.src} alt={`thumbnail ${idx}`} className="w-full h-full object-cover" />
+                  )}
+                  {activeIndex !== idx && !img.isPlaceholder && (
                     <div className="absolute inset-0 bg-slate-900/10 hover:bg-transparent transition-colors"></div>
                   )}
                 </button>
@@ -351,24 +360,21 @@ export default function Mona({ onBack, onNavigate }) {
 
           {/* 右側：商品情報 */}
           <div>
-            <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-3 md:mb-4 mt-1 md:mt-2">
-              <span className="text-xs md:text-sm font-bold text-emerald-600 bg-emerald-50 px-2.5 md:px-3 py-1 rounded-full uppercase tracking-widest">Product 01</span>
-              <div className="flex gap-2">
-                <span className="text-xs font-bold text-slate-400 border border-slate-200 px-2 py-0.5 rounded-md">42key</span>
-                <span className="text-xs font-bold text-slate-400 border border-slate-200 px-2 py-0.5 rounded-md">TrackBall(Left)</span>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-6 mt-1">
+              <span className="text-[11px] font-bold text-emerald-700 uppercase tracking-[0.16em]">Product 01</span>
+              <div className="flex gap-3 text-[11px] font-medium text-slate-500">
+                <span>42key</span>
+                <span className="before:mr-3 before:text-slate-300 before:content-['/']">TrackBall (Left)</span>
               </div>
             </div>
 
-            <h1 className="text-3xl md:text-6xl font-black text-slate-800 mb-4 md:mb-6 tracking-tight">moNa</h1>
+            <h1 className="text-4xl md:text-7xl font-semibold text-slate-900 mb-5 md:mb-7 tracking-[-0.055em] leading-none">moNa</h1>
 
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed md:leading-loose mb-6 md:mb-8 font-medium">
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed md:leading-loose mb-9 md:mb-11 font-medium">
               原点でありプロジェクト始まりのキーボード。<br />左手側にトラックボールを搭載。
             </p>
 
-            <div className="mb-6 md:mb-8 p-4 md:p-5 bg-slate-100/60 rounded-2xl md:rounded-3xl border border-slate-200/60">
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-1">
-                <MousePointerClick className="w-3.5 h-3.5" /> Color Variations
-              </p>
+            <div className="mb-6 border-b border-slate-200 pb-5">
               <div className="flex flex-wrap items-center gap-3">
                 {[
                   { name: 'ホワイト', color: 'bg-white', border: 'border-slate-300' },
@@ -378,22 +384,26 @@ export default function Mona({ onBack, onNavigate }) {
                   <button
                     key={i}
                     onClick={() => setActiveIndex(i + 1)}
-                    className={`group flex items-center gap-2 px-3 py-2 rounded-2xl transition-all focus:outline-none 
-                      ${activeIndex === i + 1 ? 'bg-white shadow-sm border border-emerald-200 ring-2 ring-emerald-500/20' : 'border border-transparent hover:bg-slate-200'}`}
+                  className={`group flex items-center gap-2 py-1 transition-colors focus:outline-none
+                      ${activeIndex === i + 1 ? 'text-slate-950' : 'text-slate-400 hover:text-slate-700'}`}
                   >
                     <span className={`w-5 h-5 rounded-full ${c.color} ${c.border} border shadow-sm inline-block transition-transform group-hover:scale-110`}></span>
-                    <span className={`text-sm font-bold ${activeIndex === i + 1 ? 'text-emerald-700' : 'text-slate-600'}`}>{c.name}</span>
+                    <span className={`text-sm font-medium ${activeIndex === i + 1 ? 'text-slate-900' : 'text-slate-500'}`}>{c.name}</span>
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 md:gap-6 p-4 md:p-6 bg-white rounded-2xl md:rounded-3xl border border-slate-200 shadow-sm">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-5 pt-5">
               <div className="flex-1">
-                <p className="text-sm text-slate-400 font-bold mb-1">Price</p>
-                <p className="text-2xl md:text-3xl font-black text-slate-800 font-mono">¥40,000<span className="text-sm text-slate-500 font-normal ml-1">(税込)</span></p>
+                <p className="text-[11px] text-slate-500 font-bold uppercase tracking-[0.14em] mb-1">Price</p>
+                <p className="text-2xl md:text-3xl font-semibold text-slate-900 font-mono tracking-[-0.04em]">¥40,000<span className="text-sm text-slate-500 font-normal ml-1 tracking-normal">(税込)</span></p>
               </div>
-              <button className="sm:flex-1 bg-slate-900 hover:bg-emerald-600 text-white flex items-center justify-center py-3.5 md:py-4 rounded-xl md:rounded-2xl font-bold transition-colors shadow-lg shadow-emerald-600/20 group">
+              <button
+                type="button"
+                onClick={() => document.getElementById('purchase')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                className="sm:flex-1 bg-slate-900 hover:bg-slate-700 text-white flex items-center justify-center py-3.5 md:py-4 rounded-md font-bold transition-colors group"
+              >
                 <ShoppingCart className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                 購入する
               </button>
@@ -542,26 +552,21 @@ export default function Mona({ onBack, onNavigate }) {
         </div>
 
         {/* 購入アクションエリア */}
-        <div className="mt-32 mb-16 flex flex-col items-center text-center">
-          <h2 className="text-3xl font-black text-slate-800 mb-6">moNa を手に入れる</h2>
-
-          <div className="bg-white rounded-3xl p-8 md:p-10 border-2 border-slate-100 shadow-xl shadow-slate-200/50 max-w-3xl w-full text-left relative overflow-hidden mt-4">
-            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-400 to-teal-400"></div>
-            <h3 className="text-xl md:text-2xl font-bold text-slate-800 mb-8 flex items-center">
-              購入手段はこちら <ChevronRight className="w-6 h-6 ml-1 text-emerald-500" />
-            </h3>
-            
-            <ul className="space-y-6 mb-10">
-              <li className="flex items-start">
-                <span className="text-orange-400 mr-3 shrink-0 text-lg">🔸</span>
+        <div id="purchase" className="scroll-mt-24 mt-32 mb-16 flex flex-col items-center text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 tracking-[-0.03em] mb-10">moNa 2 を手に入れる</h2>
+          
+          <div className="max-w-3xl w-full text-left border-y border-slate-200">
+            <ul className="divide-y divide-slate-200">
+              <li className="flex items-start px-6 py-6">
+                <span className="hidden">🔸</span>
                 <div className="text-slate-700 font-medium leading-relaxed">
-                  <a href="https://shakupan.booth.pm/items/6536958" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline text-lg">
+                  <a href="https://shakupan.booth.pm/items/6536958" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline text-lg inline-flex items-center">
                     Boothページ
                   </a>
                 </div>
               </li>
-              <li className="flex items-start">
-                <span className="text-orange-400 mr-3 shrink-0 text-lg">🔸</span>
+              <li className="flex items-start px-6 py-5">
+                <span className="hidden">🔸</span>
                 <div className="text-slate-700 font-medium leading-relaxed">
                   moNaサーバ内マーケットプレイス訳あり品 中古品<br />
                   <a href="https://discord.gg/SZ3EMRdk9N" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline text-sm inline-flex items-center mt-1">
@@ -569,23 +574,14 @@ export default function Mona({ onBack, onNavigate }) {
                   </a>
                 </div>
               </li>
-              <li className="flex items-start">
-                <span className="text-orange-400 mr-3 shrink-0 text-lg">🔸</span>
+              <li className="flex items-start px-6 py-5">
+                <span className="hidden">🔸</span>
                 <div className="text-slate-700 font-medium leading-relaxed">
-                  お苦しみmoNa（<a href="https://x.com/shakupan_" target="_blank" rel="noopener noreferrer" className="text-[#1DA1F2] hover:underline">@shakupan_</a>にて募集）基板＋バッテリーのみの構成<br />
-                  <a href="https://note.com/shakupan/n/n285a125abbb7" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline text-sm inline-flex items-center mt-1">
-                    詳細はこちら <ExternalLink className="w-3 h-3 ml-1" />
-                  </a>
+                  <a href="https://x.com/shakupan_" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline">@shakupan_</a> または <a href="https://x.com/Pooh_pol0" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline">@Pooh_pol0</a> による企画販売
                 </div>
               </li>
-              <li className="flex items-start">
-                <span className="text-orange-400 mr-3 shrink-0 text-lg">🔸</span>
-                <div className="text-slate-700 font-medium leading-relaxed">
-                  <a href="https://x.com/shakupan_" target="_blank" rel="noopener noreferrer" className="text-[#1DA1F2] hover:underline">@shakupan_</a> または <a href="https://x.com/Pooh_pol0" target="_blank" rel="noopener noreferrer" className="text-[#1DA1F2] hover:underline">@Pooh_pol0</a> による企画販売
-                </div>
-              </li>
-              <li className="flex items-start">
-                <span className="text-orange-400 mr-3 shrink-0 text-lg">🔸</span>
+              <li className="flex items-start px-6 py-5">
+                <span className="hidden">🔸</span>
                 <div className="text-slate-700 font-medium leading-relaxed">
                   TKXなどのオフラインイベント販売
                 </div>
@@ -593,14 +589,14 @@ export default function Mona({ onBack, onNavigate }) {
             </ul>
           </div>
           
-          <div className="bg-red-50/80 p-5 md:p-6 rounded-2xl border border-red-100 max-w-3xl w-full mt-6 flex items-center justify-center shadow-sm">
-            <p className="text-base md:text-lg font-bold text-red-600 flex items-center leading-relaxed">
-              <span className="mr-3 text-2xl leading-none">※</span>
+          <div className="border-l-2 border-rose-500 max-w-3xl w-full mt-8 px-4 py-1 text-left">
+            <p className="text-sm md:text-base font-medium text-slate-600 flex items-center leading-relaxed">
+              <span className="mr-3 text-lg leading-none text-rose-500">※</span>
               <span>上記以外の購入ルートの場合、サポート等は一切対応しません。</span>
             </p>
           </div>
         </div>
-      </main>
+      </main>      
 
       {/* トップへ戻るボタン */}
       <button

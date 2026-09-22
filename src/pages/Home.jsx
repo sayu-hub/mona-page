@@ -336,13 +336,16 @@ export default function Home() {
           <div className="absolute inset-0 bg-slate-900/20 mix-blend-multiply"></div>
         </div>
 
-        <div className="relative z-10 text-center px-6 max-w-4xl mt-12">
-          <h1 className="reveal text-5xl md:text-8xl font-extrabold text-white mb-8 tracking-tight drop-shadow-xl leading-[1.1]">
+        <div className="relative z-10 text-center px-6 max-w-5xl mt-12">
+          <h1 className="reveal relative isolate inline-block text-6xl sm:text-7xl md:text-[9rem] font-black text-white mb-6 sm:mb-8 md:mb-10 tracking-[-0.06em] drop-shadow-2xl leading-[0.95]">
             {/* 小さなボディでどこでも最大のパフォーマンスを */}
-            サイト制作中...
+            <span aria-hidden="true" className="absolute -inset-x-10 -inset-y-8 -z-10 rounded-full bg-gradient-to-r from-slate-950/50 via-slate-950/35 to-slate-950/50 blur-3xl"></span>
+            <span className="relative">moNa Project</span>
           </h1>
-          <p className="reveal text-lg md:text-xl text-white/90 font-bold mb-12 drop-shadow-md max-w-xl mx-auto leading-relaxed">
-            moNa は、小さな機体に機能性・デザイン性・打鍵感のすべてを追求した<br className="md:hidden" />カスタムキーボードシリーズです。
+          <p className="reveal text-xs sm:text-sm md:text-lg text-white/90 font-semibold mb-12 drop-shadow-md max-w-lg mx-auto leading-relaxed">
+            <span className="block md:hidden whitespace-nowrap">小さな筐体に、機能性・デザイン性・打鍵感を。</span>
+            <span className="block md:hidden whitespace-nowrap">すべてを追求したカスタムキーボードです。</span>
+            <span className="hidden md:inline">moNa は、小さな筐体に機能性・デザイン性・打鍵感のすべてを追求したカスタムキーボードシリーズです。</span>
           </p>
 
           <div className="reveal absolute bottom-[-20vh] md:bottom-[-25vh] left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/90 animate-bounce">
@@ -618,11 +621,11 @@ export default function Home() {
         <div className="relative w-full reveal">
           <div
             ref={galleryScrollRef}
-            className="flex overflow-x-auto gap-6 pb-8 px-6 md:px-0 no-scrollbar snap-x snap-mandatory"
+            className="flex overflow-x-auto gap-6 pb-8 px-[max(1rem,calc((100vw-350px)/2))] md:px-0 no-scrollbar snap-x snap-mandatory"
             style={{ WebkitOverflowScrolling: 'touch' }}
           >
             {randomTweets.map((url, index) => (
-              <div key={index} className="tweet-wrapper flex-none w-[350px] snap-start">
+              <div key={index} className="tweet-wrapper flex-none w-[min(350px,calc(100vw-2rem))] md:w-[350px] snap-start">
                 <TweetEmbed url={url} />
               </div>
             ))}
@@ -688,15 +691,13 @@ export default function Home() {
 
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 relative">
           <div className="flex flex-col items-center md:items-start gap-2">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-2xl shadow-lg shadow-emerald-500/20">🐼</div>
+            <div>
               <span className="font-bold text-2xl tracking-tight">moNa Project</span>
             </div>
             <p className="text-slate-400 text-sm mt-1">Handmade Keyboards from Japan.</p>
           </div>
           <div className="flex gap-8">
             <a href="#" onClick={(e) => { e.preventDefault(); navigate('/'); window.scrollTo(0, 0); }} className="text-slate-400 hover:text-white transition-colors text-sm font-bold hover:underline decoration-emerald-500 decoration-2 underline-offset-4">Top</a>
-            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/faq'); window.scrollTo(0, 0); }} className="text-slate-400 hover:text-white transition-colors text-sm font-bold hover:underline decoration-emerald-500 decoration-2 underline-offset-4">FAQ</a>
             <a href="#" className="text-slate-400 hover:text-white transition-colors text-sm font-bold hover:underline decoration-emerald-500 decoration-2 underline-offset-4">Contact</a>
           </div>
         </div>
