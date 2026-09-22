@@ -56,3 +56,6 @@ moNa-official-site/
 - [] Topic&Tipsの作成
 - [] FAQの作成
 - [] contactフォームの設置
+
+## TBD
+- [] moNa2+の作成

@@ -48,6 +48,7 @@ export const mainWorks = [
       targetView: 'moNa2',
       isPublic: true
   },
+  /*
   {
       id: '03',
       name: 'moNa 2+',
@@ -58,6 +59,7 @@ export const mainWorks = [
       targetView: 'moNa2plus',
       isPublic: false // true: 公開, false: 非公開（準備中）
   },
+  */
 ];
 
 export const accessories = [
