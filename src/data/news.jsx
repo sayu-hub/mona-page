@@ -89,7 +89,7 @@ export const newsData = [
     )
   },
   {
-    date: '2026.xx.xx',
+    date: '2026.09.22',
     title: '公式Webサイトを開設しました',
     category: 'Info',
     isPublic: true, // true: 公開, false: 非公開
