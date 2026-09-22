@@ -1,7 +1,8 @@
 // src/pages/NewsList.jsx
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, X, ChevronRight } from 'lucide-react';
-import { newsData } from '../data/news';
+import { ArrowLeft, X, ChevronRight, Maximize2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { getNewsPath, newsData } from '../data/news';
 
 const getCategoryColor = (category) => {
   switch (category?.toLowerCase()) {
@@ -12,11 +13,23 @@ const getCategoryColor = (category) => {
 };
 
 export default function NewsList({ onBack }) {
+  const navigate = useNavigate();
   const [selectedNews, setSelectedNews] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = selectedNews ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedNews]);
+
+  const closeNews = () => {
+    setSelectedNews(null);
+  };
 
   const sortedNews = [...newsData].filter(n => n.isPublic !== false).sort((a, b) => b.date.localeCompare(a.date));
 
@@ -29,7 +42,7 @@ export default function NewsList({ onBack }) {
             <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" /> Home
           </button>
           <div className="font-extrabold text-slate-800 tracking-tight flex items-center gap-2">
-            <span className="text-xl">🐼</span> moNa Project
+            moNa Project
           </div>
           <div className="w-20"></div>
         </div>
@@ -44,11 +57,11 @@ export default function NewsList({ onBack }) {
         {/* ニュース一覧リスト */}
         <div className="space-y-6">
           {/* ▼ newsData を sortedNews に変更し、key を index にする ▼ */}
-          {sortedNews.map((news, index) => (
-            <article 
-              key={index} 
+          {sortedNews.map((news) => (
+            <article
+              key={news.id}
               onClick={() => setSelectedNews(news)}
-              className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all cursor-pointer group flex flex-col md:flex-row md:items-center gap-4 md:gap-8"
+              className="bg-white p-6 md:p-8 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-slate-300 transition-all cursor-pointer group flex flex-col md:flex-row md:items-center gap-4 md:gap-8"
             >
               <div className="flex items-center gap-4 md:w-48 shrink-0">
                 <time className="text-sm text-slate-400 font-mono font-medium">{news.date}</time>
@@ -56,10 +69,10 @@ export default function NewsList({ onBack }) {
                   {news.category}
                 </span>
               </div>
-              <h3 className="text-lg font-bold text-slate-800 group-hover:text-emerald-600 transition-colors flex-1">
+              <h3 className="text-lg font-bold text-slate-800 group-hover:text-slate-600 transition-colors flex-1">
                 {news.title}
               </h3>
-              <div className="hidden md:flex w-10 h-10 rounded-full bg-slate-50 items-center justify-center text-slate-400 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+              <div className="hidden md:flex w-10 h-10 rounded-xl bg-slate-50 items-center justify-center text-slate-400 group-hover:bg-slate-700 group-hover:text-white transition-colors">
                 <ChevronRight size={20} />
               </div>
             </article>
@@ -67,33 +80,43 @@ export default function NewsList({ onBack }) {
         </div>
       </main>
 
-      {/* ポップアップ（モーダル）部分 */}
       {selectedNews && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 animate-fade-in">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setSelectedNews(null)}></div>
-          <div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
-            <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={closeNews} />
+          <div className="relative flex w-full max-w-2xl max-h-[90vh] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-4">
               <div className="flex items-center gap-3">
-                <time className="text-sm text-slate-500 font-mono font-medium">{selectedNews.date}</time>
-                <span className={`text-[11px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider ${getCategoryColor(selectedNews.category)}`}>
+                <time className="font-mono text-sm font-medium text-slate-500">{selectedNews.date}</time>
+                <span className={`rounded-sm px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider ${getCategoryColor(selectedNews.category)}`}>
                   {selectedNews.category}
                 </span>
               </div>
-              <button onClick={() => setSelectedNews(null)} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
-                <X size={20} />
-              </button>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => navigate(getNewsPath(selectedNews))}
+                  className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700"
+                  aria-label="記事ページを全画面表示で開く"
+                  title="記事ページを開く"
+                >
+                  <Maximize2 size={20} />
+                </button>
+                <button onClick={closeNews} className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700" aria-label="ニュースを閉じる">
+                  <X size={20} />
+                </button>
+              </div>
             </div>
-            <div className="p-6 sm:p-10 overflow-y-auto no-scrollbar">
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-800 mb-8 leading-tight">
+            <div className="no-scrollbar overflow-y-auto p-6 sm:p-10">
+              <h2 className="mb-8 text-2xl font-black leading-tight text-slate-800 sm:text-3xl">
                 {selectedNews.title}
               </h2>
-              <div className="text-slate-600 leading-loose font-medium whitespace-pre-wrap">
+              <div className="whitespace-pre-wrap font-medium leading-loose text-slate-600">
                 {selectedNews.content}
               </div>
             </div>
           </div>
         </div>
       )}
+
     </div>
   );
 }

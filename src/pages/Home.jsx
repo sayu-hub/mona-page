@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { Menu, X, ArrowRight, Twitter, Instagram, ChevronRight, Star, Sparkles, ArrowDown, ShoppingCart, Zap, ArrowLeft, BookOpen, Keyboard, Lightbulb, ExternalLink } from 'lucide-react';
+import { Menu, X, ArrowRight, Twitter, Instagram, ChevronRight, Star, Sparkles, ArrowDown, ShoppingCart, Zap, ArrowLeft, BookOpen, Keyboard, Lightbulb, ExternalLink, Maximize2 } from 'lucide-react';
 import { navLinks, mainWorks, accessories, members, tweetUrls } from '../data/items';
-import { newsData } from '../data/news';
+import { getNewsPath, newsData } from '../data/news';
 
 // pages フォルダ配下のコンポーネントをインポート
 import TweetEmbed from '../components/TweetEmbed';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // ▼▼▼ 追加：背景画像をインポートする ▼▼▼
 import heroBgImage from '../assets/images/common/moNa2.png';
@@ -54,6 +54,16 @@ export default function Home() {
   const randomAccessories = useMemo(() => shuffleArray(accessories), []);
   const randomTweets = useMemo(() => shuffleArray(tweetUrls), []);
 
+  useEffect(() => {
+    document.body.style.overflow = selectedNews ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedNews]);
+
+  const closeNews = () => {
+    setSelectedNews(null);
+  };
 
   // ニュースを日付の降順（最新順）に並び替え
   const sortedNews = useMemo(() => {
@@ -367,9 +377,9 @@ export default function Home() {
           </div>
 
           <div className="flex-1 space-y-12">
-            {sortedNews.slice(0, 3).map((news, index) => (
+            {sortedNews.slice(0, 3).map((news) => (
               <article
-                key={index}
+                key={news.id}
                 onClick={() => setSelectedNews(news)}
                 className="reveal border-b border-slate-200 pb-8 last:border-0 cursor-pointer group"
               >
@@ -707,34 +717,38 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* ▼ ニュース用ポップアップ ▼ */}
       {selectedNews && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 animate-fade-in">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setSelectedNews(null)}></div>
-          <div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col">
-            <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={closeNews} />
+          <div className="relative flex w-full max-w-2xl max-h-[90vh] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-4">
               <div className="flex items-center gap-3">
-                <time className="text-sm text-slate-500 font-mono font-medium">{selectedNews.date}</time>
-                <span className={`text-[11px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider ${getCategoryColor(selectedNews.category)}`}>
+                <time className="font-mono text-sm font-medium text-slate-500">{selectedNews.date}</time>
+                <span className={`rounded-sm px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider ${getCategoryColor(selectedNews.category)}`}>
                   {selectedNews.category}
                 </span>
               </div>
-              <button onClick={() => setSelectedNews(null)} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors">
-                <X size={20} />
-              </button>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => navigate(getNewsPath(selectedNews))}
+                  className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700"
+                  aria-label="記事ページを全画面表示で開く"
+                  title="記事ページを開く"
+                >
+                  <Maximize2 size={20} />
+                </button>
+                <button onClick={closeNews} className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700" aria-label="ニュースを閉じる">
+                  <X size={20} />
+                </button>
+              </div>
             </div>
-            <div className="p-6 sm:p-10 overflow-y-auto no-scrollbar">
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-800 mb-8 leading-tight">
+            <div className="no-scrollbar overflow-y-auto p-6 sm:p-10">
+              <h2 className="mb-8 text-2xl font-black leading-tight text-slate-800 sm:text-3xl">
                 {selectedNews.title}
               </h2>
-              <div className="text-slate-600 leading-loose font-medium whitespace-pre-wrap">
+              <div className="whitespace-pre-wrap font-medium leading-loose text-slate-600">
                 {selectedNews.content}
               </div>
-              {selectedNews.tweetUrl && (
-                <div className="mt-8">
-                  <TweetEmbed url={selectedNews.tweetUrl} />
-                </div>
-              )}
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigate, Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import NewsList from './pages/NewsList';
+import NewsArticle from './pages/NewsArticle';
 import Mona from './pages/moNa';
 import Mona2 from './pages/moNa2';
 import Mona2plus from './pages/moNa2plus';
@@ -34,6 +35,7 @@ export default function App() {
       <Route path="/guide" element={<UserGuide onBack={() => navigate('/')} onNavigate={handleNavigate} />} />
       <Route path="/keymap" element={<KeymapEditor onBack={() => navigate('/')} onNavigate={handleNavigate} />} />
       <Route path="/news" element={<NewsList onBack={() => navigate('/')} onNavigate={handleNavigate} />} />
+      <Route path="/news/:newsId" element={<NewsArticle />} />
       <Route path="/accessories" element={<AccessoriesList onBack={() => navigate('/')} onNavigate={handleNavigate} />} />
       <Route path="/faq" element={<Navigate to="/" replace />} />
     </Routes>

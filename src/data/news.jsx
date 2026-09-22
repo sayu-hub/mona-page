@@ -2,6 +2,7 @@
 import React from 'react';
 // 正しいパス指定
 import TweetEmbed from '../components/TweetEmbed';
+import NewsImage from '../components/NewsImage';
 import { ArrowRight } from 'lucide-react';
 import tkx26Img from '../assets/images/news/tkx26_top.png';
 import tkx26LineupImg from '../assets/images/news/tkx26_01.png';
@@ -12,22 +13,18 @@ import moNaAniversaryImg from '../assets/images/news/moNa_aniversary.png';
 
 export const newsData = [
   {
+    id: 'tkx2026-lineup',
     date: '2026.09.22',
     title: 'TKX2026のおしながき',
     category: 'Event',
     isPublic: true,
     content: (
       <div className="space-y-5">
-        <p>いよいよ明日、9月23日はTKX2026です。久しぶりの販売となりますが、どうぞよろしくお願いします。</p>
+        <p>いよいよ明日、9月23日はTKX2026です。<br />久しぶりの販売となりますが、どうぞよろしくお願いします。</p>
 
         <div>
           <p className="mb-4 font-bold text-slate-800">当日のおしながき</p>
-          <img src={tkx26LineupImg} alt="TKX2026 sayu / shakupan ブースのおしながき" className="w-full rounded-2xl object-cover shadow-sm" />
-        </div>
-
-        <div className="rounded-xl border-l-4 border-amber-400 bg-amber-50 p-4 text-amber-900">
-          <p>今回はキーキャップが付属していないため、別途キーキャップをご用意ください。</p>
-          <p className="mt-2 text-sm">※moNa2黒をご購入の方には、<strong>kotori blank／RidgeCap</strong> の販売もあります。</p>
+          <NewsImage src={tkx26LineupImg} alt="TKX2026 sayu / shakupan ブースのおしながき" className="rounded-xl object-cover shadow-sm" />
         </div>
 
         <p>
@@ -37,9 +34,21 @@ export const newsData = [
           <a href="https://x.com/Arai_Lab" target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-600 hover:underline">アライ</a>の4名でお待ちしています。
         </p>
 
+        <div className="rounded-xl border border-slate-200 bg-slate-100 p-5 text-slate-700">
+          <p>当日の在庫は、以下のページからご確認いただけます。</p>
+          <a href="https://shakupan-tkx-stock.shakushaku4646.chatgpt.site/" target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 font-bold text-emerald-700 hover:text-emerald-800 hover:underline">
+            当日の在庫を確認する <ArrowRight size={16} />
+          </a>
+        </div>
+
+        <div>
+          <p>今回はキーキャップが付属していないため、別途キーキャップをご用意ください。</p>
+          <p className="mt-2 text-sm text-slate-600">※moNa2黒をご購入の方には、<strong className="text-slate-900">kotori blank／RidgeCap</strong> の販売もあります。</p>
+        </div>
+
         <div>
           <p className="mb-4">ブースは<strong className="text-slate-800">B17</strong>です。</p>
-          <img src={tkx26MapImg} alt="TKX2026会場マップ。sayu / shakupanブースはB17、roBaブースはB18" className="w-full rounded-2xl border border-slate-100 shadow-sm" />
+          <NewsImage src={tkx26MapImg} alt="TKX2026会場マップ。sayu / shakupanブースはB17、roBaブースはB18" className="rounded-xl border border-slate-200 shadow-sm" />
         </div>
 
         <p>今回は初めて販売する射出成形キーキャップ「LAK mini ice keycaps」をご用意しています。</p>
@@ -47,17 +56,25 @@ export const newsData = [
         <p>販売は先着順で、なくなり次第終了となります。</p>
         <p>各商品は10月中旬以降にも販売を予定しています。会場では展示品を実際に触っていただけますので、ぜひお気軽にお越しください。</p>
 
-        <div className="rounded-2xl border border-slate-100 bg-slate-50 p-5">
+        <div className="rounded-xl border border-slate-200 bg-slate-100 p-5 text-slate-700">
           <p className="font-bold text-slate-800">TKX2026の公式サイト</p>
-          <a href="https://tkx.yushakobo.jp/tkx2026/" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 font-bold text-emerald-700 hover:underline">
+          <a href="https://tkx.yushakobo.jp/tkx2026/" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 font-bold text-emerald-700 hover:text-emerald-800 hover:underline">
             TKX2026の公式サイトはこちら <ArrowRight size={16} />
           </a>
         </div>
 
-        <div className="rounded-2xl bg-emerald-50 p-5 text-emerald-900">
-          <p className="font-bold">moNa2のセットアップについて</p>
+        <div className="rounded-xl border border-slate-200 bg-slate-100 p-5 text-slate-700">
+          <p className="font-bold text-slate-900">TKX2026 フロアガイド（非公式）</p>
+          <p className="mt-2 text-sm">各フロアのお品書きガイドや、他のブースを含むお品書き、ブースの場所などをご確認いただけます。</p>
+          <a href="https://tkx2026-floor-guide.shakushaku4646.chatgpt.site/#booth=B17" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 font-bold text-emerald-700 hover:text-emerald-800 hover:underline">
+            TKX2026 フロアガイドを見る（非公式） <ArrowRight size={16} />
+          </a>
+        </div>
+
+        <div className="rounded-xl border border-slate-200 bg-slate-100 p-5 text-slate-700">
+          <p className="font-bold text-slate-900">moNa2のセットアップについて</p>
           <p className="mt-2 text-sm">組み立てやファームウェアの書き込みなどは、ユーザーガイドをご覧ください。</p>
-          <a href="#/guide" className="mt-3 inline-flex items-center gap-1 font-bold text-emerald-700 hover:underline">
+          <a href="#/guide" className="mt-3 inline-flex items-center gap-1 font-bold text-emerald-700 hover:text-emerald-800 hover:underline">
             moNa2 ユーザーガイドを開く <ArrowRight size={16} />
           </a>
         </div>
@@ -65,16 +82,17 @@ export const newsData = [
     )
   },
   {
+    id: 'tkx2026-exhibitor',
     date: '2026.08.08',
     title: 'TKX2026に出展します',
     category: 'Event',
     isPublic: true,
     content: (
       <div className="space-y-4">
-        <img src={tkx26Img} alt="TKX2026 出展" className="w-full rounded-xl object-cover shadow-sm mb-4" />
+        <NewsImage src={tkx26Img} alt="TKX2026 出展" className="rounded-xl object-cover shadow-sm" />
         <p>昨年に続き今年も2026.9.23(水)に開催される、TOKYO KEYBOARD EXPO 2026 に 「sayu/shakupan」として出店することになりました！</p>
         <p>当日 moNa2の販売等も行う予定です。ぜひ、お越しください！</p>
-        <div className="mt-4 p-4 bg-slate-50 border-l-4 border-emerald-500 rounded-r-lg">
+        <div className="mt-4 rounded-xl border border-slate-200 bg-slate-100 p-4">
           <p className="font-bold text-slate-800 mb-2">TKX26公式ページ</p>
           <a
             href="https://tkx.yushakobo.jp/tkx2026/"
@@ -89,6 +107,7 @@ export const newsData = [
     )
   },
   {
+    id: 'official-website-launch',
     date: '2026.09.22',
     title: '公式Webサイトを開設しました',
     category: 'Info',
@@ -103,13 +122,14 @@ export const newsData = [
     )
   },
   {
+    id: 'keymarket-2026-report',
     date: '2026.03.28',
     title: 'キーケット2026に出展しました',
     category: 'Event',
     isPublic: true,
     content: (
       <div className="space-y-4">
-        <img src={keymarket26Img} alt="キーケット2026の様子" className="rounded-2xl w-full object-cover mb-4" />
+        <NewsImage src={keymarket26Img} alt="キーケット2026の様子" className="rounded-xl object-cover" />
         <p>3月28日に開催されたキーボードイベント「キーケット2026」に出展いたしました。</p>
         <p>当日は私たちのブースへ非常に多くの方々に足を運んでいただき、心より感謝申し上げます。実機に触れていただいた皆様から温かいお言葉をいただき、大変励みになりました！</p>
         <p>当日の様子です↓</p>
@@ -122,13 +142,14 @@ export const newsData = [
     )
   },
   {
+    id: 'tkx2025-report',
     date: '2025.09.23',
     title: 'TKX2025に出展しました',
     category: 'Event',
     isPublic: true,
     content: (
       <div className="space-y-4">
-        <img src={tkx25Img} alt="TKX2025の様子" className="rounded-2xl w-full object-cover mb-4" />
+        <NewsImage src={tkx25Img} alt="TKX2025の様子" className="rounded-xl object-cover" />
         <p>9月23日に開催された「Tokyo Keyboard Expo (TKX) 2025」に出展いたしました。</p>
         <p>私たちにとって初めてのイベント参加ということもあり、不手際なところもあったかと思いますが、当ブースへ足を運んでくださった皆様、本当にありがとうございました！</p>
         <p>たくさんの方にmoNaを試打していただき、貴重なご意見や感想を直接お聞きすることができて大変有意義な時間となりました。</p>
@@ -142,6 +163,7 @@ export const newsData = [
     )
   },
   {
+    id: 'mona2-sales-start',
     date: '2024.05.20',
     title: 'moNa 2 の販売を開始しました',
     category: 'Product',
@@ -164,13 +186,14 @@ export const newsData = [
     )
   },
   {
+    id: 'mona-first-anniversary-note',
     date: '2025.11.1',
     title: 'note更新「moNa開発１周年！ ～誕生・改良の全記録～」',
     category: 'INFO',
     isPublic: true,
     content: (
       <div className="space-y-4">
-        <img src={moNaAniversaryImg} alt="moNa開発1周年" className="w-full rounded-xl object-cover shadow-sm mb-4" />
+        <NewsImage src={moNaAniversaryImg} alt="moNa開発1周年" className="rounded-xl object-cover shadow-sm" />
         <p>moNa Projectを開始してから、無事に1周年を迎えることができました！</p>
         <p>
           これを記念して、moNaの誕生から現在に至るまでの開発の道のりや、こだわって改良を重ねたポイントなどをまとめたnote記事を公開しました。
@@ -192,3 +215,5 @@ export const newsData = [
     )
   },
 ];
+
+export const getNewsPath = (news) => `/news/${news.id}`;
