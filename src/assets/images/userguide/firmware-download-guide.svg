@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" role="img" aria-labelledby="title desc">
+  <title id="title">GitHub Actionsでfirmwareをダウンロードする位置</title>
+  <desc id="desc">Artifacts欄のfirmware行の右端にあるダウンロードボタンを赤い矢印で示した案内図</desc>
+  <rect width="1200" height="540" fill="#f8fafc"/>
+  <rect x="25" y="24" width="1150" height="492" rx="12" fill="#fff" stroke="#d0d7de" stroke-width="2"/>
+  <rect x="25" y="24" width="1150" height="58" rx="12" fill="#f6f8fa"/>
+  <text x="58" y="60" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#24292f">Actions / Build run</text>
+  <rect x="65" y="118" width="1070" height="100" rx="10" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="96" y="158" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#24292f">Status</text>
+  <text x="96" y="191" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1a7f37">✓ Success</text>
+  <text x="65" y="274" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#24292f">Artifacts</text>
+  <text x="65" y="304" font-family="Arial, sans-serif" font-size="17" fill="#57606a">Produced during runtime</text>
+  <rect x="65" y="326" width="1070" height="126" rx="8" fill="#fff" stroke="#d0d7de"/>
+  <text x="103" y="378" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#24292f">◈  firmware</text>
+  <text x="530" y="378" font-family="Arial, sans-serif" font-size="18" fill="#57606a">ZIP</text>
+  <circle cx="1053" cy="389" r="40" fill="#fff1f2" stroke="#ef4444" stroke-width="6"/>
+  <path d="M1053 365v31m-13-12 13 12 13-12m-25 24h24" fill="none" stroke="#24292f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M848 260 C916 265 978 298 1026 351" fill="none" stroke="#ef4444" stroke-width="7" stroke-linecap="round"/>
+  <path d="M1011 332 1028 354 1000 351" fill="none" stroke="#ef4444" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="644" y="220" width="254" height="56" rx="28" fill="#ef4444"/>
+  <text x="676" y="256" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#fff">ここからダウンロード</text>
+</svg>

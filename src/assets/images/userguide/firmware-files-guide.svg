@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+  <title id="title">展開後のファームウェアファイル一覧</title>
+  <desc id="desc">展開したフォルダーに含まれる4つのUF2ファイル名を示す案内図</desc>
+  <rect width="1200" height="440" fill="#f8fafc"/>
+  <rect x="28" y="28" width="1144" height="384" rx="12" fill="#fff" stroke="#d0d7de" stroke-width="2"/>
+  <rect x="28" y="28" width="1144" height="58" rx="12" fill="#f6f8fa"/>
+  <text x="60" y="65" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#24292f">firmware（展開後）</text>
+  <g font-family="Arial, sans-serif" font-size="21" fill="#24292f">
+    <rect x="65" y="112" width="1070" height="58" rx="6" fill="#f8fafc"/>
+    <text x="94" y="149">▱  mona2_l_rgbled_adapter-xiao_ble_nrf52840_zmk-zmk.uf2</text>
+    <rect x="65" y="184" width="1070" height="58" rx="6" fill="#fff"/>
+    <text x="94" y="221">▱  mona2_r-paw3222.uf2</text>
+    <rect x="65" y="256" width="1070" height="58" rx="6" fill="#f8fafc"/>
+    <text x="94" y="293">▱  mona2_r-pmw3610.uf2</text>
+    <rect x="65" y="328" width="1070" height="58" rx="6" fill="#fff"/>
+    <text x="94" y="365">▱  settings_reset-xiao_ble_nrf52840_zmk-zmk.uf2</text>
+  </g>
+</svg>

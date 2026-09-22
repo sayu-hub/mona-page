@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1068" height="747" viewBox="0 0 1068 747" role="img" aria-labelledby="title desc">
+  <title id="title">統合キーボードテスターでmona2を選択した画面</title>
+  <desc id="desc">キーボードルール選択でmona2を選び、適用ボタンが表示されたキー動作確認ツールの画面</desc>
+  <rect width="1068" height="747" fill="#303948"/>
+  <rect width="1068" height="78" fill="#3e475a"/>
+  <path d="M21 29h22M21 39h22M21 49h22" stroke="#dce5f2" stroke-width="3" stroke-linecap="round"/>
+  <text x="420" y="48" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#e8eef8">統合キーボードテスター</text>
+  <rect x="107" y="94" width="830" height="122" rx="9" fill="#414b5f"/>
+  <rect x="367" y="124" width="334" height="39" rx="5" fill="#303948"/>
+  <text x="344" y="151" font-family="Arial, sans-serif" font-size="17" fill="#edf2fa">最終イベントログ:</text>
+  <text x="580" y="151" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#b4d18e">...</text>
+  <text x="378" y="197" font-family="Arial, sans-serif" font-size="17" fill="#fff">□ スクロール検出　　□ 詳細な動作確認</text>
+  <rect x="10" y="238" width="1048" height="73" rx="9" fill="#414b5f"/>
+  <text x="297" y="281" font-family="Arial, sans-serif" font-size="17" fill="#f5f7fb">1. キーボード／ルール選択:</text>
+  <rect x="488" y="265" width="155" height="22" fill="#fff"/>
+  <text x="496" y="282" font-family="Arial, sans-serif" font-size="15" fill="#202633">mona2</text>
+  <path d="M628 273l9 0-4.5 6z" fill="#202633"/>
+  <rect x="684" y="252" width="62" height="44" rx="5" fill="#6d96c9"/>
+  <text x="698" y="280" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#fff">適用</text>
+  <g fill="#556179" stroke="#475269" stroke-width="2">
+    <rect x="84" y="332" width="62" height="61" rx="4"/><rect x="152" y="332" width="62" height="61" rx="4"/><rect x="220" y="332" width="62" height="61" rx="4"/><rect x="288" y="332" width="62" height="61" rx="4"/><rect x="356" y="332" width="62" height="61" rx="4"/>
+    <rect x="628" y="332" width="62" height="61" rx="4"/><rect x="696" y="332" width="62" height="61" rx="4"/><rect x="764" y="332" width="62" height="61" rx="4"/><rect x="832" y="332" width="62" height="61" rx="4"/><rect x="900" y="332" width="62" height="61" rx="4"/>
+    <rect x="84" y="402" width="62" height="61" rx="4"/><rect x="152" y="402" width="62" height="61" rx="4"/><rect x="220" y="402" width="62" height="61" rx="4"/><rect x="288" y="402" width="62" height="61" rx="4"/><rect x="356" y="402" width="62" height="61" rx="4"/>
+    <rect x="560" y="402" width="62" height="61" rx="4"/><rect x="628" y="402" width="62" height="61" rx="4"/><rect x="696" y="402" width="62" height="61" rx="4"/><rect x="764" y="402" width="62" height="61" rx="4"/><rect x="832" y="402" width="62" height="61" rx="4"/><rect x="900" y="402" width="62" height="61" rx="4"/>
+    <rect x="84" y="472" width="62" height="61" rx="4"/><rect x="152" y="472" width="62" height="61" rx="4"/><rect x="220" y="472" width="62" height="61" rx="4"/><rect x="288" y="472" width="62" height="61" rx="4"/><rect x="356" y="472" width="62" height="61" rx="4"/><rect x="424" y="472" width="62" height="61" rx="4"/>
+    <rect x="560" y="472" width="62" height="61" rx="4"/><rect x="628" y="472" width="62" height="61" rx="4"/><rect x="696" y="472" width="62" height="61" rx="4"/><rect x="764" y="472" width="62" height="61" rx="4"/><rect x="832" y="472" width="62" height="61" rx="4"/><rect x="900" y="472" width="62" height="61" rx="4"/>
+    <rect x="84" y="542" width="62" height="61" rx="4"/><rect x="152" y="542" width="62" height="61" rx="4"/><rect x="220" y="542" width="62" height="61" rx="4"/><rect x="288" y="542" width="62" height="61" rx="4"/><rect x="356" y="542" width="62" height="61" rx="4"/><rect x="424" y="542" width="62" height="61" rx="4"/>
+    <rect x="560" y="542" width="62" height="61" rx="4"/><rect x="628" y="542" width="62" height="61" rx="4"/><rect x="900" y="542" width="62" height="61" rx="4"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#edf2fa" text-anchor="middle">
+    <text x="115" y="368">Q</text><text x="183" y="368">W</text><text x="251" y="368">E</text><text x="319" y="368">R</text><text x="387" y="368">T</text><text x="659" y="368">Y</text><text x="727" y="368">U</text><text x="795" y="368">I</text><text x="863" y="368">O</text><text x="931" y="368">P</text>
+    <text x="115" y="438">A</text><text x="183" y="438">S</text><text x="251" y="438">D</text><text x="319" y="438">F</text><text x="387" y="438">G</text><text x="591" y="438">F13</text><text x="659" y="438">H</text><text x="727" y="438">J</text><text x="795" y="438">K</text><text x="863" y="438">L</text><text x="931" y="433">SEMICO</text><text x="931" y="451">LON</text>
+    <text x="115" y="508">Z</text><text x="183" y="508">X</text><text x="251" y="508">C</text><text x="319" y="508">V</text><text x="387" y="508">B</text><text x="455" y="508">F14</text><text x="591" y="508">F15</text><text x="659" y="508">N</text><text x="727" y="508">M</text><text x="795" y="508">COMMA</text><text x="863" y="508">DOT</text><text x="931" y="508">SLASH</text>
+    <text x="115" y="578">LCTRL</text><text x="183" y="578">LEFT_WIN</text><text x="251" y="578">F16</text><text x="319" y="578">BACKSPACE</text><text x="387" y="578">ENTER</text><text x="455" y="578">LANG2</text><text x="591" y="578">LANG1</text><text x="659" y="578">SPACE</text><text x="931" y="578">LEFT_ALT</text>
+  </g>
+  <rect x="10" y="619" width="1048" height="43" rx="7" fill="#414b5f"/>
+  <rect x="10" y="662" width="1048" height="75" rx="7" fill="#414b5f"/>
+  <rect x="362" y="677" width="142" height="44" rx="5" fill="#b4d18e"/>
+  <text x="378" y="705" font-family="Arial, sans-serif" font-size="16" fill="#293344">はんだ付け検証</text>
+  <rect x="524" y="677" width="158" height="44" rx="5" fill="#db896f"/>
+  <text x="539" y="705" font-family="Arial, sans-serif" font-size="16" fill="#fff">テストをリセット</text>
+</svg>

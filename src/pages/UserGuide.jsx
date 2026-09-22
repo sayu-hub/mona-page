@@ -9,6 +9,14 @@ import step_bt_1 from '../assets/images/userguide/step_bt_1.png';
 import step_encoders_1 from '../assets/images/userguide/step_encoders_1.png';
 import step12 from '../assets/images/userguide/step12.png';
 import step_reset_1 from '../assets/images/userguide/step_reset_1.jpeg';
+import firmwareDownloadGuide from '../assets/images/userguide/firmware-download-guide.svg';
+import firmwareFilesGuide from '../assets/images/userguide/firmware-files-guide.svg';
+import keyCheckerMona2 from '../assets/images/userguide/key-checker-mona2.svg';
+import dyaStudioStep1 from '../assets/images/userguide/dya-studio-01.png';
+import dyaStudioStep2 from '../assets/images/userguide/dya-studio-02.png';
+import dyaStudioStep3 from '../assets/images/userguide/dya-studio-03.png';
+import dyaStudioStep4 from '../assets/images/userguide/dya-studio-04.png';
+import dyaStudioStep5 from '../assets/images/userguide/dya-studio-05.png';
 
 const SectionHeading = ({ children }) => (
   <div className="flex items-center mb-8 border-b border-slate-100 pb-6">
@@ -149,6 +157,9 @@ const SECTIONS = {
             </ul>
           </div>
         </div>
+        <p className="mt-6 text-sm text-slate-500 leading-relaxed">
+          ※販売形態や販売時期により、商品内容（同梱物）が一部異なる場合があります。
+        </p>
       </div>
     )
   },
@@ -193,23 +204,70 @@ const SECTIONS = {
           <div className="flex">
             <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2 w-16 shrink-0">03</div>
             <div className="w-full">
-              <h3 className="text-xl font-bold text-slate-800 mb-3">本体（左右）の電源を入れる</h3>
-              <p className="text-slate-600 leading-relaxed mb-6">
-                本機は完全無線設計です。まずはキーボード本体（左右両方）の電源スイッチをONにしてください。
+              <h3 className="text-xl font-bold text-slate-800 mb-3">ファームウェアの書き込み</h3>
+              <p className="text-slate-600 leading-relaxed mb-4">
+                本機とPCをUSBケーブルで接続し、左右それぞれにファームウェアを書き込みます。
+                まず、以下のGitHub Actionsページからファームウェアをダウンロードしてください。
               </p>
-              <div className="w-full aspect-video bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400">
-                <ImageIcon className="w-10 h-10 mb-3 text-slate-300" />
-                <span className="font-bold text-sm tracking-widest">[ 画像を挿入 ]</span>
+              <a
+                href="https://github.com/sayu-hub/zmk-config-moNa2-v2/actions/runs/33948061190"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-emerald-700 font-bold hover:text-emerald-600 underline underline-offset-4 mb-6"
+              >
+                <Github className="w-5 h-5" />
+                ファームウェアをGitHubからダウンロード
+                <ExternalLink className="w-4 h-4" />
+              </a>
+              <div className="space-y-8 mb-6">
+                <figure>
+                  <ZoomableImage
+                    src={firmwareDownloadGuide}
+                    alt="GitHub ActionsのArtifacts欄にあるfirmwareのダウンロードボタン"
+                    className="w-full rounded-2xl border border-slate-200 shadow-sm"
+                  />
+                  <figcaption className="mt-3 text-sm text-slate-500">
+                    ページ下部の「Artifacts」にある <strong>firmware</strong> のダウンロードボタンからZIPファイルを保存し、PC上で展開します。
+                  </figcaption>
+                </figure>
+                <figure>
+                  <ZoomableImage
+                    src={firmwareFilesGuide}
+                    alt="展開後のファームウェアZIPに含まれる4つのUF2ファイル"
+                    className="w-full rounded-2xl border border-slate-200 shadow-sm"
+                  />
+                  <figcaption className="mt-3 text-sm text-slate-500">
+                    展開したフォルダーには、上記の4つのUF2ファイルが入っています。
+                  </figcaption>
+                </figure>
               </div>
+              <ol className="list-decimal space-y-4 pl-6 text-slate-600 leading-relaxed marker:font-bold marker:text-emerald-600">
+                <li>
+                  左右それぞれの本体をPCにUSBケーブルで接続します。マイコン部はケースで覆われていますが、ケース上からUSB端子のすぐ左側（リセットボタンの真上）を素早く2回押してください。クリック感のあるボタンです。ブートローダーが起動すると、PC上でドライブとして認識され、フォルダーが表示されます。
+                </li>
+                <li>
+                  <code className="rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-700">settings_reset-xiao_ble_nrf52840_zmk-zmk.uf2</code>
+                  を、左右それぞれのドライブへドラッグ＆ドロップして書き込みます。
+                </li>
+                <li>
+                  ケース上からUSB端子のすぐ左側を、再度素早く2回押してブートローダーを起動します。右側には
+                  <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-700">mona2_r-pmw3610.uf2</code>
+                  、左側には
+                  <code className="mx-1 rounded bg-slate-100 px-1.5 py-0.5 text-sm text-slate-700">mona2_l_rgbled_adapter-xiao_ble_nrf52840_zmk-zmk.uf2</code>
+                  を、それぞれのドライブへドラッグ＆ドロップして書き込みます。
+                </li>
+                <li>
+                  ケース上からUSB端子のすぐ左側を1回押します。マイコン部のLEDが点灯すれば、書き込みは完了です。点灯しない場合は、最初から書き込みをやり直してください。
+                </li>
+              </ol>
             </div>
           </div>
           <div className="flex">
             <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2 w-16 shrink-0">04</div>
             <div className="w-full">
-              <h3 className="text-xl font-bold text-slate-800 mb-3">PCの設定画面からBluetooth接続する</h3>
+              <h3 className="text-xl font-bold text-slate-800 mb-3">本体（左右）の電源を入れる</h3>
               <p className="text-slate-600 leading-relaxed mb-6">
-                お使いのPC（WindowsやMacなど）の設定画面から、Bluetoothデバイスの追加を開きます。
-                ペアリングモードになっている本機を選択し、Bluetooth接続を完了させてください。
+                本機は無線設計です。USBケーブルを抜き、キーボード本体（左右両方）の電源スイッチをONにしてください。
               </p>
               <div className="w-full aspect-video bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400">
                 <ImageIcon className="w-10 h-10 mb-3 text-slate-300" />
@@ -220,15 +278,39 @@ const SECTIONS = {
           <div className="flex">
             <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2 w-16 shrink-0">05</div>
             <div className="w-full">
-              <h3 className="text-xl font-bold text-slate-800 mb-3">各キーやカーソル等が動くか確認する</h3>
+              <h3 className="text-xl font-bold text-slate-800 mb-3">PCの設定画面からBluetooth接続する</h3>
               <p className="text-slate-600 leading-relaxed mb-6">
-                接続が完了したら、テキストエディタやブラウザを開き、実際に各キーを押して入力できるか確認してください。
-                また、トラックボールを動かしてマウスカーソルが正常に動作することも合わせて確認しましょう。
+                お使いのPC（WindowsやMacなど）の設定画面から、Bluetoothデバイスの追加を開きます。
+                デバイス一覧にキーボード名「mona2」と表示されるので、それを選択してBluetooth接続を完了させてください。
               </p>
               <div className="w-full aspect-video bg-slate-50 rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-400">
                 <ImageIcon className="w-10 h-10 mb-3 text-slate-300" />
                 <span className="font-bold text-sm tracking-widest">[ 画像を挿入 ]</span>
               </div>
+            </div>
+          </div>
+          <div className="flex">
+            <div className="hidden sm:block text-6xl font-black text-slate-100 mr-6 select-none -mt-2 w-16 shrink-0">06</div>
+            <div className="w-full">
+              <h3 className="text-xl font-bold text-slate-800 mb-3">各キーやカーソル等が動くことを確認する</h3>
+              <p className="text-slate-600 leading-relaxed mb-6">
+                接続が完了したら、テキストエディタやブラウザを開き、各キーの入力とカーソルの動作を確認してください。
+                以下のキー動作確認ツールを使うと、簡単に確認できます。キーボードの動作確認を行う場合は、「キーボード／ルール選択」から「mona2」を選び、「適用」を押してください。
+              </p>
+              <a
+                href="https://key-checker-ruddy.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-emerald-700 font-bold hover:text-emerald-600 underline underline-offset-4 mb-6"
+              >
+                キー動作確認ツールを開く
+                <ExternalLink className="w-4 h-4" />
+              </a>
+              <ZoomableImage
+                src={keyCheckerMona2}
+                alt="統合キーボードテスターでmona2を選択した画面"
+                className="w-full rounded-2xl border border-slate-200 shadow-sm"
+              />
             </div>
           </div>
         </div>
@@ -248,13 +330,125 @@ const SECTIONS = {
           <p className="text-sm text-amber-700 leading-relaxed mb-4">
             キーが反応しない、PCと接続できないなどの初期不良と思われる症状がある場合は、提供元側の原因が考えられます。お手数ですが、以下のサポート窓口よりお問い合わせください。
           </p>
-          <a href="#" className="inline-flex items-center text-sm font-bold text-amber-700 hover:text-amber-600 underline decoration-amber-300 underline-offset-4 transition-colors">
+          <a href="https://discord.gg/v3AbrzjANB" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-sm font-bold text-amber-700 hover:text-amber-600 underline decoration-amber-300 underline-offset-4 transition-colors">
             サポートにお問い合わせする <ExternalLink className="w-4 h-4 ml-1" />
           </a>
         </div>
       </div>
     )
   },
+  keyboardSettings: {
+    id: 'keyboardSettings',
+    title: 'キーボードの設定変更',
+    icon: <Keyboard className="w-5 h-5" />,
+    redirectTo: 'dyaStudio'
+  },
+  dyaStudio: {
+    id: 'dyaStudio',
+    parentId: 'keyboardSettings',
+    title: 'DYAStudioに接続する',
+    icon: <Keyboard className="w-5 h-5" />,
+    content: (
+      <div className="animate-fade-in">
+        <SectionHeading>DYAStudioに接続する</SectionHeading>
+        <p className="text-slate-600 leading-relaxed mb-10">
+          DYAStudioを使ってキーボードの設定を変更するには、最初にPCと本機を接続して認識させます。
+        </p>
+
+        <ol className="space-y-8 text-slate-600 leading-relaxed">
+          <li>
+            <p className="mb-3"><span className="mr-2 font-bold text-emerald-600">1.</span>DYAStudioにアクセスします。</p>
+            <a
+              href="https://studio.dya.cormoran.works/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 font-bold text-emerald-700 underline underline-offset-4 hover:text-emerald-600"
+            >
+              DYAStudioを開く
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </li>
+          <li>
+            <p><span className="mr-2 font-bold text-emerald-600">2.</span>キーボードとPCをUSBケーブルで接続します。接続するのは右手側だけで問題ありません。</p>
+          </li>
+          <li>
+            <p className="mb-4"><span className="mr-2 font-bold text-emerald-600">3.</span>画面のUSB接続ボタンをクリックし、一覧から「mona2」を選択します。</p>
+            <ZoomableImage src={dyaStudioStep1} alt="DYAStudioのUSB接続ボタン" className="w-full rounded-xl border border-slate-200 shadow-sm" />
+          </li>
+          <li>
+            <p className="mb-4"><span className="mr-2 font-bold text-emerald-600">4.</span>「mona2」が2つ表示される場合は、同じ操作をもう一度行い、2つとも選択します。</p>
+            <ZoomableImage src={dyaStudioStep2} alt="DYAStudioでmona2を選択する画面" className="w-full rounded-xl border border-slate-200 shadow-sm" />
+          </li>
+        </ol>
+        <p className="mt-8 rounded-2xl bg-emerald-50 px-5 py-4 text-sm leading-relaxed text-emerald-800">
+          認識が完了するとDYAStudioの設定画面が開きます。ここからキーボードの各種設定を変更できます。
+        </p>
+      </div>
+    )
+  },
+  keymapChange: {
+    id: 'keymapChange',
+    parentId: 'keyboardSettings',
+    title: 'キーマップを変更する',
+    icon: <Keyboard className="w-5 h-5" />,
+    content: (
+      <div className="animate-fade-in">
+        <SectionHeading>キーマップを変更する</SectionHeading>
+        <p className="text-slate-600 leading-relaxed mb-10">
+          DYAStudioでキーボードを認識したら、キーごとに動作を割り当てたり、レイヤーごとのキーマップを編集したりできます。
+        </p>
+
+        <ol className="space-y-12 text-slate-600 leading-relaxed">
+          <li>
+            <h2 className="mb-3 flex items-center text-xl font-black text-slate-800">
+              <span className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 text-sm text-emerald-700">1</span>
+              キーマップの編集画面を開く
+            </h2>
+            <p className="mb-4">
+              画面上部の「キーボード」タブを開き、「キーマップ」タブを選択すると、キーマップの編集画面が表示されます。
+            </p>
+            <ZoomableImage src={dyaStudioStep3} alt="DYAStudioでキーボードとキーマップのタブを選択する画面" className="w-full rounded-xl border border-slate-200 shadow-sm" />
+          </li>
+          <li>
+            <h2 className="mb-3 flex items-center text-xl font-black text-slate-800">
+              <span className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 text-sm text-emerald-700">2</span>
+              編集するレイヤーとキーを選ぶ
+            </h2>
+            <p className="mb-4">
+              編集したいレイヤーを選択してから、キーボード図で変更したいキーをクリックします。選択したキーの編集画面が開きます。
+            </p>
+            <ZoomableImage src={dyaStudioStep5} alt="DYAStudioでレイヤーを選択する画面" className="w-full rounded-xl border border-slate-200 shadow-sm" />
+          </li>
+          <li>
+            <h2 className="mb-3 flex items-center text-xl font-black text-slate-800">
+              <span className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 text-sm text-emerald-700">3</span>
+              キーに動作を割り当てる
+            </h2>
+            <p className="mb-4">
+              編集画面の「レイヤーの項目設定」では、通常のキー入力に加え、レイヤーの切り替えや、タップ時と長押し時で異なる動作を割り当てるMod-Tapなどを設定できます。設定したい動作を選び、画面下部のキーボードから任意のキーコードを選択してください。
+            </p>
+            <ZoomableImage src={dyaStudioStep4} alt="DYAStudioでキーの動作を設定する編集画面" className="w-full rounded-xl border border-slate-200 shadow-sm" />
+          </li>
+        </ol>
+
+        <div className="mt-12 space-y-6">
+          <section className="rounded-3xl border-2 border-slate-100 bg-white p-6 md:p-8 shadow-sm">
+            <h2 className="mb-3 text-lg font-black text-slate-800">修飾キーを組み合わせる</h2>
+            <p className="text-sm leading-relaxed text-slate-600">
+              「修飾キー」を選ぶと、CtrlやShiftなどを他のキーと組み合わせたショートカットを設定できます。たとえば、1つのキーにCtrl＋Cのような操作を割り当てることが可能です。
+            </p>
+          </section>
+          <section className="rounded-3xl border-2 border-slate-100 bg-white p-6 md:p-8 shadow-sm">
+            <h2 className="mb-3 text-lg font-black text-slate-800">マウスボタンを設定する</h2>
+            <p className="text-sm leading-relaxed text-slate-600">
+              マウスボタンの動作を割り当てる場合は、Behaviourの「マウス」から設定します。
+            </p>
+          </section>
+        </div>
+      </div>
+    )
+  },
+  // Topics & Tips 保管（公開準備が整うまでユーザーガイドのナビゲーションには表示しない）
   githubSetup: {
     id: 'githubSetup',
     title: 'ファームウェアの準備 (GitHub)',
@@ -528,18 +722,21 @@ const SECTIONS = {
   }
 };
 
+const TOPICS_AND_TIPS_ARCHIVE_KEYS = new Set(['githubSetup', 'keymap', 'mouseSettings']);
+
 export default function UserGuide({ onBack }) {
   const [activeSection, setActiveSection] = useState('introduction');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDesktopSidebarOpen, setIsDesktopSidebarOpen] = useState(true);
-  const sectionKeys = Object.keys(SECTIONS);
+  const sectionKeys = Object.keys(SECTIONS).filter((key) => !TOPICS_AND_TIPS_ARCHIVE_KEYS.has(key));
+  const navigableSectionKeys = sectionKeys.filter((key) => !SECTIONS[key].redirectTo);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeSection]);
 
   const handleNavClick = (sectionId) => {
-    setActiveSection(sectionId);
+    setActiveSection(SECTIONS[sectionId].redirectTo ?? sectionId);
     setIsMobileMenuOpen(false);
   };
 
@@ -548,11 +745,13 @@ export default function UserGuide({ onBack }) {
       {sectionKeys.map((key) => {
         const section = SECTIONS[key];
         const isActive = activeSection === key;
+        const isSubsection = Boolean(section.parentId);
         return (
           <button
             key={key}
             onClick={() => handleNavClick(key)}
-            className={`w-full flex items-center px-4 py-3.5 text-sm font-bold rounded-2xl transition-all duration-200 ${isActive
+            className={`flex w-full items-center px-4 py-3.5 text-sm font-bold rounded-2xl transition-all duration-200 ${isSubsection ? 'ml-4 w-[calc(100%-1rem)]' : ''} ${
+              isActive
                 ? 'bg-emerald-50 text-emerald-700 border-2 border-emerald-100'
                 : 'text-slate-500 hover:bg-slate-50 border-2 border-transparent'
               }`}
@@ -630,19 +829,19 @@ export default function UserGuide({ onBack }) {
             {SECTIONS[activeSection].content}
 
             <div className="mt-20 pt-8 border-t border-slate-100 flex justify-between">
-              {sectionKeys.indexOf(activeSection) > 0 ? (
-                <button onClick={() => handleNavClick(sectionKeys[sectionKeys.indexOf(activeSection) - 1])} className="flex items-center px-5 py-3 rounded-full hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-200">
+              {navigableSectionKeys.indexOf(activeSection) > 0 ? (
+                <button onClick={() => handleNavClick(navigableSectionKeys[navigableSectionKeys.indexOf(activeSection) - 1])} className="flex items-center px-5 py-3 rounded-full hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-200">
                   <ArrowRight className="w-4 h-4 mr-2 rotate-180 text-slate-400" />
                   <span className="font-bold text-slate-600">
-                    {SECTIONS[sectionKeys[sectionKeys.indexOf(activeSection) - 1]].title}
+                    {SECTIONS[navigableSectionKeys[navigableSectionKeys.indexOf(activeSection) - 1]].title}
                   </span>
                 </button>
               ) : <div></div>}
 
-              {sectionKeys.indexOf(activeSection) < sectionKeys.length - 1 ? (
-                <button onClick={() => handleNavClick(sectionKeys[sectionKeys.indexOf(activeSection) + 1])} className="flex items-center px-6 py-3 rounded-full bg-white border-2 border-slate-100 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all text-slate-800">
+              {navigableSectionKeys.indexOf(activeSection) < navigableSectionKeys.length - 1 ? (
+                <button onClick={() => handleNavClick(navigableSectionKeys[navigableSectionKeys.indexOf(activeSection) + 1])} className="flex items-center px-6 py-3 rounded-full bg-white border-2 border-slate-100 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all text-slate-800">
                   <span className="font-bold mr-2">
-                    {SECTIONS[sectionKeys[sectionKeys.indexOf(activeSection) + 1]].title}
+                    {SECTIONS[navigableSectionKeys[navigableSectionKeys.indexOf(activeSection) + 1]].title}
                   </span>
                   <ArrowRight className="w-4 h-4 text-emerald-500" />
                 </button>
