@@ -4,11 +4,66 @@ import React from 'react';
 import TweetEmbed from '../components/TweetEmbed';
 import { ArrowRight } from 'lucide-react';
 import tkx26Img from '../assets/images/news/tkx26_top.png';
+import tkx26LineupImg from '../assets/images/news/tkx26_01.png';
+import tkx26MapImg from '../assets/images/news/tkx26_02.png';
 import keymarket26Img from '../assets/images/news/keymarket26.png';
 import tkx25Img from '../assets/images/news/tkx25_top.png';
 import moNaAniversaryImg from '../assets/images/news/moNa_aniversary.png';
 
 export const newsData = [
+  {
+    date: '2026.09.22',
+    title: 'TKX2026のおしながき',
+    category: 'Event',
+    isPublic: true,
+    content: (
+      <div className="space-y-5">
+        <p>いよいよ明日、9月23日はTKX2026です。久しぶりの販売となりますが、どうぞよろしくお願いします。</p>
+
+        <div>
+          <p className="mb-4 font-bold text-slate-800">当日のおしながき</p>
+          <img src={tkx26LineupImg} alt="TKX2026 sayu / shakupan ブースのおしながき" className="w-full rounded-2xl object-cover shadow-sm" />
+        </div>
+
+        <div className="rounded-xl border-l-4 border-amber-400 bg-amber-50 p-4 text-amber-900">
+          <p>今回はキーキャップが付属していないため、別途キーキャップをご用意ください。</p>
+          <p className="mt-2 text-sm">※moNa2黒をご購入の方には、<strong>kotori blank／RidgeCap</strong> の販売もあります。</p>
+        </div>
+
+        <p>
+          当日は、<a href="https://x.com/shakupan_" target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-600 hover:underline">shakupan</a>、
+          <a href="https://x.com/Pooh_pol0" target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-600 hover:underline">白湯_sayu</a>、
+          <a href="https://x.com/mui__key" target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-600 hover:underline">muino</a>、
+          <a href="https://x.com/Arai_Lab" target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-600 hover:underline">アライ</a>の4名でお待ちしています。
+        </p>
+
+        <div>
+          <p className="mb-4">ブースは<strong className="text-slate-800">B17</strong>です。</p>
+          <img src={tkx26MapImg} alt="TKX2026会場マップ。sayu / shakupanブースはB17、roBaブースはB18" className="w-full rounded-2xl border border-slate-100 shadow-sm" />
+        </div>
+
+        <p>今回は初めて販売するキーキャップをご用意しています。</p>
+        <p>お隣のB18のroBaブースにも関連商品がありますので、ぜひあわせてお立ち寄りください。</p>
+        <p>販売は先着順で、なくなり次第終了となります。</p>
+        <p>各商品は10月中旬以降にも販売を予定しています。会場では展示品を実際に触っていただけますので、ぜひお気軽にお越しください。</p>
+
+        <div className="rounded-2xl border border-slate-100 bg-slate-50 p-5">
+          <p className="font-bold text-slate-800">TKX2026の公式サイト</p>
+          <a href="https://tkx.yushakobo.jp/tkx2026/" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 font-bold text-emerald-700 hover:underline">
+            TKX2026の公式サイトはこちら <ArrowRight size={16} />
+          </a>
+        </div>
+
+        <div className="rounded-2xl bg-emerald-50 p-5 text-emerald-900">
+          <p className="font-bold">moNa2のセットアップについて</p>
+          <p className="mt-2 text-sm">組み立てやファームウェアの書き込みなどは、ユーザーガイドをご覧ください。</p>
+          <a href="#/guide" className="mt-3 inline-flex items-center gap-1 font-bold text-emerald-700 hover:underline">
+            moNa2 ユーザーガイドを開く <ArrowRight size={16} />
+          </a>
+        </div>
+      </div>
+    )
+  },
   {
     date: '2026.08.08',
     title: 'TKX2026に出展します',
