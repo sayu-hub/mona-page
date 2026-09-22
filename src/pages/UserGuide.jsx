@@ -17,6 +17,9 @@ import dyaStudioStep2 from '../assets/images/userguide/dya-studio-02.png';
 import dyaStudioStep3 from '../assets/images/userguide/dya-studio-03.png';
 import dyaStudioStep4 from '../assets/images/userguide/dya-studio-04.png';
 import dyaStudioStep5 from '../assets/images/userguide/dya-studio-05.png';
+import dyaStudioStep7 from '../assets/images/userguide/dya-studio-07.png';
+import dyaStudioStep8 from '../assets/images/userguide/dya-studio-08.png';
+import dyaStudioStep9 from '../assets/images/userguide/dya-studio-09.png';
 
 const SectionHeading = ({ children }) => (
   <div className="flex items-center mb-8 border-b border-slate-100 pb-6">
@@ -442,6 +445,104 @@ const SECTIONS = {
             <h2 className="mb-3 text-lg font-black text-slate-800">マウスボタンを設定する</h2>
             <p className="text-sm leading-relaxed text-slate-600">
               マウスボタンの動作を割り当てる場合は、Behaviourの「マウス」から設定します。
+            </p>
+          </section>
+        </div>
+      </div>
+    )
+  },
+  macroComboSettings: {
+    id: 'macroComboSettings',
+    parentId: 'keyboardSettings',
+    title: 'マクロ＆コンボの設定',
+    icon: <Wrench className="w-5 h-5" />,
+    content: (
+      <div className="animate-fade-in">
+        <SectionHeading>マクロ＆コンボの設定</SectionHeading>
+        <p className="text-slate-600 leading-relaxed mb-10">
+          画面上部の「マクロ＆コンボ」タブでは、複数の操作をまとめて実行するマクロと、複数キーの同時押しを設定するコンボを作成できます。
+        </p>
+
+        <div className="space-y-12">
+          <section>
+            <h2 className="mb-4 flex items-center text-2xl font-black text-slate-800">
+              <span className="mr-3 flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-sm text-emerald-700">01</span>
+              マクロを作成する
+            </h2>
+            <div className="space-y-5 text-slate-600 leading-relaxed">
+              <p>
+                マクロは、キーのタップや押下・解放、文字列の入力、待機時間などを順番に実行する機能です。よく使う文字列やショートカット操作を、1つのキーにまとめて割り当てられます。
+              </p>
+              <ol className="list-decimal space-y-3 pl-6 marker:font-bold marker:text-emerald-600">
+                <li>「マクロ一覧」の <strong>＋</strong> ボタンを押して、新しいマクロを作成します。</li>
+                <li>「ステップ」ボタンを押し、追加したステップの種類を選択します。文字列・キー操作・待機などを組み合わせて、実行したい操作の順番を設定してください。</li>
+                <li>設定が完了したら、画面右上の「保存」を押してマクロを保存します。</li>
+              </ol>
+              <ZoomableImage src={dyaStudioStep7} alt="DYAStudioでマクロのステップを追加する画面" className="w-full rounded-xl border border-slate-200 shadow-sm" />
+            </div>
+          </section>
+
+          <section>
+            <h2 className="mb-4 flex items-center text-2xl font-black text-slate-800">
+              <span className="mr-3 flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-sm text-emerald-700">02</span>
+              コンボを作成する
+            </h2>
+            <div className="space-y-5 text-slate-600 leading-relaxed">
+              <p>
+                コンボは、指定した複数のキーを同時に押したときに、任意のキー入力や動作を実行する機能です。たとえば2つのキーの同時押しに、よく使うショートカットを割り当てられます。
+              </p>
+              <ol className="list-decimal space-y-3 pl-6 marker:font-bold marker:text-emerald-600">
+                <li>「コンボ一覧」の <strong>＋</strong> ボタンを押して、新しいコンボを作成します。</li>
+                <li>「ビヘイビア」で、コンボが発動したときに実行するキー入力や動作を選択します。</li>
+                <li>「位置」のキーボード図から、同時押しに使うキーを選択します。必要に応じて、コンボを有効にするレイヤーも指定してください。</li>
+                <li>設定が完了したら、画面右上の「保存」を押します。</li>
+              </ol>
+              <ZoomableImage src={dyaStudioStep8} alt="DYAStudioでコンボのビヘイビアと同時押しキーを設定する画面" className="w-full rounded-xl border border-slate-200 shadow-sm" />
+            </div>
+          </section>
+        </div>
+      </div>
+    )
+  },
+  trackballSettings: {
+    id: 'trackballSettings',
+    parentId: 'keyboardSettings',
+    title: 'トラックボールの設定',
+    icon: <Wrench className="w-5 h-5" />,
+    content: (
+      <div className="animate-fade-in">
+        <SectionHeading>トラックボールの設定</SectionHeading>
+        <p className="text-slate-600 leading-relaxed mb-10">
+          画面上部の「トラックボール」タブでは、トラックボールの感度やマウスレイヤーなど、ポインティング操作に関する設定を変更できます。ここでは、よく使う設定を紹介します。
+        </p>
+        <ZoomableImage src={dyaStudioStep9} alt="DYAStudioのトラックボール設定画面" className="w-full rounded-xl border border-slate-200 shadow-sm mb-10" />
+
+        <div className="space-y-6">
+          <section className="rounded-3xl border-2 border-slate-100 bg-white p-6 md:p-8 shadow-sm">
+            <h2 className="mb-3 text-lg font-black text-slate-800">設定を適用するレイヤー</h2>
+            <p className="text-sm leading-relaxed text-slate-600">
+              「有効にするレイヤー」をオンにして対象のレイヤーを選ぶと、この画面で設定した内容は選択したレイヤーでのみ適用されます。オフの場合は、すべてのレイヤーに同じ設定が適用されます。
+            </p>
+          </section>
+
+          <section className="rounded-3xl border-2 border-slate-100 bg-white p-6 md:p-8 shadow-sm">
+            <h2 className="mb-3 text-lg font-black text-slate-800">トラックボールの感度を調整する</h2>
+            <p className="text-sm leading-relaxed text-slate-600">
+              「スケーリング」で、トラックボールを動かしたときのカーソル移動量を細かく調整できます。値を上げると少ない操作でカーソルが大きく動き、値を下げるとより細かな操作がしやすくなります。
+            </p>
+          </section>
+
+          <section className="rounded-3xl border-2 border-slate-100 bg-white p-6 md:p-8 shadow-sm">
+            <h2 className="mb-3 text-lg font-black text-slate-800">一時レイヤーを使う</h2>
+            <p className="text-sm leading-relaxed text-slate-600">
+              「一時レイヤー」をオンにすると、トラックボールを操作している間だけ指定したマウスレイヤーへ自動で切り替えられます。通常のキー配列を保ったまま、トラックボール操作時だけマウス用の操作を使いたい場合に便利です。
+            </p>
+          </section>
+
+          <section className="rounded-3xl border-2 border-slate-100 bg-white p-6 md:p-8 shadow-sm">
+            <h2 className="mb-3 text-lg font-black text-slate-800">軸の向きを反転する</h2>
+            <p className="text-sm leading-relaxed text-slate-600">
+              カーソルの動きが意図した方向と逆になる場合は、「軸の反転設定」でX軸・Y軸を個別に切り替えられます。Colopitなどを使用している場合は、X軸とY軸の反転をどちらもオンにしてください。
             </p>
           </section>
         </div>
